@@ -20,4 +20,10 @@ public:
         int result = must_follow_a(vek, 4, 'a', 'b');
         TS_ASSERT_EQUALS( result, 1);
     }
+    void test_a_form_peke( void )
+    {
+        char vek[] = {'b', 'b', 'a', 'b', 'b'};
+        int result =  must_follow_a(vek, 3, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 1);
+    }
 };
