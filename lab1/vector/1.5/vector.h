@@ -143,7 +143,8 @@ class Vector{
 		T* insert(size_t i, T v){
 			if(i > _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 			if(_size == _maxSize){
-				_maxSize = 2*_maxSize;
+				if(_maxSize) _maxSize = 2*_maxSize;
+				else _maxSize = DEFAULT_INIT_SIZE;
 				T * newArray = new T[_maxSize];
 				size_t j(0);
 				for(; j<i; ++j) newArray[j] = _elements[j];
