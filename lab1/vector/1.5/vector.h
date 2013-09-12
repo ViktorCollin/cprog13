@@ -12,7 +12,6 @@
 using namespace std;
 template <class T>
 class Vector{
-<<<<<<< HEAD
 private:
 	T* _elements;
 	size_t _size;
