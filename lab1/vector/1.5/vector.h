@@ -50,7 +50,7 @@ public:
 	}
 	
 	~Vector(){
-		delete[] _elements;
+    if(_elements != NULL) delete[] _elements;
 	}
 	
 	// Asinment operators
@@ -178,3 +178,4 @@ ostream& operator<<(ostream& os, const Vector<T>& v){
 
 
 #endif
+
