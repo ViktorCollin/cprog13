@@ -16,10 +16,6 @@ private:
 	T* _elements;
 	size_t _size;
 	size_t _maxSize;
-	
-	bool decending(T i, T j){
-		return j < i;
-	}
 
 public:
 	
@@ -118,15 +114,19 @@ public:
 		_maxSize = 0;
 	}
 	
-	bool exists(const T& v){
-		return find(_elements, _elements+_size, v) == v;
+	bool exists(const T& v) const{
+		return *std::find(_elements, _elements+_size, v) == v;
+	}
+	
+	bool decending(T i, T j){
+		return j < i;
 	}
 	
 	void sort(bool ascending = true){
 		if(ascending){
-			sort(_elements, _elements+_size);
+			std::sort(_elements, _elements+_size);
 		}else{
-			sort(_elements, _elements+_size, decending);
+			std::sort(_elements, _elements+_size, decending);
 		}	
 	}
 	
@@ -143,21 +143,22 @@ public:
 			delete[] _elements;
 			_elements = newArray;
 		}else{
-			for(size_t j=_size; j>i;) _elements[j] = _elements[--j];
+			for(size_t j=_size; i<j;) _elements[j] = _elements[--j];
 		}
 		_elements[i] = v;
 		++_size;
+		return _elements+i;
 	}
 	
 	T* erase(size_t i){
 		if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-		for(size_t j=_size; j>i;) _elements[j] = _elements[--j];
+		for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
 		--_size;
+		return _elements+i;
 	}
-	
-	
 
 };
+
 
 /* write to stream */
 template <class T>
