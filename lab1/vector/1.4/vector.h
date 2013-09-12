@@ -2,8 +2,9 @@
 #define VECTOR_H
 
 #include <initializer_list>
-using namespace std;
+#include <iostream>
 
+using namespace std;
 class Vector{
 private:
 	unsigned int* _elements;
@@ -11,7 +12,7 @@ private:
 
 public:
 	Vector(); 
-	Vector(size_t);
+	explicit Vector(size_t);
 	Vector(const Vector&);
 	Vector(Vector&&);
 	Vector(initializer_list<unsigned int>);
@@ -24,9 +25,10 @@ public:
 	unsigned int& operator[](const unsigned int);
 	unsigned int& operator[](const unsigned int) const;
 
-	size_t size();
-
+	size_t size() const;
+	
 
 };
+ostream& operator<<(ostream& os, const Vector &v);
 
 #endif

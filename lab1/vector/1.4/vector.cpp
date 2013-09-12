@@ -1,8 +1,10 @@
 #include "vector.h"
+#include <iostream>
 #include <cstring>
 #include <stdexcept>
 #include <initializer_list>
 using namespace std;
+
 Vector::Vector():_size(0){
 	_elements = new unsigned int[0];
 }
@@ -20,6 +22,7 @@ Vector::Vector(const Vector& a):_size(a._size){
 Vector::Vector(Vector&& a):_size(a._size){
 	_elements = a._elements;
 	a._elements = NULL;
+	a._size = 0;
 }
 
 Vector::Vector(initializer_list<unsigned int> list){
@@ -51,6 +54,7 @@ Vector& Vector::operator=(Vector&& a){
 		_size = a._size;
 		_elements = a._elements;
 		a._elements = NULL;
+		a._size = 0;
 		
 	}
 	return *this;
@@ -68,15 +72,30 @@ Vector& Vector::operator=(initializer_list<unsigned int> list){
 }
 
 unsigned int& Vector::operator[](const unsigned int i){
-	if(i >= _size || i < 0) throw std::out_of_range ("");
+	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	return _elements[i];
 }
 
 unsigned int& Vector::operator[](const unsigned int i) const{
-	if(i >= _size || i < 0) throw std::out_of_range ("");
+	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	return _elements[i];
 }
 
-size_t Vector::size(){
+size_t Vector::size() const{
 	return _size;
 }
+
+/* write to stream */
+ostream& operator<<(ostream& os, const Vector &v){
+	size_t n = v.size();
+	if(!n){
+		os << "{}";
+		return os;
+	}
+	--n;
+	size_t i;
+	os << '{';
+	for(i=0; i<n; ++i) os << v[i] << ", ";
+	os << v[n] << '}';
+	return os;
+} 

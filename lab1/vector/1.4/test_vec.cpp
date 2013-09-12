@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdexcept>
-#include "vector/vector.h"     // inkludera din headerfil här
+#include "vector.h"     // inkludera din headerfil här
 
-
+using namespace std;
 
 int main()
 {
