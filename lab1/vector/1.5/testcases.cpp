@@ -59,5 +59,26 @@ int main(){
   cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
   v2.push_back(1);
   cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+	v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+	v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+	v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+	v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+  v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+  v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+  v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+  v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+  v2.erase(1);
+	cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+	v2.erase(1);
+  cout << "v2 has size: " << v2.size() << " and maxSize: " << v2.maxSize() << " and are: " << v2 << endl;
+
   return 0;	 
 }

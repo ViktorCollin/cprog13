@@ -163,6 +163,13 @@ class Vector{
 			if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 			for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
 			--_size;
+			if(_size*4 <= _maxSize) {
+				_maxSize /= 2;
+				T* newArray = new T[_maxSize];
+				for(size_t k=0; k<_size; k++) newArray[k] = _elements[k];
+				delete[] _elements;
+				_elements = newArray;
+			}
 			return _elements+i;
 		}
 };
