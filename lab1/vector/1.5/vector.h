@@ -141,7 +141,9 @@ public:
 		if(_size == _maxSize){
 			_maxSize = 2*_maxSize;
 			T * newArray = new T[_maxSize];
-			for(size_t j=0; j<i; ++j) newArray[j] = _elements[j];
+			size_t j(0);
+			for(; j<i; ++j) newArray[j] = _elements[j];
+			for(; j<_size; ++j) newArray[j+1] = _elements[j];
 			delete[] _elements;
 			_elements = newArray;
 		}else{
