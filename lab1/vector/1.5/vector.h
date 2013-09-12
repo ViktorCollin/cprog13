@@ -12,6 +12,7 @@
 using namespace std;
 template <class T>
 class Vector{
+<<<<<<< HEAD
 private:
 	T* _elements;
 	size_t _size;
@@ -118,17 +119,20 @@ public:
 		return *std::find(_elements, _elements+_size, v) == v;
 	}
 	
-	bool descending(const T * i, const T * j){
-		return *j < *i;
-	}
+	template <typename S>
+	struct Comparator : public std::binary_function<S,S,bool>
+	{
+		bool operator()(const S& o1, const S& o2)
+		{
+			return o2 < o1;
+		}
+	};
 	
 	void sort(bool ascending = true){
 		if(ascending){
 			std::sort(_elements, _elements+_size);
 		}else{
-			typedef bool (*desc)(const T*, const T*);
-			desc d = &descending;
-			std::sort(_elements, _elements+_size, d);
+			std::sort(_elements, _elements+_size, Comparator<T>());
 		}	
 	}
 	
@@ -160,25 +164,24 @@ public:
 		--_size;
 		return _elements+i;
 	}
-
 };
 
 
 /* write to stream */
 template <class T>
 ostream& operator<<(ostream& os, const Vector<T>& v){
-	size_t n = v.size();
-	if(!n){
-		os << "{}";
-		return os;
-	}
-	--n;
-	size_t i;
-	os << '{';
-	for(i=0; i<n; ++i) os << v[i] << ", ";
-	os << v[n] << '}';
-	return os;
-} 
+    size_t n = v.size();
+    if(!n){
+        os << "{}";
+        return os;
+    }
+    --n;
+    size_t i;
+    os << '{';
+    for(i=0; i<n; ++i) os << v[i] << ", ";
+    os << v[n] << '}';
+    return os;
+}
 
 
 #endif
