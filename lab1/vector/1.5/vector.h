@@ -118,15 +118,17 @@ public:
 		return *std::find(_elements, _elements+_size, v) == v;
 	}
 	
-	bool decending(T i, T j){
-		return j < i;
+	bool descending(const T * i, const T * j){
+		return *j < *i;
 	}
 	
 	void sort(bool ascending = true){
 		if(ascending){
 			std::sort(_elements, _elements+_size);
 		}else{
-			std::sort(_elements, _elements+_size, decending);
+			typedef bool (*desc)(const T*, const T*);
+			desc d = &descending;
+			std::sort(_elements, _elements+_size, d);
 		}	
 	}
 	
