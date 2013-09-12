@@ -1,8 +1,8 @@
 #include "vector.h"
 #include <cstring>
 #include <stdexcept>
+#include <initializer_list>
 using namespace std;
-
 Vector::Vector():_size(0){
 	_elements = new unsigned int[0];
 }
@@ -21,6 +21,7 @@ Vector::Vector(Vector&& a):_size(a._size){
 	_elements = a._elements;
 	a._elements = NULL;
 }
+
 Vector::Vector(initializer_list<unsigned int> list){
 	_size = list.size();
 	_elements = new unsigned int[_size];
@@ -50,6 +51,7 @@ Vector& Vector::operator=(Vector&& a){
 		_size = a._size;
 		_elements = a._elements;
 		a._elements = NULL;
+		
 	}
 	return *this;
 }
@@ -66,11 +68,15 @@ Vector& Vector::operator=(initializer_list<unsigned int> list){
 }
 
 unsigned int& Vector::operator[](const unsigned int i){
-	if(i >= _size) throw std::out_of_range ("");
+	if(i >= _size || i < 0) throw std::out_of_range ("");
 	return _elements[i];
 }
 
 unsigned int& Vector::operator[](const unsigned int i) const{
-	if(i >= _size) throw std::out_of_range ("");
+	if(i >= _size || i < 0) throw std::out_of_range ("");
 	return _elements[i];
+}
+
+size_t Vector::size(){
+	return _size;
 }
