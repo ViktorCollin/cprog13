@@ -12,160 +12,157 @@
 using namespace std;
 template <class T>
 class Vector{
-    private:
-        T* _elements;
-        size_t _size;
-        size_t _maxSize;
+private:
+	T* _elements;
+	size_t _size;
+	size_t _maxSize;
 
-    public:
+public:
+	
+	// Constructors
+	Vector():_size(0), _maxSize(DEFAULT_INIT_SIZE){
+		_elements = new T[DEFAULT_INIT_SIZE];
+	}
 
-        // Constructors
-        Vector():_size(0), _maxSize(DEFAULT_INIT_SIZE){
-            _elements = new T[DEFAULT_INIT_SIZE];
-        }
+	explicit Vector(size_t size):_size(size), _maxSize(_size){
+		_elements = new T[_size];
+		for(size_t i=0; i<_size; ++i) _elements[i] = T();
+	}
 
-        explicit Vector(size_t size):_size(size), _maxSize(_size){
-            _elements = new T[_size];
-            for(size_t i=0; i<_size; ++i) _elements[i] = T();
-        }
+	Vector(const Vector<T>& a):_size(a._size), _maxSize(_size){
+		_elements = new T[_size];
+		for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
+	}
 
-        Vector(const Vector<T>& a):_size(a._size), _maxSize(_size){
-            _elements = new T[_size];
-            for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
-        }
+	Vector(Vector<T>&& a):_size(a._size), _maxSize(_size){
+		_elements = a._elements;
+		a._elements = NULL;
+		a._size = 0;
+		a._maxSize = 0;
+	}
 
-        Vector(Vector<T>&& a):_size(a._size), _maxSize(_size){
-            _elements = a._elements;
-            a._elements = NULL;
-            a._size = 0;
-            a._maxSize = 0;
-        }
+	Vector(initializer_list<T> list){
+		_size = list.size();
+		_maxSize = _size;
+		_elements = new T[_size];
+		size_t i(0);
+		for(T l : list) _elements[i++] = l;
+	}
+	
+	~Vector(){
+		delete[] _elements;
+	}
+	
+	// Asinment operators
+	Vector<T>& operator=(const Vector<T>& a){
+		if(this != &a){
+			delete[] _elements;
+			_size = a._size;
+			_maxSize = a._maxSize;
+			_elements = new T[_size];
+			for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
+		}
+		return *this;
+	}
 
-        Vector(initializer_list<T> list){
-            _size = list.size();
-            _maxSize = _size;
-            _elements = new T[_size];
-            size_t i(0);
-            for(T l : list) _elements[i++] = l;
-        }
+	Vector<T>& operator=(Vector<T>&& a){
+		if(this != &a){
+			delete[] _elements;
+			_size = a._size;
+			_maxSize = a._maxSize;
+			_elements = a._elements;
+			a._elements = NULL;
+			a._size = 0;
+			a._maxSize = 0;
 
-        ~Vector(){
-            delete[] _elements;
-        }
+		}
+		return *this;
+	}
 
-        // Asinment operators
-        Vector<T>& operator=(const Vector<T>& a){
-            if(this != &a){
-                delete[] _elements;
-                _size = a._size;
-                _maxSize = a._maxSize;
-                _elements = new T[_size];
-                for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
-            }
-            return *this;
-        }
+	Vector<T>& operator=(initializer_list<T> list){
+		delete[] _elements;
+		_size = list.size();
+		_maxSize = _size;
+		_elements = new T[_size];
+		size_t i(0);
+		for(T l : list) _elements[i++] = l;
+		return *this;
+	}
 
-        Vector<T>& operator=(Vector<T>&& a){
-            if(this != &a){
-                delete[] _elements;
-                _size = a._size;
-                _maxSize = a._maxSize;
-                _elements = a._elements;
-                a._elements = NULL;
-                a._size = 0;
-                a._maxSize = 0;
+	T& operator[](const size_t i){
+		if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+		return _elements[i];
+	}
 
-            }
-            return *this;
-        }
+	T& operator[](const size_t i) const{
+		if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+		return _elements[i];
+	}
 
-        Vector<T>& operator=(initializer_list<T> list){
-            delete[] _elements;
-            _size = list.size();
-            _maxSize = _size;
-            _elements = new T[_size];
-            size_t i(0);
-            for(T l : list) _elements[i++] = l;
-            return *this;
-        }
-
-        T& operator[](const size_t i){
-            if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-            return _elements[i];
-        }
-
-        T& operator[](const size_t i) const{
-            if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-            return _elements[i];
-        }
-
-        // Functions
-        size_t size() const{
-            return _size;
-        }
-
-        size_t maxSize() const{
-            return _maxSize;
-        }
-
-        void clear(){
-            delete[] _elements;
-            _size = 0;
-            _maxSize = 0;
-        }
-
-        bool exists(const T& v) const{
-            return *std::find(_elements, _elements+_size, v) == v;
-        }
-
-        //bool descending(const T * i, const T * j){
-            //return *j < *i;
-        //}
-
-        template <typename S>
-        struct Comparator : public std::binary_function<S,S,bool>
-        {
-            bool operator()(const S& o1, const S& o2)
-            {
-                return o1 > o2;
-            }
-        };
-
-        void sort(bool ascending = true){
-            if(ascending){
-                std::sort(_elements, _elements+_size);
-            }else{
-                std::sort(_elements, _elements+_size, Comparator<T>());
-            }
-        }
-
-        void push_back(T v){
-            insert(_size, v);
-        }
-
-        T* insert(size_t i, T v){
-            if(i > _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-            if(_size == _maxSize){
-                _maxSize = 2*_maxSize;
-                T * newArray = new T[_maxSize];
-                for(size_t j=0; j<i; ++j) newArray[j] = _elements[j];
-                delete[] _elements;
-                _elements = newArray;
-            }else{
-                for(size_t j=_size; i<j;) _elements[j] = _elements[--j];
-            }
-            _elements[i] = v;
-            ++_size;
-            return _elements+i;
-        }
-
-        T* erase(size_t i){
-            if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-            for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
-            --_size;
-            return _elements+i;
-        }
-
+	// Functions
+	size_t size() const{
+		return _size;
+	}
+	
+	size_t maxSize() const{
+		return _maxSize;
+	}
+	
+	void clear(){
+		delete[] _elements;
+		_size = 0;
+		_maxSize = 0;
+	}
+	
+	bool exists(const T& v) const{
+		return *std::find(_elements, _elements+_size, v) == v;
+	}
+	
+	template <typename S>
+	struct Comparator : public std::binary_function<S,S,bool>
+	{
+		bool operator()(const S& o1, const S& o2)
+		{
+			return o2 < o1;
+		}
+	};
+	
+	void sort(bool ascending = true){
+		if(ascending){
+			std::sort(_elements, _elements+_size);
+		}else{
+			std::sort(_elements, _elements+_size, Comparator<T>());
+		}	
+	}
+	
+	void push_back(T v){
+		insert(_size, v);
+	}
+	
+	T* insert(size_t i, T v){
+		if(i > _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+		if(_size == _maxSize){
+			_maxSize = 2*_maxSize;
+			T * newArray = new T[_maxSize];
+			size_t j(0);
+			for(; j<i; ++j) newArray[j] = _elements[j];
+			for(; j<_size; ++j) newArray[j+1] = _elements[j];
+			delete[] _elements;
+			_elements = newArray;
+		}else{
+			for(size_t j=_size; i<j;) _elements[j] = _elements[--j];
+		}
+		_elements[i] = v;
+		++_size;
+		return _elements+i;
+	}
+	
+	T* erase(size_t i){
+		if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+		for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
+		--_size;
+		return _elements+i;
+	}
 };
 
 
