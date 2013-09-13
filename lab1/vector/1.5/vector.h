@@ -13,7 +13,7 @@
 
 
 using namespace std;
-template <class T>
+template <typename T>
 class Vector{
 	private:
 		T* _elements;
@@ -47,29 +47,29 @@ class Vector{
 		
 };
 
-template <class T>
+template <typename T>
 Vector<T>::Vector():_size(0), _maxSize(DEFAULT_INIT_SIZE){
 	_elements = new T[DEFAULT_INIT_SIZE];
 }
 
-template <class T>
+template <typename T>
 Vector<T>::Vector(size_t size){
 	Vector(size, T());
 }
 
-template <class T>
+template <typename T>
 Vector<T>::Vector(size_t size, T e):_size(size), _maxSize(_size){
 	_elements = new T[_size];
 	for(size_t i=0; i<_size; ++i) _elements[i] = e;
 }
 
-template <class T>
+template <typename T>
 Vector<T>::Vector(const Vector<T>& a):_size(a._size), _maxSize(_size){
 	_elements = new T[_size];
 	for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
 }
 
-template <class T>
+template <typename T>
 Vector<T>::Vector(Vector<T>&& a):_size(a._size), _maxSize(_size){
 	_elements = a._elements;
 	a._elements = NULL;
@@ -77,7 +77,7 @@ Vector<T>::Vector(Vector<T>&& a):_size(a._size), _maxSize(_size){
 	a._maxSize = 0;
 }
 
-template <class T>
+template <typename T>
 Vector<T>::Vector(initializer_list<T> list){
 	_size = list.size();
 	_maxSize = _size;
@@ -86,13 +86,13 @@ Vector<T>::Vector(initializer_list<T> list){
 	for(T l : list) _elements[i++] = l;
 }
 
-template <class T>
+template <typename T>
 Vector<T>::~Vector(){
 	if(_elements != NULL) delete[] _elements;
 }
 
 // Asinment operators
-template <class T>
+template <typename T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& a){
 	if(this != &a){
 		delete[] _elements;
@@ -104,7 +104,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& a){
 	return *this;
 }
 
-template <class T>
+template <typename T>
 Vector<T>& Vector<T>::operator=(Vector<T>&& a){
 	if(this != &a){
 		delete[] _elements;
@@ -119,7 +119,7 @@ Vector<T>& Vector<T>::operator=(Vector<T>&& a){
 	return *this;
 }
 
-template <class T>
+template <typename T>
 Vector<T>& Vector<T>::operator=(initializer_list<T> list){
 	delete[] _elements;
 	_size = list.size();
@@ -130,30 +130,30 @@ Vector<T>& Vector<T>::operator=(initializer_list<T> list){
 	return *this;
 }
 
-template <class T>
+template <typename T>
 T& Vector<T>::operator[](const size_t i){
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	return _elements[i];
 }
 
-template <class T>
+template <typename T>
 T& Vector<T>::operator[](const size_t i) const{
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	return _elements[i];
 }
 
 // Functions
-template <class T>
+template <typename T>
 size_t Vector<T>::size() const{
 	return _size;
 }
 
-template <class T>
+template <typename T>
 size_t Vector<T>::maxSize() const{
 	return _maxSize;
 }
 
-template <class T>
+template <typename T>
 void Vector<T>::clear(){
 	delete[] _elements;
 	_elements = new T[DEFAULT_INIT_SIZE];
@@ -161,7 +161,7 @@ void Vector<T>::clear(){
 	_maxSize = 0;
 }
 
-template <class T>
+template <typename T>
 bool Vector<T>::exists(const T& v) const{
 	return *std::find(_elements, _elements+_size, v) == v;
 }
@@ -173,7 +173,7 @@ struct Comparator : public std::binary_function<S,S,bool>{
 	}
 };
 
-template <class T>
+template <typename T>
 void Vector<T>::sort(bool ascending /*default true*/){
 	if(ascending){
 		std::sort(_elements, _elements+_size);
@@ -182,12 +182,12 @@ void Vector<T>::sort(bool ascending /*default true*/){
 	}	
 }
 
-template <class T>
+template <typename T>
 void Vector<T>::push_back(T v){
 	(void)insert(_size, v);
 }
 
-template <class T>
+template <typename T>
 T* Vector<T>::insert(size_t i, T v){
 	if(i > _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	if(_size == _maxSize){
@@ -207,7 +207,7 @@ T* Vector<T>::insert(size_t i, T v){
 	return _elements+i;
 }
 
-template <class T>
+template <typename T>
 T* Vector<T>::erase(size_t i){
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
@@ -224,7 +224,7 @@ T* Vector<T>::erase(size_t i){
 
 
 /* write to stream */
-template <class T>
+template <typename T>
 ostream& operator<<(ostream& os, const Vector<T>& v){
 	size_t n = v.size();
 	if(!n){

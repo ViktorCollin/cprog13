@@ -46,7 +46,7 @@ main.cpp:
 
   int main( void )
   {
-      CxxText::ErrorPrinter::runAllTests();
+      CxxTest::ErrorPrinter::runAllTests();
       return 0;
   }
 
