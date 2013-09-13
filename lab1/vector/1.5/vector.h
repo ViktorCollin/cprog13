@@ -1,9 +1,5 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-#define DEFAULT_INIT_SIZE 16
-#define SHRINK_VECTOR_FRACTION 4
-#define SHRINK_VECTOR_AMOUNT 2
-
 
 #include <iostream>
 #include <cstring>
@@ -11,8 +7,12 @@
 #include <initializer_list>
 #include <algorithm>
 
-
 using namespace std;
+static const size_t DEFAULT_INIT_SIZE(16);
+static const size_t SHRINK_VECTOR_FRACTION(4);
+static const size_t SHRINK_VECTOR_AMOUNT(2);
+
+
 template <typename T>
 class Vector{
 	private:
@@ -58,19 +58,19 @@ Vector<T>::Vector(size_t size){
 }
 
 template <typename T>
-Vector<T>::Vector(size_t size, T e):_size(size), _maxSize(_size){
-	_elements = new T[_size];
+Vector<T>::Vector(size_t size, T e):_size(size), _maxSize(max(_size, DEFAULT_INIT_SIZE)){
+	_elements = new T[_maxSize];
 	for(size_t i=0; i<_size; ++i) _elements[i] = e;
 }
 
 template <typename T>
-Vector<T>::Vector(const Vector<T>& a):_size(a._size), _maxSize(_size){
-	_elements = new T[_size];
+Vector<T>::Vector(const Vector<T>& a):_size(a._size), _maxSize(a._maxSize){
+	_elements = new T[_maxSize];
 	for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
 }
 
 template <typename T>
-Vector<T>::Vector(Vector<T>&& a):_size(a._size), _maxSize(_size){
+Vector<T>::Vector(Vector<T>&& a):_size(a._size), _maxSize(a._maxSize){
 	_elements = a._elements;
 	a._elements = NULL;
 	a._size = 0;
@@ -80,8 +80,8 @@ Vector<T>::Vector(Vector<T>&& a):_size(a._size), _maxSize(_size){
 template <typename T>
 Vector<T>::Vector(initializer_list<T> list){
 	_size = list.size();
-	_maxSize = _size;
-	_elements = new T[_size];
+	_maxSize = max(DEFAULT_INIT_SIZE,_size);
+	_elements = new T[_maxSize];
 	size_t i(0);
 	for(T l : list) _elements[i++] = l;
 }
@@ -98,7 +98,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& a){
 		delete[] _elements;
 		_size = a._size;
 		_maxSize = a._maxSize;
-		_elements = new T[_size];
+		_elements = new T[_maxSize];
 		for(size_t i=0; i<_size; ++i) _elements[i] = a[i];
 	}
 	return *this;
@@ -123,8 +123,8 @@ template <typename T>
 Vector<T>& Vector<T>::operator=(initializer_list<T> list){
 	delete[] _elements;
 	_size = list.size();
-	_maxSize = _size;
-	_elements = new T[_size];
+	_maxSize = max(DEFAULT_INIT_SIZE, _size);
+	_elements = new T[_maxSize];
 	size_t i(0);
 	for(T l : list) _elements[i++] = l;
 	return *this;
@@ -158,7 +158,7 @@ void Vector<T>::clear(){
 	delete[] _elements;
 	_elements = new T[DEFAULT_INIT_SIZE];
 	_size = 0;
-	_maxSize = 0;
+	_maxSize = DEFAULT_INIT_SIZE;
 }
 
 template <typename T>
@@ -195,8 +195,8 @@ T* Vector<T>::insert(size_t i, T v){
 		else _maxSize = DEFAULT_INIT_SIZE;
 		T * newArray = new T[_maxSize];
 		size_t j(0);
-		for(; j<i; ++j) newArray[j] = _elements[j];
-		for(; j<_size; ++j) newArray[j+1] = _elements[j];
+		while(j<i) newArray[j] = _elements[j++];
+		while(j<_size) newArray[++j] = _elements[j-1];
 		delete[] _elements;
 		_elements = newArray;
 	}else{
@@ -213,7 +213,7 @@ T* Vector<T>::erase(size_t i){
 	for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
 	--_size;
 	if(_size*SHRINK_VECTOR_FRACTION <= _maxSize) {
-		_maxSize /= SHRINK_VECTOR_AMOUNT;
+		_maxSize = max(DEFAULT_INIT_SIZE, _maxSize/SHRINK_VECTOR_AMOUNT);
 		T* newArray = new T[_maxSize];
 		for(size_t k=0; k<_size; k++) newArray[k] = _elements[k];
 		delete[] _elements;
