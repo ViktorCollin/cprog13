@@ -1,7 +1,9 @@
 /////////////////////////////////////////////////////////////////
 //
 // Personuppgifter (namn, pnr, epost) på dem som gjort labben
-//
+Christian Wamstad xxxxxx-xxxx wamstad@kth.se
+Viktor Collin 880316-0277 vcollin@kth.se
+
 
 
 /////////////////////////////////////////////////////////////////
@@ -12,6 +14,8 @@
 
 
 // vad gör -Wall och -g ?
+-Wall shows all warnings pressent in compiletime
+-g adds debug information
 
 
 /////////////////////////////////////////////////////////////////
@@ -42,10 +46,13 @@
 //         std::cout << z << "*" << x * x << " är inte 29" << std::endl;           
 // }
 // 
-// Varför blir värdet på variabeln w inte det man tror (0.29*100)? 
+// Varför blir värdet på variabeln w inte det man tror (0.29*100)?
+för att bodyn till forloopen är tom p.g.a. ett extra ; 
 
 
-// Hur många varv körs for-loopen i funktionen powerof? 
+// Hur många varv körs for-loopen i funktionen powerof?
+forloopen körs y gånger om inte detta optimeras bort i kompilatorn. 
+Eftersom inget utförs vid varje varv påverkas inga variabler.
 
 
 // 1.2 b)

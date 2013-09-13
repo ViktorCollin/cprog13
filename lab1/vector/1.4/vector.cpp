@@ -5,10 +5,12 @@
 #include <initializer_list>
 using namespace std;
 
+// Vector v
 Vector::Vector():_size(0){
 	_elements = new unsigned int[0];
 }
 
+// Vector(5)
 Vector::Vector(size_t size):_size(size){
 	_elements = new unsigned int[_size];
 	memset(_elements, 0, _size*sizeof(unsigned int));

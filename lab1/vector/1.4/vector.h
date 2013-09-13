@@ -29,6 +29,9 @@ public:
 	
 
 };
+
+// cout << "v: " <<  v << " and its size is: " << v.size()
 ostream& operator<<(ostream& os, const Vector &v);
+
 
 #endif
