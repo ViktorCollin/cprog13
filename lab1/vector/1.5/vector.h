@@ -133,13 +133,13 @@ Vector<T>& Vector<T>::operator=(initializer_list<T> list){
 
 template <typename T>
 T& Vector<T>::operator[](const size_t i){
-	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+	if(i >= _size || i < 0) throw std::out_of_range ("Index out of bounds exception");
 	return _elements[i];
 }
 
 template <typename T>
 T& Vector<T>::operator[](const size_t i) const{
-	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+	if(i >= _size || i < 0) throw std::out_of_range ("Index out of bounds exception");
 	return _elements[i];
 }
 
@@ -186,23 +186,23 @@ void Vector<T>::sort(bool ascending /*default true*/){
 
 template <typename T>
 void Vector<T>::push_back(T v){
-	(void)insert(_size, v);
+	insert(_size, v);
 }
 
 template <typename T>
 T* Vector<T>::insert(size_t i, T v){
-	if(i > _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
+	if(i > _size || i < 0) throw std::out_of_range ("Index out of bounds exception");
 	if(_size == _maxSize){
 		if(_maxSize) _maxSize = 2*_maxSize;
 		else _maxSize = DEFAULT_INIT_SIZE;
 		T * newArray = new T[_maxSize];
 		size_t j(0);
-		while(j<i) newArray[j] = _elements[j++];
-		while(j<_size) newArray[++j] = _elements[j-1];
-		delete[] _elements;
+		for(;j<i; ++j) newArray[j] = _elements[j];
+		for(;j<_size; ++j) newArray[j+1] = _elements[j];
+		if(_elements != NULL) delete[] _elements;
 		_elements = newArray;
 	}else{
-		for(size_t j=_size; i<j;) _elements[j] = _elements[--j];
+		for(size_t j=_size; i<j; --j) _elements[j] = _elements[j-1];
 	}
 	_elements[i] = v;
 	++_size;

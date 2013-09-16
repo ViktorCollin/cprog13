@@ -353,11 +353,8 @@ class SomeTest : public CxxTest::TestSuite {
 		void testErasingObjects() {
 			Vector<Foo> objects(3);
 			Vector<Foo> expected(2);
-			cout << "\nobj: " << objects << &objects[0] << " " << &objects[1] << " " << &objects[2] << endl;
 			objects[1].x = -1;
-			cout << "obj: " << objects << &objects[0].x << " " << &objects[1].x << " " << &objects[2].x << endl;
 			objects.erase(1);
-			cout << "obj: " << objects << &objects[0].x << " " << &objects[1].x << endl;
 
 			assertVectorsEqual(expected, objects);
 		}
