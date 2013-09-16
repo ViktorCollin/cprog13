@@ -53,10 +53,13 @@ Vector<T>::Vector():_size(0), _maxSize(DEFAULT_INIT_SIZE){
 }
 
 template <typename T>
-Vector<T>::Vector(size_t size): Vector(size, T()){ }
+Vector<T>::Vector(size_t size):_size(size), _maxSize(max(size,DEFAULT_INIT_SIZE)){
+  _elements = new T[_maxSize];
+  for(size_t i=0; i<_size; ++i) _elements[i] = T();
+}
 
 template <typename T>
-Vector<T>::Vector(size_t size, T e):_size(size), _maxSize(max(_size, DEFAULT_INIT_SIZE)){
+Vector<T>::Vector(size_t size, T e):_size(size), _maxSize(max(size, DEFAULT_INIT_SIZE)){
 	_elements = new T[_maxSize];
 	for(size_t i=0; i<_size; ++i) _elements[i] = e;
 }
