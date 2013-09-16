@@ -165,7 +165,7 @@ void Vector<T>::clear(){
 template <typename T>
 bool Vector<T>::exists(const T& v) const{
 	if(!_size) return false;
-	return *std::find(_elements, _elements+(_size-1), v) == v;
+	return std::find(_elements, _elements+_size, v) != &_elements[_size];
 }
 
 template <typename S>
@@ -215,13 +215,13 @@ T* Vector<T>::erase(size_t i){
 	--_size;
 	for(size_t j=i; j<_size; ++j ) _elements[j] = _elements[j+1];
 
-	if(_size*SHRINK_VECTOR_FRACTION <= _maxSize && _maxSize != DEFAULT_INIT_SIZE) {
-		_maxSize = max(DEFAULT_INIT_SIZE, _maxSize/SHRINK_VECTOR_AMOUNT);
-		T* newArray = new T[_maxSize];
-		for(size_t k=0; k<_size; k++) newArray[k] = _elements[k];
-		delete[] _elements;
-		_elements = newArray;
-	}
+	//if(_size*SHRINK_VECTOR_FRACTION <= _maxSize && _maxSize != DEFAULT_INIT_SIZE) {
+		//_maxSize = max(DEFAULT_INIT_SIZE, _maxSize/SHRINK_VECTOR_AMOUNT);
+		//T* newArray = new T[_maxSize];
+		//for(size_t k=0; k<_size; k++) newArray[k] = _elements[k];
+		//delete[] _elements;
+		//_elements = newArray;
+	//}
 	return _elements+i;
 }
 
