@@ -161,7 +161,8 @@ void Vector<T>::clear(){
 
 template <typename T>
 bool Vector<T>::exists(const T& v) const{
-	return *std::find(_elements, _elements+_size, v) == v;
+	if(!_size) return false;
+	return *std::find(_elements, _elements+(_size-1), v) == v;
 }
 
 template <typename S>
