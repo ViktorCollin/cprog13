@@ -209,8 +209,9 @@ T* Vector<T>::insert(size_t i, T v){
 template <typename T>
 T* Vector<T>::erase(size_t i){
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-	for(size_t j=i; j<_size; ) _elements[j] = _elements[++j]; // risk for out of bounce
 	--_size;
+	for(size_t j=i; j<_size; ++j ) _elements[j] = _elements[j+1];
+
 	if(_size*SHRINK_VECTOR_FRACTION <= _maxSize && _maxSize != DEFAULT_INIT_SIZE) {
 		_maxSize = max(DEFAULT_INIT_SIZE, _maxSize/SHRINK_VECTOR_AMOUNT);
 		T* newArray = new T[_maxSize];
