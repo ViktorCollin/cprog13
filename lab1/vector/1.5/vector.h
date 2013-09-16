@@ -211,7 +211,7 @@ T* Vector<T>::erase(size_t i){
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
 	for(size_t j=i; j<_size; ) _elements[j] = _elements[++j]; // risk for out of bounce
 	--_size;
-	if(_size*SHRINK_VECTOR_FRACTION <= _maxSize) {
+	if(_size*SHRINK_VECTOR_FRACTION <= _maxSize && _maxSize != DEFAULT_INIT_SIZE) {
 		_maxSize = max(DEFAULT_INIT_SIZE, _maxSize/SHRINK_VECTOR_AMOUNT);
 		T* newArray = new T[_maxSize];
 		for(size_t k=0; k<_size; k++) newArray[k] = _elements[k];
