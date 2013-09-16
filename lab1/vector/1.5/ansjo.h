@@ -10,6 +10,26 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <iostream>
+
+
+
+struct Foo {
+	int x, y;
+	std::string str;
+
+	Foo() : x(1), y(2), str("hello") {}
+
+	bool operator==(const Foo & ref) {
+		return x == ref.x && y == ref.y && str == ref.str;
+	}
+	
+
+};
+ostream& operator<<(ostream &os, const Foo &f){
+	os << "{" << f.x << ", " << f.y << ", " << f.str << "}";
+	return os;
+}
 class SomeTest : public CxxTest::TestSuite {
 
 	public:
@@ -211,17 +231,8 @@ class SomeTest : public CxxTest::TestSuite {
 			assertVectorsEqual(v, expected);
 		}
 		
-		struct Foo {
-			int x, y;
-			std::string str;
-
-			Foo() : x(1), y(2), str("hello") {}
-
-			bool operator==(const Foo & ref) {
-				return x == ref.x && y == ref.y && str == ref.str;
-			}
-
-		};
+	
+		
 		
 		void testWithClasses() {
 			Vector<Foo> v;
@@ -284,6 +295,88 @@ class SomeTest : public CxxTest::TestSuite {
 			}
 		}
 		
+		void testContainsOneElem() {
+			Vector<string> v = { "foo"};
+			TS_ASSERT_EQUALS(true, v.exists("foo"));
+			TS_ASSERT_EQUALS(false, v.exists("bar"));
+		}
+		
+		void testContainsTwoElems() {
+			Vector<string> v = { "foo", "bar"};
+			TS_ASSERT_EQUALS(true, v.exists("foo"));
+			TS_ASSERT_EQUALS(true, v.exists("bar"));
+			TS_ASSERT_EQUALS(false, v.exists("baz"));
+		}
+		
+		
+		void testContainsTwoElemsWithErase() {
+			Vector<string> v = { "foo", "bar"};
+			TS_ASSERT_EQUALS(true, v.exists("foo"));
+			TS_ASSERT_EQUALS(true, v.exists("bar"));
+			TS_ASSERT_EQUALS(false, v.exists("baz"));
+			v.erase(1);
+			TS_ASSERT_EQUALS(false, v.exists("bar"));
+		}
+		
+		void testInsertWithClasses() {
+			Vector<Foo> v(2);
+			Foo f;
+			v.insert(0, f);
+			f.x = 5;
+			TS_ASSERT_DIFFERS(v[0].x, f.x);
+		}
+		
+		void testInsertWithStandardVector() {
+			std::vector<Foo> v(2);
+			Foo f;
+			v[0] = f;
+			f.x = 5;
+			TS_ASSERT_DIFFERS(v[0].x, f.x);
+		}
+		
+		void testStdMoveingObjects() {
+			Vector<Foo> v(10);
+			v[2].x = -1;
+			Vector<Foo> expected = v;
+			Vector<Foo> v2 = std::move(v);
+			Vector<Foo> v3;
+			TS_ASSERT_EQUALS(10, v2.size());
+			TS_ASSERT_EQUALS(0, v.size());
+			v3 = std::move(v2);
+			TS_ASSERT_EQUALS(10, v3.size());
+			TS_ASSERT_EQUALS(0, v2.size());
+
+			assertVectorsEqual(v3, expected);
+			TS_ASSERT_EQUALS(v3[2].x, -1);
+		}
+		
+		void testErasingObjects() {
+			Vector<Foo> objects(3);
+			Vector<Foo> expected(2);
+			cout << "\nobj: " << objects << endl;
+			objects[1].x = -1;
+			cout << "obj: " << objects << endl;
+			objects.erase(1);
+			cout << "obj: " << objects << endl;
+
+			assertVectorsEqual(expected, objects);
+		}
+		
+		void testDefaultVal() {
+			Vector<std::string> strs(2), expected = {"", ""};
+			assertVectorsEqual(strs, expected);
+
+			Vector<int> ints(100);
+			for (int i = 0; i < 100; ++i) {
+				TS_ASSERT_EQUALS(0, ints[i]);
+			}
+		}
+
+		void TestFirstPart() {
+			Vector<int> v(1);
+			TS_ASSERT_EQUALS(v[0], 0);
+			TS_ASSERT_EQUALS(v.size(), 1);
+		}
 	
 		
 
@@ -292,5 +385,7 @@ class SomeTest : public CxxTest::TestSuite {
 
 
 };
+
+
 
 #endif

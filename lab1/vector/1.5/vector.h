@@ -53,9 +53,7 @@ Vector<T>::Vector():_size(0), _maxSize(DEFAULT_INIT_SIZE){
 }
 
 template <typename T>
-Vector<T>::Vector(size_t size){
-	Vector(size, T());
-}
+Vector<T>::Vector(size_t size): Vector(size, T()){ }
 
 template <typename T>
 Vector<T>::Vector(size_t size, T e):_size(size), _maxSize(max(_size, DEFAULT_INIT_SIZE)){
@@ -210,7 +208,7 @@ T* Vector<T>::insert(size_t i, T v){
 template <typename T>
 T* Vector<T>::erase(size_t i){
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of Bounce Expection");
-	for(size_t j=i; j<_size; ) _elements[j] = _elements[++j];
+	for(size_t j=i; j<_size; ) _elements[j] = _elements[++j]; // risk for out of bounce
 	--_size;
 	if(_size*SHRINK_VECTOR_FRACTION <= _maxSize) {
 		_maxSize = max(DEFAULT_INIT_SIZE, _maxSize/SHRINK_VECTOR_AMOUNT);
