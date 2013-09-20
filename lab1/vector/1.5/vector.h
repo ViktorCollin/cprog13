@@ -41,6 +41,7 @@ class Vector{
 		void clear();
 		bool exists(const T&) const;
 		void sort(bool = true);
+		void unique_sort(bool = true);
 		void push_back(T);
 		T* insert(size_t, T);
 		T* erase(size_t);
@@ -182,6 +183,14 @@ void Vector<T>::sort(bool ascending /*default true*/){
 	}else{
 		std::sort(_elements, _elements+_size, Comparator<T>());
 	}	
+}
+
+template <typename T>
+void Vector<T>::unique_sort(bool ascending /*default true*/){
+	Vector<T>::sort(ascending);
+	T* newEnd = std::unique(_elements, _elements+_size);
+	_size = _size - ((_elements+_size)-newEnd);
+	
 }
 
 template <typename T>

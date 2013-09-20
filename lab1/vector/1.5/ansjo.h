@@ -374,7 +374,14 @@ class SomeTest : public CxxTest::TestSuite {
 			TS_ASSERT_EQUALS(v[0], 0);
 			TS_ASSERT_EQUALS(v.size(), 1);
 		}
-	
+		
+		void TestUnique_sort(){
+			Vector<int> v = {1,2,3,1,2,3,4,5,4,6},
+				expected = {1,2,3,4,5,6};
+			v.unique_sort();
+			assertVectorsEqual(v, expected);
+			TS_ASSERT_EQUALS(v.size(), 6);
+		}
 		
 
 		
