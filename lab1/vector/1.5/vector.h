@@ -190,7 +190,6 @@ void Vector<T>::unique_sort(bool ascending /*default true*/){
 	Vector<T>::sort(ascending);
 	T* newEnd = std::unique(_elements, _elements+_size);
 	_size = _size - ((_elements+_size)-newEnd);
-	
 }
 
 template <typename T>
