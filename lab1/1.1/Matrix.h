@@ -1,6 +1,6 @@
 #ifndef MATRIX_H
 #define MATRIX_H
-#include <vector>
+#include "vector.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -61,6 +61,29 @@ class Matrix
     void add_row( );            // Non mandatory help function
     friend std::istream& operator>> ( std::istream&, Matrix& );
 };
+
+Matrix::Matrix():Matrix(0,0) {}
+
+Matrix::Matrix(std::size_t n, std::size_t m):m_rows(n), m_cols(m), m_vectors(n, matrix_row(m)) {}
+
+Matrix::Matrix( const Matrix& m):m_rows(m.rows()), m_cols(m.cols()), m_vectors(m.m_vectors) {}
+
+Matrix::Matrix(int size):Matrix(size, size) {}
+
+matrix_row& Matrix::operator[](index i){
+	return m_vectors[i];
+}
+
+const matrix_row& Matrix::operator[]( index i ) const{
+	return m_vectors[i];
+}
+
+std::size_t Matrix::rows(){
+	return m_rows;
+}
+std::size_t Matrix::cols(){
+	return m_cols;
+}
 
 std::istream& operator>> ( std::istream&, Matrix& );
 std::ostream& operator<< ( std::ostream& os, Matrix& m){
