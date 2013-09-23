@@ -23,8 +23,7 @@ class Matrix
  public:
     typedef unsigned int index;
     
-    class matrix_row : private Vector< int >
-    {
+    class matrix_row : private Vector< int >{
     public:
         matrix_row( std::size_t s = 0) : Vector< int >( s ) {}
         using Vector<int>::operator [];
@@ -64,7 +63,22 @@ class Matrix
 };
 
 std::istream& operator>> ( std::istream&, Matrix& );
-std::ostream& operator<< ( std::ostream&, Matrix& );
+std::ostream& operator<< ( std::ostream& os, Matrix& m){
+	os << "[ ";
+	std::size_t n = m.rows()-1;
+	std::size_t cols = m.cols();
+	for(std::size_t i=0; i<n; ++i){
+		for(std::size_t j=0; j<cols; ++j){
+			os << m[i][j] << ' ';
+		}
+		os << "\n; ";
+	}
+	for(std::size_t j=0; j<cols; ++j){
+		os << m[n][j] << ' ';
+	}
+	os << ']';
+	return os;
+}
 Matrix operator* ( int, const Matrix& );
 
 #endif // MATRIX_H
