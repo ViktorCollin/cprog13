@@ -21,3 +21,8 @@ test:
 	./runner
 	rm runner
 	rm runner.cpp
+
+submit:
+	cp vector.h kth_cprog_vektor.cpp
+	submit.py kth_cprog_vektor.cpp
+	rm kth_cprog_vektor.cpp

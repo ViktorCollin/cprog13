@@ -178,6 +178,7 @@ struct Comparator : public std::binary_function<S,S,bool>{
 
 template <typename T>
 void Vector<T>::sort(bool ascending /*default true*/){
+	if(_size < 2) return;
 	if(ascending){
 		std::sort(_elements, _elements+_size);
 	}else{
@@ -187,6 +188,7 @@ void Vector<T>::sort(bool ascending /*default true*/){
 
 template <typename T>
 void Vector<T>::unique_sort(bool ascending /*default true*/){
+	if(_size < 2) return;
 	Vector<T>::sort(ascending);
 	T* newEnd = std::unique(_elements, _elements+_size);
 	_size = _size - ((_elements+_size)-newEnd);
