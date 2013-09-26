@@ -4,17 +4,6 @@
 #include <iostream>
 #include <stdexcept>
 
-template <class T>
-class Vector : public std::vector< T > {
-public:
-    explicit Vector <T> (std::size_t size  = 0, T data = T()) : std::vector<T>(size, data) {}
-    const T& operator[](unsigned int i) const throw(std::out_of_range) {
-        return this->at( i );
-    }
-    T& operator[](unsigned int i) throw(std::out_of_range) {
-        return this->at( i );
-    }    
-};
 
 //using namespace std;
 
@@ -70,18 +59,18 @@ Matrix::Matrix( const Matrix& m):m_rows(m.rows()), m_cols(m.cols()), m_vectors(m
 
 Matrix::Matrix(int size):Matrix(size, size) {}
 
-matrix_row& Matrix::operator[](index i){
+Matrix::matrix_row& Matrix::operator[](index i){
 	return m_vectors[i];
 }
 
-const matrix_row& Matrix::operator[]( index i ) const{
+const Matrix::matrix_row& Matrix::operator[]( index i ) const{
 	return m_vectors[i];
 }
 
-std::size_t Matrix::rows(){
+std::size_t Matrix::rows() const {
 	return m_rows;
 }
-std::size_t Matrix::cols(){
+std::size_t Matrix::cols() const {
 	return m_cols;
 }
 
