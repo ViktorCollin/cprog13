@@ -7,8 +7,11 @@ cflags      = -std=c++11
 testcode.cpp: $(testcode)
 	python $(cxxtestpath)cxxtestgen.py --error-printer -o testcode.cpp $(testcode)
 
-runtest0%: testcode.cpp
-	$(compiler) $(cflags) -I $(cxxtestpath) -o runtest0$* testcode.cpp Matrix.h
+runtest0%: testcode.cpp Matrix.h
+	$(compiler) $(cflags) -I $(cxxtestpath) -o $@ $^
+
+run0%: runtest0%
+	./runtest0$*
 
 clean:
 	touch runtest01 testcode.cpp

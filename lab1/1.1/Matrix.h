@@ -51,14 +51,22 @@ class Matrix
     friend std::istream& operator>> ( std::istream&, Matrix& );
 };
 
-Matrix::Matrix():Matrix(0,0) {}
+Matrix::Matrix():m_rows(0), m_cols(0), m_vectors(0, matrix_row(0)) {}
 
 Matrix::Matrix(std::size_t n, std::size_t m):m_rows(n), m_cols(m), m_vectors(n, matrix_row(m)) {}
 
 Matrix::Matrix( const Matrix& m):m_rows(m.rows()), m_cols(m.cols()), m_vectors(m.m_vectors) {}
 
-Matrix::Matrix(int size):Matrix(size, size) {}
+Matrix::Matrix(int size):m_rows(size), m_cols(size), m_vectors(size, matrix_row(size)) {}
 
+Matrix::~Matrix() { 
+//TODO
+}
+
+Matrix& Matrix::operator= ( const Matrix& ) {
+//TODO
+return *this;
+}
 Matrix::matrix_row& Matrix::operator[](index i){
 	return m_vectors[i];
 }
@@ -74,7 +82,9 @@ std::size_t Matrix::cols() const {
 	return m_cols;
 }
 
-std::istream& operator>> ( std::istream&, Matrix& );
+std::istream& operator>> ( std::istream& os, Matrix& m){
+
+}
 std::ostream& operator<< ( std::ostream& os, Matrix& m){
 	os << "[ ";
 	std::size_t n = m.rows()-1;
