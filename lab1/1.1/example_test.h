@@ -30,14 +30,17 @@ public:
         TS_ASSERT( m[ 0 ][ 1 ] == 0 );
     
     }
+    void testStringStreamConstructor ( ) 
+    {
+        Matrix m = a_matrix_3by2();
+        TS_ASSERT( m[ 0 ][ 0 ] == 1);
+    }
     void testIndex2Operator ( )
     {
-        Matrix m( 2, 2 );
-        m = a_matrix_3by2();
-        TS_ASSERT( m[ 0 ][ 0 ] == 1 );
-
+        Matrix m( 2, 2);
         init_matrix(m, "  [ 1 3 5 ; 0 2 1 ]");
         TS_ASSERT( m[ 0 ][ 0 ] == 1 );
+        TS_ASSERT( m[ 1 ][ 2 ] == 1 );
 
         std::stringstream ss;
         ss << m;
