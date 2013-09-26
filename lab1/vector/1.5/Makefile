@@ -14,3 +14,10 @@ ansjo:
 	./runner
 	rm runner
 	rm runner.cpp
+
+test:
+	python ../../cxxtest/cxxtestgen.py --error-printer -o runner.cpp ourTestCases.h
+	g++-4.8 -std=c++11 -I../../cxxtest/ -o runner runner.cpp vector.h
+	./runner
+	rm runner
+	rm runner.cpp
