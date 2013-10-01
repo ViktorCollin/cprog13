@@ -24,6 +24,32 @@ public:
     {
         char vek[] = {'b', 'b', 'a', 'b', 'b'};
         int result =  must_follow_a(vek, 3, 'a', 'b');
-        TS_ASSERT_EQUALS( result, 1);
+        TS_ASSERT_EQUALS( result, 0);
     }
+    void test_a_vector_is_empty( void )
+    {
+        char vek[] = {};
+        int result = must_follow_a(vek, 0, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_form_peke2( void )
+    {
+        char vek[] = {'b', 'b', 'a' };
+        int result =  must_follow_a(vek, 3, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_vector_is_one( void )
+    {
+        char vek[] = {'a'};
+        int result = must_follow_a(vek, 0, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_vector_is_only_as( void )
+    {
+        char vek[] = {'a', 'a','a','a'};
+        int result = must_follow_a(vek, 4, 'a', 'a');
+        TS_ASSERT_EQUALS( result, 3);
+    }
+ 
+ 
 };
