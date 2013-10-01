@@ -1,0 +1,300 @@
+/////////////////////////////////////////////////////////////////
+//
+// Personuppgifter (namn, pnr, epost) på dem som gjort labben
+Christian Wemstad 900420-4575 wemstad@kth.se
+Viktor Collin 880316-0277 vcollin@kth.se
+
+
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.1
+//
+// vad betyder \$* i en makefile? 
+Den referear till target-file, d.v.s filen/filerna som står innan : i
+metodhuvudet
+
+// vad gör -Wall och -g ?
+-Wall shows all warnings pressent in compiletime
+-g adds debug information
+
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.2 a)
+// 
+// int powerof(int x, int y) {
+//     int res = 1;
+//     for (int i = 0; i < y; i++); {
+//         res *= x;
+//     }
+//     return res;
+// }
+// 
+// int main() {
+//     int x = 10;
+//     int y = 3;
+// 
+//     int res = powerof(x, y);
+// 
+//     std::cout << x << " upphöjt till " << y << " är " << res << std::endl;
+// 
+//     float z = 0.29;
+//     int w = (int) (z * x * x);
+//     if (z * x * x == 29)
+//         std::cout << z << "*" << x * x << " är 29" << std::endl;
+//     else
+//         std::cout << z << "*" << x * x << " är inte 29" << std::endl;           
+// }
+// 
+// Varför blir värdet på variabeln w inte det man tror (0.29*100)?
+för att bodyn till forloopen är tom p.g.a. ett extra ; 
+Koden innanför { } kommer bara köras en gång, den ligger i ett eget scope. 
+
+
+// Hur många varv körs for-loopen i funktionen powerof?
+forloopen körs y gånger om inte detta optimeras bort i kompilatorn. 
+Eftersom inget utförs vid varje varv påverkas inga variabler.
+
+
+// 1.2 b)
+//
+// int must_follow_a(char * start, int length, char a, char b) {
+//     int nr = 0;
+//     for (int i = 0; i < length; i++, ++start) {
+//         if (*start == a && *(start + 1) == b) // maintainers note: DANGER!
+//             nr += 1;
+//     }
+//     return nr;
+// }
+// 
+// Dina tre testfall
+   void test_a_vector_is_empty( void )
+    {
+        char vek[] = {};
+        int result = must_follow_a(vek, 0, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_vector_is_one( void )
+    {
+        char vek[] = {'a'};
+        int result = must_follow_a(vek, 1, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_vector_is_ab( void )
+    {
+        char vek[] = {'a','b'};
+        int result = must_follow_a(vek, 2, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 1);
+    }
+    void test_a_vector_is_only_as( void )
+    {
+        char vek[] = {'a', 'a','a','a'};
+        int result = must_follow_a(vek, 4, 'a', 'a');
+        TS_ASSERT_EQUALS( result, 3);
+    }
+
+
+// Varför är det så viktigt att testa randvillkoren?
+Det är oftast vid randen som "konstiga" saker kan hända. Out_of_bounds,
+felaktiga beräkningar, nullpointers osv.
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.3 
+// 
+// Bifoga källkoden till din version av A.cpp
+#include <iostream>
+
+class A {
+public:
+    A() 
+        {std::cout << "The default contructor" << std::endl; }
+    A(const A & ref) 
+        {std::cout << "The copy contructor" << std::endl; }
+    ~A() 
+        {std::cout << "The destructor" << std::endl; }
+    A(char * s) 
+        {std::cout << "Some other constructor " << s << std::endl;}
+    A & operator=(const A & s) 
+        {std::cout << "The assignment operator" << std::endl; 
+         return *this;}
+};
+
+void no_ref(A a) {}
+void with_ref(const A & a) {}
+
+int main()
+{
+    std::cout << "A a('my name is a');" << std::endl;
+    A a("my name is a");
+    
+    std::cout << "A b = a" << std::endl;
+    A b = a;         // vad är skillnaden Copy Constructor 
+    std::cout << "A c(a)" << std::endl;
+    A c(a);          // mellan dessa Copy Constructor
+    std::cout << "A d" << std::endl;
+    A d;             // tre tekniker? Default costructor 
+    std::cout << "d = a" << std::endl;
+    d = a;
+
+    std::cout << "Start: no_ref" << std::endl;
+    no_ref(a);       // Bildas temporära objekt?
+    std::cout << "End: no_ref. \nStart: with_ref" << std::endl;
+    with_ref(a);     // Bildas temporära objekt?
+    std::cout << "End: with_ref" << std::endl;
+
+    std::cout << "Allocating array" << std::endl;
+    A *aa = new A[5];
+    std::cout << "Deleting array" << std::endl;
+    delete aa;       // Vad kommer att hända?
+    return 0;
+}
+
+// Vad skriver ditt program ut, var förberedd att förklara varför. 
+A a('my name is a');
+Some other constructor my name is a
+A b = a
+The copy contructor
+A c(a)
+The copy contructor
+A d
+The default contructor
+d = a
+The assignment operator
+Start: no_ref
+The copy contructor
+The destructor
+End: no_ref.
+Start: with_ref
+End: with_ref
+Allocating array
+The default contructor
+The default contructor
+The default contructor
+The default contructor
+The default contructor
+Deleting array
+The destructor
+A.out(69147) malloc: *** error for object 0x7fc5c34000e8: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
+
+// När frigörs objekten?  
+Vid delete aa och när metoden är slut.
+Note: delete tar inte bort alla objekt i listan.
+
+// När skapas temporära objekt?
+Beror på def. av temporära. Men vid no_ref.
+Och vid A d;
+
+
+//   A b = a;         // vad är skillnaden
+//   A c(a);          // mellan dessa
+//   A d;             // tre tekniker?
+A b = a och A c(a) kommer båda att köra copy construktorn
+A d kör default constructorn. 
+
+//   no_ref(a);       // Bildas temporära objekt?
+Ja en kopia av a (via copy construktorn) kommer att skapas. 
+
+//   with_ref(a);     // Bildas temporära objekt?
+Nej, a kommer bara att refereras till denna metod.
+
+//   delete aa;       // Vad kommer att hända
+Det är odefinierat. Vår kod chrashar, i runtime. 
+
+
+/////////////////////////////////////////////////////////////////
+//
+// struct Data {
+//     int x, y, z;
+// };  
+// 
+// Data ** foo(Data ** v, int x) {
+//     for (int i = 0; i < x; i++)
+//         //if (v[i] != 0)
+//             v[i] = new Data;
+//     return v;
+// }
+// 
+// int main () {
+//     const int size = 5;
+//     Data ** v = new Data * [size];
+//     Data ** p = foo(v, size);
+//     delete [] p;
+// }
+
+// Hur ser valgrinds felmeddelande ut?  
+Vi har funnit att det finns 2 versioner av denna fil (Data.cpp). En där delete [] p finns och en därden inte finns.
+Vi utgår nedan ifrån den version som står i denna textfil.
+
+==15344== Conditional jump or move depends on uninitialised value(s)
+==15344==    at 0x400620: foo(Data**, int) (Data.cpp:7)
+==15344==    by 0x400688: main (Data.cpp:15)
+==15344== 
+==15344== 
+==15344== HEAP SUMMARY:
+==15344==     in use at exit: 0 bytes in 0 blocks
+==15344==   total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+==15344== 
+==15344== All heap blocks were freed -- no leaks are possible
+==15344== 
+==15344== For counts of detected and suppressed errors, rerun with: -v
+==15344== Use --track-origins=yes to see where uninitialised values come from
+==15344== ERROR SUMMARY: 5 errors from 1 contexts (suppressed: 2 from 2)
+
+Inga läckor finns. Eftersom heapen för oss var NULL:ad kommer if:satsen alltid att returnera false. Detta gör 
+att inga Data struktar skapas.
+
+(Om delete [] p inte finns kommer den att läcka 40 bytes. För att inga heap element free:as, den listan av
+pekare som skapas vid Data ** v = new Data * [size];)
+
+// Blir det någon skillnad i hur mycket minne som läcker när man
+// kommenterar if-satsen?
+==15265== HEAP SUMMARY:
+==15265==     in use at exit: 60 bytes in 5 blocks
+==15265==   total heap usage: 6 allocs, 1 frees, 100 bytes allocated
+==15265== 
+==15265== 60 bytes in 5 blocks are definitely lost in loss record 1 of 1
+==15265==    at 0x4C2B1C7: operator new(unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==15265==    by 0x400626: foo(Data**, int) (Data.cpp:8)
+==15265==    by 0x400673: main (Data.cpp:15)
+==15265== 
+==15265== LEAK SUMMARY:
+==15265==    definitely lost: 60 bytes in 5 blocks
+==15265==    indirectly lost: 0 bytes in 0 blocks
+==15265==      possibly lost: 0 bytes in 0 blocks
+==15265==    still reachable: 0 bytes in 0 blocks
+==15265==         suppressed: 0 bytes in 0 blocks
+==15265== 
+==15265== For counts of detected and suppressed errors, rerun with: -v
+==15265== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 2 from 2)
+
+Då programmet inte längre kollar om pekarna är NULL:ade så skapas 5 st Data strukatar på heapen.
+Dessa tar tillsammas upp 60byte, som sedan inte free:as. (int = 4 byte. 4*3intar per strukt. 4*3*5= 60) 
+
+(Om delete [] p inte finns läcker också de 40 bytes som visades i förra uppgiften.)
+
+// Borde det ha blivit någon skillnad?
+Ja, i ena fallet skapas aldrig Data strukterna
+
+// Varför läcker programmet fortfarande minne?
+Se beskrivning ovan
+
+
+/////////////////////////////////////////////////////////////////
+//
+// 1.4
+//
+// Generellt är det ofta en god idé att låta konstruktorer som
+// tar ett argument deklareras som explicit. Varför? Ange ett
+// exempel där det annars kan bli dumt.
+Det gör att kompilatorn inte kan göra egna typkonverteringar för att matcha konstruktorn. Detta gör att
+potentiella fel uppstår i compile-time istället för run-time 
+(felen uppstår för utvecklaren istället för kunden)
+
+// operatorn[] måste vara en konstant medlemsfunktion i vissa
+// fall. När och varför? Hur kopierar man vektorn?
+När man t.ex gör en copy assignment på en vektor från a till vecktor b (b = a) så bör denna metod 
+lova att inte ändra på a (operator=(const & a)) dock måste denna använda a.operator[] för att kopiera elementen.
+Denna operation måste också lova att inte ändra på a och därför också deklareras som const.
