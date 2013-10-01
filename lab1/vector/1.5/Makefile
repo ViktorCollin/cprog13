@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 tests.o: testcases.cpp vector.h
 	g++-4.8 -std=c++11 -g -Wall testcases.cpp vector.h -o tests.o
 
