@@ -83,7 +83,11 @@ std::size_t Matrix::cols() const {
 }
 
 std::istream& operator>> ( std::istream& os, Matrix& m){
-
+    std::string line;
+    std::getline(os, line);
+    vector<std::string> rows;
+    boost::split( rows, s, is_any_of( " ," ), token_compress_on );
+    std::cout << rows[1] << endl;
 }
 std::ostream& operator<< ( std::ostream& os, Matrix& m){
 	os << "[ ";

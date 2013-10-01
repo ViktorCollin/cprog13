@@ -27,9 +27,15 @@ public:
  void runTest() { suite_MatrixTestSuite.testIndexOperator(); }
 } testDescription_MatrixTestSuite_testIndexOperator;
 
+static class TestDescription_MatrixTestSuite_testStringStreamConstructor : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MatrixTestSuite_testStringStreamConstructor() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 33, "testStringStreamConstructor" ) {}
+ void runTest() { suite_MatrixTestSuite.testStringStreamConstructor(); }
+} testDescription_MatrixTestSuite_testStringStreamConstructor;
+
 static class TestDescription_MatrixTestSuite_testIndex2Operator : public CxxTest::RealTestDescription {
 public:
- TestDescription_MatrixTestSuite_testIndex2Operator() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 33, "testIndex2Operator" ) {}
+ TestDescription_MatrixTestSuite_testIndex2Operator() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 38, "testIndex2Operator" ) {}
  void runTest() { suite_MatrixTestSuite.testIndex2Operator(); }
 } testDescription_MatrixTestSuite_testIndex2Operator;
 
