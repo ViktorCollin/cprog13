@@ -69,6 +69,30 @@ Eftersom inget utförs vid varje varv påverkas inga variabler.
 // }
 // 
 // Dina tre testfall
+   void test_a_vector_is_empty( void )
+    {
+        char vek[] = {};
+        int result = must_follow_a(vek, 0, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_form_peke2( void )
+    {
+        char vek[] = {'b', 'b', 'a' };
+        int result =  must_follow_a(vek, 3, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_vector_is_one( void )
+    {
+        char vek[] = {'a'};
+        int result = must_follow_a(vek, 0, 'a', 'b');
+        TS_ASSERT_EQUALS( result, 0);
+    }
+    void test_a_vector_is_only_as( void )
+    {
+        char vek[] = {'a', 'a','a','a'};
+        int result = must_follow_a(vek, 4, 'a', 'a');
+        TS_ASSERT_EQUALS( result, 3);
+    }
 
 
 // Varför är det så viktigt att testa randvillkoren?
@@ -80,10 +104,80 @@ felaktiga beräkningar, nullpointers osv.
 // 1.3 
 // 
 // Bifoga källkoden till din version av A.cpp
+#include <iostream>
 
+class A {
+public:
+    A() 
+        {std::cout << "The default contructor" << std::endl; }
+    A(const A & ref) 
+        {std::cout << "The copy contructor" << std::endl; }
+    ~A() 
+        {std::cout << "The destructor" << std::endl; }
+    A(char * s) 
+        {std::cout << "Some other constructor " << s << std::endl;}
+    A & operator=(const A & s) 
+        {std::cout << "The assignment operator" << std::endl; 
+         return *this;}
+};
+
+void no_ref(A a) {}
+void with_ref(const A & a) {}
+
+int main()
+{
+    std::cout << "A a('my name is a');" << std::endl;
+    A a("my name is a");
+    
+    std::cout << "A b = a" << std::endl;
+    A b = a;         // vad är skillnaden Copy Constructor 
+    std::cout << "A c(a)" << std::endl;
+    A c(a);          // mellan dessa Copy Constructor
+    std::cout << "A d" << std::endl;
+    A d;             // tre tekniker? Default costructor 
+    std::cout << "d = a" << std::endl;
+    d = a;
+
+    std::cout << "Start: no_ref" << std::endl;
+    no_ref(a);       // Bildas temporära objekt?
+    std::cout << "End: no_ref. \nStart: with_ref" << std::endl;
+    with_ref(a);     // Bildas temporära objekt?
+    std::cout << "End: with_ref" << std::endl;
+
+    std::cout << "Allocating array" << std::endl;
+    A *aa = new A[5];
+    std::cout << "Deleting array" << std::endl;
+    delete aa;       // Vad kommer att hända?
+    return 0;
+}
 
 // Vad skriver ditt program ut, var förberedd att förklara varför. 
-
+A a('my name is a');
+Some other constructor my name is a
+A b = a
+The copy contructor
+A c(a)
+The copy contructor
+A d
+The default contructor
+d = a
+The assignment operator
+Start: no_ref
+The copy contructor
+The destructor
+End: no_ref.
+Start: with_ref
+End: with_ref
+Allocating array
+The default contructor
+The default contructor
+The default contructor
+The default contructor
+The default contructor
+Deleting array
+The destructor
+A.out(69147) malloc: *** error for object 0x7fc5c34000e8: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
 
 // När frigörs objekten?  
 Vid delete aa och när metoden är slut.
@@ -104,7 +198,7 @@ A d kör default constructorn.
 Ja en kopia av a (via copy construktorn) kommer att skapas. 
 
 //   with_ref(a);     // Bildas temporära objekt?
-Nej.
+Nej, a kommer bara att refereras till denna metod.
 
 //   delete aa;       // Vad kommer att hända
 Det är odefinierat. Vår kod chrashar, i runtime. 
@@ -204,5 +298,3 @@ potentiella fel uppstår i compile-time istället för run-time
 När man t.ex gör en copy assignment på en vektor från a till vecktor b (b = a) så bör denna metod 
 lova att inte ändra på a (operator=(const & a)) dock måste denna använda a.operator[] för att kopiera elementen.
 Denna operation måste också lova att inte ändra på a och därför också deklareras som const.
-
-
