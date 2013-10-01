@@ -26,7 +26,6 @@ public:
     void testIndexOperator ( )
     {
         Matrix m( 2, 2 );
-        std::cout << "\n" <<  m << std::endl;
         TS_ASSERT( m[ 0 ][ 1 ] == 0 );
     
     }
@@ -46,6 +45,18 @@ public:
         ss << m;
         ss >> m;
         TS_ASSERT( m[ 0 ][ 0 ] == 1 );
+    }
+    void testRowSize ( ){
+        Matrix m; 
+        TS_ASSERT_EQUALS(m.rows() , 0);
+        m = a_matrix_3by2();
+        TS_ASSERT_EQUALS(m.rows() , 2);
+    }
+    void testColSize ( ){
+        Matrix m;
+        TS_ASSERT_EQUALS(m.cols() , 0);
+        m = a_matrix_3by2();
+        TS_ASSERT_EQUALS(m.cols() , 3);
     }
 };
 

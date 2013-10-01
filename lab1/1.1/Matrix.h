@@ -2,6 +2,7 @@
 #define MATRIX_H
 #include "vector.h"
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 
@@ -14,7 +15,8 @@ class Matrix
     
     class matrix_row : private Vector< int >{
     public:
-        matrix_row( std::size_t s = 0) : Vector< int >( s ) {}
+        matrix_row() : Vector< int >( 0 ) {}
+        matrix_row( std::size_t s ) : Vector< int >( s ) {}
         using Vector<int>::operator [];
     private:
         friend std::istream& operator>>( std::istream&, Matrix& );
@@ -47,11 +49,16 @@ class Matrix
     std::size_t                 m_rows;
     std::size_t                 m_cols;
     
-    void add_row( );            // Non mandatory help function
+    void add_row( matrix_row );            // Non mandatory help function
     friend std::istream& operator>> ( std::istream&, Matrix& );
+
 };
 
-Matrix::Matrix():m_rows(0), m_cols(0), m_vectors(0, matrix_row(0)) {}
+void trim( string& );
+
+Matrix::Matrix():m_rows(0), m_cols(0), m_vectors(0, matrix_row(0)) {
+
+}
 
 Matrix::Matrix(std::size_t n, std::size_t m):m_rows(n), m_cols(m), m_vectors(n, matrix_row(m)) {}
 
@@ -63,9 +70,11 @@ Matrix::~Matrix() {
 //TODO
 }
 
-Matrix& Matrix::operator= ( const Matrix& ) {
-//TODO
-return *this;
+Matrix& Matrix::operator= ( const Matrix& m ) {
+    m_vectors = m.m_vectors;
+    m_cols = m.m_cols;
+    m_rows = m.m_rows;
+    return *this;
 }
 Matrix::matrix_row& Matrix::operator[](index i){
 	return m_vectors[i];
@@ -82,14 +91,43 @@ std::size_t Matrix::cols() const {
 	return m_cols;
 }
 
-std::istream& operator>> ( std::istream& os, Matrix& m){
-    std::string line;
-    std::getline(os, line);
-    vector<std::string> rows;
-    boost::split( rows, s, is_any_of( " ," ), token_compress_on );
-    std::cout << rows[1] << endl;
+void Matrix::add_row( matrix_row r) {
+    m_vectors.push_back(r);
+    ++m_rows; 
 }
-std::ostream& operator<< ( std::ostream& os, Matrix& m){
+
+void trim( string& s){
+    
+    string::size_type pos = s.find_last_not_of(" []");
+    if(pos != string::npos) {
+        s.erase(pos + 1);
+        pos = s.find_first_not_of(" []");
+        if(pos != string::npos) s.erase(0, pos);
+    }
+    else s.erase(s.begin(), s.end());
+}
+
+
+std::istream& operator>> ( std::istream& is, Matrix& m){
+    std::string line;
+    std::size_t cols;
+    m.m_rows = 0;
+    m.m_vectors.clear();
+    while(is){
+        if (!std::getline(is, line, ';')) break;
+        trim(line);
+        cols = std::count(line.begin(), line.end(), ' ') + 1;
+        Matrix::matrix_row* mrp = new Matrix::matrix_row(cols);    
+        std::stringstream s(line);
+        Matrix::matrix_row mr = *mrp;
+        for(int i = 0; i < cols; ++i){
+            s >> mr[i]; 
+        }
+        m.add_row(mr); 
+    }
+    m.m_cols = cols;
+}
+std::ostream& operator<< ( std::ostream& os, const Matrix& m){
 	os << "[ ";
 	std::size_t n = m.rows()-1;
 	std::size_t cols = m.cols();
@@ -105,6 +143,6 @@ std::ostream& operator<< ( std::ostream& os, Matrix& m){
 	os << ']';
 	return os;
 }
-Matrix operator* ( int, const Matrix& );
 
+Matrix operator* ( int, const Matrix& );
 #endif // MATRIX_H

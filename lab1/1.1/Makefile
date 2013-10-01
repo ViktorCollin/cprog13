@@ -14,6 +14,6 @@ run0%: runtest0%
 	./runtest0$*
 
 clean:
-	touch runtest01 testcode.cpp
+	touch runtest0* testcode.cpp
 	rm runtest0* testcode.cpp
 
