@@ -1,5 +1,6 @@
 compiler = g++
 cflags   = -std=c++0x
+SHELL := /bin/bash
 
 tests.o: testcases.cpp vector.h
 	$(compiler) $(cflags) -g -Wall testcases.cpp vector.h -o tests.o
