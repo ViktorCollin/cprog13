@@ -34,7 +34,7 @@ class Vector{
 		Vector<T>& operator=(initializer_list<T>);
 		
 		T& operator[](const size_t);
-		T& operator[](const size_t) const;
+		const T& operator[](const size_t) const;
 		
 		size_t size() const;
 		size_t maxSize() const;
@@ -139,7 +139,7 @@ T& Vector<T>::operator[](const size_t i){
 }
 
 template <typename T>
-T& Vector<T>::operator[](const size_t i) const{
+const T& Vector<T>::operator[](const size_t i) const{
 	if(i >= _size || i < 0) throw std::out_of_range ("Index out of bounds exception");
 	return _elements[i];
 }
@@ -157,8 +157,8 @@ size_t Vector<T>::maxSize() const{
 
 template <typename T>
 void Vector<T>::clear(){
-	delete[] _elements;
-	_elements = new T[DEFAULT_INIT_SIZE];
+	//delete[] _elements;
+	//_elements = new T[DEFAULT_INIT_SIZE];
 	_size = 0;
 	_maxSize = DEFAULT_INIT_SIZE;
 }
