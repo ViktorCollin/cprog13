@@ -29,14 +29,32 @@ public:
 
 static class TestDescription_MatrixTestSuite_testStringStreamConstructor : public CxxTest::RealTestDescription {
 public:
- TestDescription_MatrixTestSuite_testStringStreamConstructor() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 33, "testStringStreamConstructor" ) {}
+ TestDescription_MatrixTestSuite_testStringStreamConstructor() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 32, "testStringStreamConstructor" ) {}
  void runTest() { suite_MatrixTestSuite.testStringStreamConstructor(); }
 } testDescription_MatrixTestSuite_testStringStreamConstructor;
 
 static class TestDescription_MatrixTestSuite_testIndex2Operator : public CxxTest::RealTestDescription {
 public:
- TestDescription_MatrixTestSuite_testIndex2Operator() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 38, "testIndex2Operator" ) {}
+ TestDescription_MatrixTestSuite_testIndex2Operator() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 37, "testIndex2Operator" ) {}
  void runTest() { suite_MatrixTestSuite.testIndex2Operator(); }
 } testDescription_MatrixTestSuite_testIndex2Operator;
+
+static class TestDescription_MatrixTestSuite_testRowSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MatrixTestSuite_testRowSize() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 49, "testRowSize" ) {}
+ void runTest() { suite_MatrixTestSuite.testRowSize(); }
+} testDescription_MatrixTestSuite_testRowSize;
+
+static class TestDescription_MatrixTestSuite_testColSize : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MatrixTestSuite_testColSize() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 55, "testColSize" ) {}
+ void runTest() { suite_MatrixTestSuite.testColSize(); }
+} testDescription_MatrixTestSuite_testColSize;
+
+static class TestDescription_MatrixTestSuite_testPlusSame : public CxxTest::RealTestDescription {
+public:
+ TestDescription_MatrixTestSuite_testPlusSame() : CxxTest::RealTestDescription( Tests_MatrixTestSuite, suiteDescription_MatrixTestSuite, 62, "testPlusSame" ) {}
+ void runTest() { suite_MatrixTestSuite.testPlusSame(); }
+} testDescription_MatrixTestSuite_testPlusSame;
 
 #include <cxxtest/Root.cpp>

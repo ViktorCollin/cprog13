@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <functional>
 
 
 //using namespace std;
@@ -18,11 +19,12 @@ class Matrix
         matrix_row() : Vector< int >( 0 ) {}
         matrix_row( std::size_t s ) : Vector< int >( s ) {}
         using Vector<int>::operator [];
+
     private:
         friend std::istream& operator>>( std::istream&, Matrix& );
     };
     
-    Matrix( );
+    Matrix( ); 
     Matrix( std::size_t, std::size_t );
     Matrix( const Matrix& );
     Matrix(int size);
@@ -30,12 +32,12 @@ class Matrix
     
     Matrix& operator= ( const Matrix& );
     Matrix operator+ ( const Matrix& ) const;
-    Matrix operator* ( const Matrix& ) const;
-    Matrix operator* ( int ) const;
-    Matrix operator-( const Matrix& ) const;
-    Matrix operator-( ) const;
+    Matrix operator* ( const Matrix& ) const; //TODO
+    Matrix operator* ( int ) const; // TODO
+    Matrix operator-( const Matrix& ) const; //TODO
+    Matrix operator-( ) const; //TODO
     
-    Matrix& transpose( );
+    Matrix& transpose( ); //TODO
     
     matrix_row& operator[]( index i );
     const matrix_row& operator[]( index i ) const;
@@ -45,7 +47,7 @@ class Matrix
     
  protected:
  private:
-    Vector< matrix_row >        m_vectors;
+    Vector< matrix_row >      m_vectors;
     std::size_t                 m_rows;
     std::size_t                 m_cols;
     
@@ -55,10 +57,11 @@ class Matrix
 };
 
 void trim( string& );
+std::ostream& operator<< ( std::ostream&, const Matrix&);
+template<typename Op>
+Matrix& calculate(const Matrix&, const Matrix&, Op);
 
-Matrix::Matrix():m_rows(0), m_cols(0), m_vectors(0, matrix_row(0)) {
-
-}
+Matrix::Matrix():m_rows(0), m_cols(0), m_vectors(0, matrix_row(0)) {}
 
 Matrix::Matrix(std::size_t n, std::size_t m):m_rows(n), m_cols(m), m_vectors(n, matrix_row(m)) {}
 
@@ -67,7 +70,7 @@ Matrix::Matrix( const Matrix& m):m_rows(m.rows()), m_cols(m.cols()), m_vectors(m
 Matrix::Matrix(int size):m_rows(size), m_cols(size), m_vectors(size, matrix_row(size)) {}
 
 Matrix::~Matrix() { 
-//TODO
+	//if(&m_vectors != NULL) delete[] &m_vectors;
 }
 
 Matrix& Matrix::operator= ( const Matrix& m ) {
@@ -76,6 +79,25 @@ Matrix& Matrix::operator= ( const Matrix& m ) {
     m_rows = m.m_rows;
     return *this;
 }
+
+Matrix Matrix::operator+ ( const Matrix& other) const{
+	return calculate(*this, other, std::plus<int>());
+	
+}
+template<typename Op>
+Matrix& calculate(const Matrix& m1, const Matrix& m2, Op operand) {
+	size_t nr = m1.rows();
+	size_t nc = m1.cols();
+	if(nr != m2.rows() || nc != m2.cols()) throw std::invalid_argument("Diferent dimentions of matrices");
+	Matrix ret(nr, nc);
+	for(size_t i=0; i<nr; ++i){
+		for(size_t j=0; j<nc; ++j){
+			ret[i][j] = operand(m1[i][j],m2[i][j]);
+		}
+	}
+	return ret;
+}
+
 Matrix::matrix_row& Matrix::operator[](index i){
 	return m_vectors[i];
 }

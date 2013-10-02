@@ -58,6 +58,20 @@ public:
         m = a_matrix_3by2();
         TS_ASSERT_EQUALS(m.cols() , 3);
     }
+
+	void testPlusSame(){
+		Matrix m3, m1 = a_matrix_3by2(), m2 = a_matrix_3by2();
+		m3 = m1 + m2;
+		TS_ASSERT_EQUALS(m1.rows(), m3.rows());
+		TS_ASSERT_EQUALS(m1.cols(), m3.cols());
+		TS_ASSERT_EQUALS(m3[0][0], 2);
+		TS_ASSERT_EQUALS(m3[0][1], 6);
+		TS_ASSERT_EQUALS(m3[0][2], 10);
+		TS_ASSERT_EQUALS(m3[1][0], 0);
+		TS_ASSERT_EQUALS(m3[1][1], 4);
+		TS_ASSERT_EQUALS(m3[1][2], 0);
+		
+	}
 };
 
 #endif
