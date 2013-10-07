@@ -1,19 +1,39 @@
 #ifndef DATE_H
 #define DATE_H
-
-#define DEBUG
-
-
-
-namespace lab2;
-
-class Date {
-  private: 
-    int _year, _month, _day;
-
-
-  public:
+#include <string>
 
 
 
+namespace lab2 {
+
+  class Date {
+    private: 
+      int _year, _month, _day;
+
+
+    public:
+      Date();
+
+      Date(int, int, int);
+
+      int year() const; 
+
+      int month() const; 
+
+      int day() const; 
+
+      int week_day() const; 
+
+      int days_per_week() const; 
+
+      int days_this_month() const; 
+
+      int months_per_year() const;
+
+      std::string week_day_name() const; 
+
+      std::string month_name() const;
+
+  };
+}
 #endif

@@ -14,5 +14,6 @@
 *.a
 
 *.dSYM/
+*.gch
 runner
 runner.cpp
