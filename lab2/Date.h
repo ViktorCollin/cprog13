@@ -10,6 +10,7 @@ namespace lab2 {
     private: 
       int _year, _month, _day;
 
+      void currentDate();
 
     public:
       Date();
