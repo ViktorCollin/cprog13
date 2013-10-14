@@ -38,7 +38,7 @@ namespace lab2 {
   }
 
   int Date::months_per_year() const {
-    return 0;
+    return 12;
   }
 
   std::string Date::week_day_name() const {

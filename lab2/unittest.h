@@ -49,7 +49,9 @@ class MyTestSuite : public CxxTest::TestSuite {
     }
 
     //void testDaysThisMonth() {
-
+      //lab2::Date d(2012,10, 31);
+      
+      //lab2::Date d(2012,10, 31);
 
 };
 #endif
