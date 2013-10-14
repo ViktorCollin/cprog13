@@ -6,10 +6,12 @@
 namespace lab2 {
 
   Date::Date(){
-    currentDate(); 
+    setCurrentDate(); 
   }
 
-  Date::Date(int year, int month, int day): _year(year), _month(month), _day(day) { }
+  Date::Date(int year, int month, int day) { 
+    setDate(year, month, day);
+  }
 
   int Date::year() const {
     return _year;
@@ -28,7 +30,7 @@ namespace lab2 {
   }
 
   int Date::days_per_week() const {
-    return 0;
+    return 7;
   }
 
   int Date::days_this_month() const {
@@ -47,12 +49,35 @@ namespace lab2 {
     return NULL;
   }
 
-  void Date::currentDate() {
+  void Date::add_month(int n) {
+    int fac = -1;
+    if( n > 0) fac = 1;
+    _month += n;
+    while(_month >= 13 || _month <= 0) {
+      _month -= fac*12;
+      _year += fac;
+    }
+    verifyDay();
+  }
+
+  void Date::verifyDay() {
+    //TODO kolla skottår för februari
+    if(_day > _daysOfMonth[_month - 1]) _day = _daysOfMonth[_month -1];
+  }
+
+  void Date::setCurrentDate() {
     time_t theTime = time(NULL);
     struct tm *aTime = localtime(&theTime);
 
-    _day = aTime->tm_mday;
-    _month = aTime->tm_mon + 1; // Month is 0 - 11, add 1 to get a jan-dec 1-12 concept
-    _year = aTime->tm_year + 1900; // Year is # years since 1900
+    int day = aTime->tm_mday;
+    int month = aTime->tm_mon + 1; // Month is 0 - 11, add 1 to get a jan-dec 1-12 concept
+    int year = aTime->tm_year + 1900; // Year is # years since 1900
+
+    setDate(year, month, day);
+  }
+  void Date::setDate(int year, int month, int day) {
+    _day = day;
+    _month = month;
+    _year = year;
   }
 }

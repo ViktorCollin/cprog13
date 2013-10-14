@@ -1,16 +1,16 @@
-compiler = g++
-cflags   = -std=c++0x
+compiler = g++-4.8
+cflags   = -std=c++11
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
 tests    = unittest.h
 
-runner.cpp:
-	python $(cxxpath)cxxtestgen.py --error-printer -o runner.cpp $(tests)
+runner.cpp: $(tests)
+	python $(cxxpath)cxxtestgen.py --error-printer -o $@ $(tests)
 
 Date.o: Date.h Date.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest0%: runner.cpp Date.o
+runtest0%: Date.o runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run0%: runtest0%

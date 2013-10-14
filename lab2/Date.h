@@ -8,10 +8,15 @@ namespace lab2 {
 
   class Date {
     private: 
-      int _year, _month, _day;
+      long _days;
+      int _day, _month, _year;
+      int _daysOfMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
-      void currentDate();
+      void setCurrentDate();
 
+      void setDate(int, int, int);
+
+      void verifyDay();
     public:
       Date();
 
@@ -35,6 +40,7 @@ namespace lab2 {
 
       std::string month_name() const;
 
+      void add_month(int n = 1);
   };
 }
 #endif
