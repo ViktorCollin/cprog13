@@ -10,7 +10,13 @@ runner.cpp: $(tests)
 Date.o: Date.h Date.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest0%: Date.o runner.cpp 
+Gregorian.o: Middle.o Gregorian.h Gregorian.cpp
+	$(compiler) $(cflags) -c $^
+
+Middle.o: Date.o Middle.h Middle.cpp
+	$(compiler) $(cflags) -c $^
+
+runtest0%: Gregorian.o runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run0%: runtest0%

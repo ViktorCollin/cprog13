@@ -6,7 +6,8 @@
 namespace lab2 {
 
   Date::Date(){
-    setCurrentDate(); 
   }
+  Date::Date(unsigned long long days): _days(days) {};
+
 
 }

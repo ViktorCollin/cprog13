@@ -1,9 +1,12 @@
+#include "Middle.h"
 
 namespace lab2 {
 
   class Gregorian : Middle {
     private: 
       bool isLeepYear() const;
+
+      void verifyDay();
 
     public:
       int year() const; 
@@ -24,9 +27,7 @@ namespace lab2 {
 
       std::string month_name() const;
 
-      void add_month(int n = 1);
-
-  }
+  };
 
 }
 

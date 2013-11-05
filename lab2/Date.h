@@ -8,12 +8,15 @@ namespace lab2 {
 
   class Date {
     private: 
-      long _days;
+      unsigned long long _days;
 
       void setCurrentDate();
 
     public:
       Date();
+      Date(unsigned long long);
+      Date(const Date&);
+
 
       virtual int year() const = 0;
 
@@ -34,12 +37,12 @@ namespace lab2 {
       //Operators
       Date& operator++();
       Date& operator--();
-      Date& operator+=();
-      Date& operator-=();
+      Date& operator+=(int);
+      Date& operator-=(int);
 
-      Date& add_year(n = 1);
-      Date& add_month(n = 1);
-      Date& add_day(n = 1);
+      virtual Date& add_year(int n = 1) = 0;
+      virtual Date& add_month(int n = 1) = 0;
+      virtual Date& add_day(int n = 1) = 0;
 
       bool operator==(const Date&) const; 
       bool operator!=(const Date&) const; 
@@ -51,5 +54,6 @@ namespace lab2 {
 
       long mod_julian_day() const;
   };
+  std::ostream & operator<<(std::ostream &, const Date&);
 }
 #endif

@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <string>
-#include "Date.h"
+#include "Gregorian.h"
 #include <time.h>
 
 namespace lab2{
