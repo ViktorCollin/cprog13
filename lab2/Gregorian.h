@@ -7,6 +7,7 @@ namespace lab2{
   class Gregorian : public Middle {
     protected: 
       bool isLeapYear() const;
+      bool isLeapYear(int) const;
 
       void verifyDay();
 
