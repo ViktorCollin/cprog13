@@ -6,50 +6,58 @@
 
 namespace lab2 {
 
-  class Date {
-    protected : 
-      unsigned long long _days;
+    class Date {
+        protected : 
+        unsigned long long _days;
 
-      unsigned long long getDays() const;
+        unsigned long long getDays() const;
 
     public:
-      Date();
-      Date(int,int,int);
-      Date(unsigned long long);
-      Date(const Date&);
+        Date();
+        Date(int,int,int);
+        Date(unsigned long long);
+        Date(const Date&);
 
-      virtual int year() const = 0;
-      virtual int month() const = 0;
-      virtual int day() const = 0;
-      virtual int week_day() const = 0;
-      virtual int days_this_month() const = 0;
-      virtual int months_per_year() const = 0;
-      virtual std::string week_day_name() const = 0;
-      virtual std::string month_name() const = 0;
+        virtual int year() const = 0;
+        virtual int month() const = 0;
+        virtual int day() const = 0;
+        virtual int week_day() const = 0;
+        virtual int days_this_month() const = 0;
+        virtual int months_per_year() const = 0;
+        virtual std::string week_day_name() const = 0;
+        virtual std::string month_name() const = 0;
 
-      //Operators
-      Date& operator++();
-      Date& operator--();
-      Date& operator+=(int);
-      Date& operator-=(int);
-      Date& operator=(const Date&);
-      Date& operator=(const unsigned long long);
+        //Operators
+        Date& operator=(const Date&);
+        Date& operator=(const unsigned long long); // Kanske onödig då detta är implecit
+        
+        Date& operator++();
+        Date& operator--();
+        
+        Date& operator+=(const Date&);
+        Date& operator+=(const unsigned long long); // Kanske onödig då detta är implecit
+        Date& operator-=(const Date&);
+        Date& operator-=(const unsigned long long); // Kanske onödig då detta är implecit
 
-      virtual Date& add_year(int n = 1) = 0;
-      virtual Date& add_month(int n = 1) = 0;
-      virtual Date& add_day(int n = 1) = 0;
+        Date& operator+(const Date&);
+        Date& operator+(const unsigned long long); // Kanske onödig då detta är implecit
+        Date& operator-(const Date&);
+        Date& operator-(const unsigned long long); // Kanske onödig då detta är implecit
 
-      bool operator==(const Date&) const; 
-      bool operator!=(const Date&) const; 
-      bool operator<(const Date&) const; 
-      bool operator<=(const Date&) const; 
-      bool operator>(const Date&) const; 
-      bool operator>=(const Date&) const; 
-      bool operator-(const Date&); 
-      
+        virtual Date& add_year(int n = 1) = 0;
+        virtual Date& add_month(int n = 1) = 0;
+        virtual Date& add_day(int n = 1) = 0;
 
-      long mod_julian_day() const;
-  };
-  std::ostream & operator<<(std::ostream &, const Date&);
+        bool operator==(const Date&) const; 
+        bool operator!=(const Date&) const; 
+        bool operator<(const Date&) const; 
+        bool operator<=(const Date&) const; 
+        bool operator>(const Date&) const; 
+        bool operator>=(const Date&) const; 
+
+
+        long mod_julian_day() const;
+    };
+    std::ostream & operator<<(std::ostream &, const Date&);
 }
 #endif

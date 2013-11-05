@@ -7,8 +7,10 @@ namespace lab2{
   class Middle : public Date {
 
     protected :
-      int _daysOfMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
-      unsigned long long calculatedDate; 
+      const int _daysOfMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+      const std::string nameOfDay[] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+      const std::string nameOfMonth[] = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+      mutable unsigned long long calculatedDate; 
       mutable int _day, _month, _year;
 
     public : 
