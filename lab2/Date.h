@@ -9,38 +9,47 @@ namespace lab2 {
   class Date {
     private: 
       long _days;
-      int _day, _month, _year;
-      int _daysOfMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
       void setCurrentDate();
 
-      void setDate(int, int, int);
-
-      void verifyDay();
     public:
       Date();
 
-      Date(int, int, int);
+      virtual int year() const = 0;
 
-      int year() const; 
+      virtual int month() const = 0;
 
-      int month() const; 
+      virtual int day() const = 0;
 
-      int day() const; 
+      virtual int week_day() const = 0;
 
-      int week_day() const; 
+      virtual int days_this_month() const = 0;
 
-      int days_per_week() const; 
+      virtual int months_per_year() const = 0;
 
-      int days_this_month() const; 
+      virtual std::string week_day_name() const = 0;
 
-      int months_per_year() const;
+      virtual std::string month_name() const = 0;
 
-      std::string week_day_name() const; 
+      //Operators
+      Date& operator++();
+      Date& operator--();
+      Date& operator+=();
+      Date& operator-=();
 
-      std::string month_name() const;
+      Date& add_year(n = 1);
+      Date& add_month(n = 1);
+      Date& add_day(n = 1);
 
-      void add_month(int n = 1);
+      bool operator==(const Date&) const; 
+      bool operator!=(const Date&) const; 
+      bool operator<(const Date&) const; 
+      bool operator<=(const Date&) const; 
+      bool operator>(const Date&) const; 
+      bool operator>=(const Date&) const; 
+      bool operator-(const Date&); 
+
+      long mod_julian_day() const;
   };
 }
 #endif
