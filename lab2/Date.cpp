@@ -15,4 +15,7 @@ namespace lab2 {
     if(this == &d) return;
     _days = d.getDays();
   }
+  unsigned long long Date::getDays() const {
+    return _days;
+  }
 }

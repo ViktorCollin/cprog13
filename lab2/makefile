@@ -1,4 +1,4 @@
-compiler = g++-4.6
+compiler = g++-4.8
 cflags   = -std=c++11
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
@@ -10,13 +10,13 @@ runner.cpp: $(tests)
 Date.o: Date.h Date.cpp
 	$(compiler) $(cflags) -c $^
 
-Gregorian.o: Date.h Date.cpp Middle.h Middle.cpp Gregorian.h Gregorian.cpp
+Gregorian.o: Gregorian.h Gregorian.cpp
 	$(compiler) $(cflags) -c $^
 
 Middle.o: Date.o Middle.h Middle.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest0%: Gregorian.o runner.cpp 
+runtest0%: Gregorian.o Date.o Middle.o runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run0%: runtest0%

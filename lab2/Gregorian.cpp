@@ -46,7 +46,13 @@ namespace lab2{
     return NULL;
   }
 
+  Gregorian& Gregorian::add_year(int n) {
+    return *this;
+  }
 
+  Gregorian& Gregorian::add_day(int n) {
+    return *this;
+  }
 
   void Gregorian::verifyDay() {
     //TODO kolla skottår för februari
