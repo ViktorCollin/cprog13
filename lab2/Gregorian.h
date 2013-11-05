@@ -1,3 +1,5 @@
+#ifndef GREGORIAN_H
+#define GREGORIAN_H
 #include "Middle.h"
 
 namespace lab2 {
@@ -30,4 +32,5 @@ namespace lab2 {
   };
 
 }
+#endif
 
