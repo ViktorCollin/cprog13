@@ -2,33 +2,42 @@
 #define GREGORIAN_H
 #include "Middle.h"
 
-namespace lab2 {
+namespace lab2{
 
-  class Gregorian : Middle {
-    private: 
-      bool isLeepYear() const;
+  class Gregorian : public Middle {
+    protected: 
+      bool isLeapYear() const;
 
       void verifyDay();
 
+      void setDate(int, int,int);
+
+      void setCurrentDate();
     public:
-      int year() const; 
+      Gregorian();
+      Gregorian(int,int,int);
+      
+      virtual int year() const; 
 
-      int month() const; 
+      virtual int month() const; 
 
-      int day() const; 
+      virtual int day() const; 
 
-      int week_day() const; 
+      virtual int week_day() const; 
 
-      int days_per_week() const; 
+      virtual int days_per_week() const; 
 
-      int days_this_month() const; 
+      virtual int days_this_month() const; 
 
-      int months_per_year() const;
+      virtual int months_per_year() const;
 
-      std::string week_day_name() const; 
+      virtual std::string week_day_name() const; 
 
-      std::string month_name() const;
+      virtual std::string month_name() const;
 
+      virtual Gregorian& add_year(int n = 1);
+      virtual Gregorian& add_month(int n = 1);
+      virtual Gregorian& add_day(int n = 1);
   };
 
 }

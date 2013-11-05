@@ -5,6 +5,11 @@
 
 namespace lab2{
 
+  Gregorian::Gregorian():Middle(){
+  }
+  Gregorian::Gregorian(int year, int month, int day):Middle(year,month,day){
+
+  }
   int Gregorian::year() const {
     return 0;
   }
@@ -61,9 +66,9 @@ namespace lab2{
 
   void Gregorian::setDate(int year, int month, int day) {
     unsigned long long days = 0;
-    Date::setDate(days);
+    _days = days;
   }
-  void Gregorian::add_month(int n) {
+  Gregorian& Gregorian::add_month(int n) {
     int fac = -1;
     if( n > 0) fac = 1;
     _month += n;
@@ -72,6 +77,7 @@ namespace lab2{
       _year += fac;
     }
     verifyDay();
+    return *this;
   }
 
   bool Gregorian::isLeapYear() const{
