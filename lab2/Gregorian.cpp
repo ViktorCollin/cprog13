@@ -2,13 +2,16 @@
 #include <string>
 #include "Gregorian.h"
 #include <time.h>
+#include <stdexcept>
 
 namespace lab2{
 
     Gregorian::Gregorian():Middle(){
     }
-    Gregorian::Gregorian(int year, int month, int day){
-        setDate(year,month,day);
+    Gregorian::Gregorian(int year, int month, int day):Middle(year,month,day){
+        if(month < 1 || month > 12 || day < 1 || day > days_month(year, month))
+            throw std::out_of_range("The date imported is not valid");
+        set_date(year,month,day);
     }
     Gregorian::Gregorian(unsigned long long numeric):Middle(numeric){
 

@@ -1,6 +1,7 @@
 #include "Middle.h"
 #include "kattistime.h"
 #include <iostream>
+#include <stdexcept>
 
 namespace lab2 {
 
@@ -20,7 +21,8 @@ namespace lab2 {
 
         _numeric = day + (153*m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
     }
-
+    Middle::Middle(int year, int month, int day) : Date() {
+    }
     Middle::Middle(unsigned long long num) : Date(num) {}
     Middle::Middle(const Date& d) : Date(d) {}
 

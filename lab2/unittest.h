@@ -21,6 +21,16 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.year(), 2013); 
             TS_ASSERT_EQUALS(d.month(), 11);
         }
+
+        void testInvalidConstructorGreg() {
+            TS_ASSERT_THROWS(lab2::Gregorian d(2012, 13, 1),std::out_of_range);
+        }    
+        void testInvalidConstructorGreg1() {
+            TS_ASSERT_THROWS(lab2::Gregorian d(2013, 2, 29),std::out_of_range);
+        }    
+        void testInvalidConstructorGreg2() {
+            TS_ASSERT_THROWS_NOTHING(lab2::Gregorian d(2012, 2, 29));
+        }    
         //void testConstructorJuli() {
         //lab2::Julian j;
         //TS_ASSERT_EQUALS(j.year(), 2013); 
@@ -160,6 +170,8 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.day(), 1);
             TS_ASSERT_EQUALS(d.month(), 12);
         }
+
+        //void testWeekDayName() {
 
 };
 #endif
