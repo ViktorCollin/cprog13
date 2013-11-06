@@ -1,5 +1,5 @@
 compiler = g++-4.8
-cflags   = -std=c++11
+cflags   = -Wall -std=c++11
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
 tests    = unittest.h
@@ -28,8 +28,9 @@ runtest0%: Julian.o Gregorian.o Date.o Middle.o kattistime.o runner.cpp
 run0%: runtest0%
 	./runtest0$*
 
-test: Date.h Date.cpp Middle.h Middle.cpp Gregorian.h Gregorian.cpp
-	$(compiler) $(cflags) -c $^
+test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22b.o 
+	$(compiler) $(cflags) -o $@ $^
+	./test
 
 submit:
 	cp vector.h kth_cprog_vektor.cpp
