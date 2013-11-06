@@ -8,7 +8,7 @@ namespace lab2 {
 
     class Date {
         protected : 
-        unsigned long long _days;
+        unsigned long long _numeric;
 
         unsigned long long getDays() const;
 

@@ -13,10 +13,16 @@ Date.o: Date.h Date.cpp
 Gregorian.o: Gregorian.h Gregorian.cpp
 	$(compiler) $(cflags) -c $^
 
-Middle.o: Date.o Middle.h Middle.cpp
+Julian.o: Julian.h Julian.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest0%: Gregorian.o Date.o Middle.o runner.cpp 
+Middle.o: Middle.h Middle.cpp
+	$(compiler) $(cflags) -c $^
+
+kattistime.o: kattistime.h kattistime.cpp
+	$(compiler) $(cflags) -c $^
+
+runtest0%: Julian.o Gregorian.o Date.o Middle.o kattistime.o runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run0%: runtest0%

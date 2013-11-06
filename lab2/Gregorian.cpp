@@ -7,8 +7,8 @@ namespace lab2{
 
     Gregorian::Gregorian():Middle(){
     }
-    Gregorian::Gregorian(int year, int month, int day):Middle(year,month,day){
-
+    Gregorian::Gregorian(int year, int month, int day){
+        setDate(year,month,day);
     }
     Gregorian::Gregorian(unsigned long long numeric):Middle(numeric){
 
@@ -17,22 +17,22 @@ namespace lab2{
 
     }
     int Gregorian::year() const {
-        if(calculatedDate != _days) calcYMD();
+        if(calculatedDate != _numeric) calcYMD();
         return _year;
     }
 
     int Gregorian::month() const {
-        if(calculatedDate != _days) calcYMD();
+        if(calculatedDate != _numeric) calcYMD();
         return _month;
     }
 
     int Gregorian::day() const {
-        if(calculatedDate != _days) calcYMD();
+        if(calculatedDate != _numeric) calcYMD();
         return _day;
     }
 
     inline int Gregorian::week_day() const {
-        return _days % days_per_week() + 1;
+        return _numeric % days_per_week() + 1;
     }
     
     int Gregorian::months_per_year() const {
@@ -43,7 +43,7 @@ namespace lab2{
         return 7;
     }
     
-    int days_month(int y, int m){
+    int Gregorian::days_month(int y, int m) const{
         if(isLeapYear(y) && m == 2) return 29;
         return _daysOfMonth[m-1];
     }
@@ -60,8 +60,6 @@ namespace lab2{
     std::string Gregorian::month_name() const {
         return nameOfMonth[month()-1];
     }
-
-    
 
     Gregorian& Gregorian::add_year(int n) {
         return *this;
@@ -89,11 +87,24 @@ namespace lab2{
         if(_day > _daysOfMonth[_month - 1]) _day = _daysOfMonth[_month -1];
     }
 
-    mutable void calcYMD(){
-
+    void Gregorian::calcYMD() const{
+        int y = 4716, j = 1401, m = 2, n = 12, r = 4, p = 1461, v = 3, u = 5,
+            s = 153, w = 2, B = 274277, C = -38;
+        unsigned long long f = _numeric + j + (((4 * _numeric + B)/146097)*3)/4+C;
+        unsigned long long e = r * f + v;
+        unsigned int g = (e % p) /r;
+        unsigned int h = u * g + w;
+        _day = (h % s)/u + 1;
+        _month = ((h/s + m) % n) + 1;
+        _year = e/p - y + (n+m - _month)/n;
     }
     
-    unsigned long long YMDtoNumeric(int y, int m, int d){
+    unsigned long long Gregorian::YMDtoNumeric(int year, int month, int day) const{
+        int a = (14 - month)/12; 
+        int y = year + 4800 - a;
+        int m = month + 12*a - 3;
+
+        return day + (153*m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
         
     }
 
@@ -109,11 +120,11 @@ namespace lab2{
     }
 
     void Gregorian::setDate(int year, int month, int day) {
-        _days = YMDtoNumeric(year, mont, day);
+        _numeric = YMDtoNumeric(year, month, day);
         _year = year;
         _month = month;
         _day = day;
-        calculatedDate = _days;
+        calculatedDate = _numeric;
     }
    
 

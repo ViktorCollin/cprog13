@@ -34,6 +34,8 @@ namespace lab2{
 
       virtual int months_per_year() const;
 
+      virtual int days_month(int,int) const;
+
       virtual std::string week_day_name() const; 
 
       virtual std::string month_name() const;
@@ -41,6 +43,9 @@ namespace lab2{
       virtual Gregorian& add_year(int n = 1);
       virtual Gregorian& add_month(int n = 1);
       virtual Gregorian& add_day(int n = 1);
+
+      void calcYMD() const; 
+      unsigned long long YMDtoNumeric(int,int,int) const; 
   };
 
 }
