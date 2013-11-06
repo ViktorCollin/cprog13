@@ -138,7 +138,9 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d2.year(), 2017);
             TS_ASSERT_EQUALS(d2.month(),2);
             TS_ASSERT_EQUALS(d2.day(),28);
-
+        }
+        void testAddYear4() {
+            lab2::Gregorian d2(2017,2,28);
             d2.add_year(-1);
             TS_ASSERT_EQUALS(d2.year(), 2016);
             TS_ASSERT_EQUALS(d2.month(),2);
@@ -149,15 +151,6 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d2.month(),2);
             TS_ASSERT_EQUALS(d2.day(),28);
         }
-
-        //void testprefix() {
-            //lab2::Gregorian d(2013,11,29);
-            //++d;
-            //TS_ASSERT_EQUALS(d.day(), 30);
-            //++d;
-            //TS_ASSERT_EQUALS(d.day(), 1);
-            //TS_ASSERT_EQUALS(d.month(), 12);
-        //}
 
         void testpostfix() {
             lab2::Gregorian d(2013,11,29);
