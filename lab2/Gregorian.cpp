@@ -57,6 +57,8 @@ namespace lab2{
     }
 
     int Gregorian::days_month(int y, int m) const{
+        while(m > 12) { m -= 12; y++; }
+        while(m < 1) { m += 12; y--; }
         if(isLeapYear(y) && m == 2) return 29;
         return _daysOfMonth[m-1];
     }
@@ -75,7 +77,34 @@ namespace lab2{
     }
 
     Gregorian& Gregorian::add_year(int n) {
-        return *this;
+        if(n == 0) return *this;
+        int sign = -1;
+        if( n > 0)  {
+            sign = 1;
+        }
+        //n = std::abs(n);
+
+        if(isLeapYear()) {
+            
+            //if(std::abs(n) % 4 == 0) {
+                //_numeric += (365*4 + 1 )*sign;
+                //n -= sign * 4;
+            //} else
+                //if(((month() >= 3 && sign < 0 ) ||
+                    //(month() < 3 && sign > 0)) &&
+                        //!(month() == 2 && day() == 29)) {
+                //_numeric += 366 * sign;
+                //n -= sign;
+            //} else {
+                //_numeric += 365 * sign;
+                //n -= sign;
+            //}
+        //} else {
+            //_numeric += 365 * sign;
+            //n -= sign;
+        }
+
+        return add_year(n);
     }
 
     Gregorian& Gregorian::add_month(int n) {
@@ -84,12 +113,6 @@ namespace lab2{
             sign = 1;
         }
         n = std::abs(n);
-        //_month += n;
-        //while(_month >= 13 || _month <= 0) {
-            //_month -= fac*12;
-            //_year += fac;
-        //}
-        //verifyDay();
         for(int i = 0; i < n; ++i) {
             if(days_month(year(), month() + sign) < day()){
                 _numeric += 30 * sign;
@@ -98,7 +121,6 @@ namespace lab2{
             } else {
                 _numeric -= days_month(year(), month()-1);
             }
-
         }
         return *this;
     }
@@ -107,11 +129,6 @@ namespace lab2{
 
         return *this;
     }
-
-    //void Gregorian::verifyDay() {
-        //TODO kolla skottår för februari
-        //if(_day > _daysOfMonth[_month - 1]) _day = _daysOfMonth[_month -1];
-    //}
 
     void Gregorian::calcYMD() const{
         int y = 4716, j = 1401, m = 2, n = 12, r = 4, p = 1461, v = 3, u = 5,
