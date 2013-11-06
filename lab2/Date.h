@@ -31,8 +31,8 @@ namespace lab2 {
         //Operators
         Date& operator=(const Date&);
 
-        Date& operator++();
-        Date& operator--();
+        //Date& operator++();
+        //Date& operator--();
 
         Date& operator+=(const Date&);
         Date& operator-=(const Date&);

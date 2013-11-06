@@ -17,15 +17,15 @@ namespace lab2 {
         return _numeric;
     }
 
-    Date& Date::operator++(){
-        _numeric++;
-        return *this;
-    }
+    //Date& Date::operator++(){
+        //_numeric++;
+        //return *this;
+    //}
 
-    Date& Date::operator--(){
-        _numeric--;
-        return *this;
-    }
+    //Date& Date::operator--(){
+        //_numeric--;
+        //return *this;
+    //}
     
     Date& Date::operator+=(const Date& d){
         _numeric += d.getNumeric();

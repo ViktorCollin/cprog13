@@ -20,11 +20,8 @@ namespace lab2{
       Gregorian(unsigned long long);
       Gregorian(const Date&);
       
-      Gregorian operator++(int);
-      Gregorian operator--(int); 
-      virtual Gregorian& operator++();
-      virtual Gregorian& operator--(); 
-
+      virtual Gregorian operator++(int);
+      virtual Gregorian operator--(int); 
 
       virtual int year() const; 
       virtual int month() const; 
