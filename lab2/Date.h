@@ -7,7 +7,7 @@
 namespace lab2 {
 
     class Date {
-        protected : 
+    protected: 
         unsigned long long _numeric;
 
         unsigned long long getDays() const;
@@ -29,31 +29,26 @@ namespace lab2 {
 
         //Operators
         Date& operator=(const Date&);
-        Date& operator=(const unsigned long long); // Kanske onödig då detta är implecit
-        
+
         Date& operator++();
         Date& operator--();
-        
+
         Date& operator+=(const Date&);
-        Date& operator+=(const unsigned long long); // Kanske onödig då detta är implecit
         Date& operator-=(const Date&);
-        Date& operator-=(const unsigned long long); // Kanske onödig då detta är implecit
 
         Date& operator+(const Date&);
-        Date& operator+(const unsigned long long); // Kanske onödig då detta är implecit
         Date& operator-(const Date&);
-        Date& operator-(const unsigned long long); // Kanske onödig då detta är implecit
 
         virtual Date& add_year(int n = 1) = 0;
         virtual Date& add_month(int n = 1) = 0;
         virtual Date& add_day(int n = 1) = 0;
 
-        bool operator==(const Date&) const; 
-        bool operator!=(const Date&) const; 
-        bool operator<(const Date&) const; 
-        bool operator<=(const Date&) const; 
-        bool operator>(const Date&) const; 
-        bool operator>=(const Date&) const; 
+        inline bool operator==(const Date&) const; 
+        inline bool operator!=(const Date&) const; 
+        inline bool operator<(const Date&) const; 
+        inline bool operator<=(const Date&) const; 
+        inline bool operator>(const Date&) const; 
+        inline bool operator>=(const Date&) const; 
 
 
         long mod_julian_day() const;

@@ -72,7 +72,7 @@ namespace lab2{
 
   void Julian::setDate(int year, int month, int day) {
     unsigned long long days = 0;
-    _days = days;
+    _numeric = days;
   }
   Julian& Julian::add_month(int n) {
     int fac = -1;
