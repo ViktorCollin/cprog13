@@ -70,5 +70,15 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.day(), 1);
             TS_ASSERT_EQUALS(d.month(), 12);
         }
+
+        void testpostfix() {
+            lab2::Gregorian d(2013,11,29);
+            d++;
+            TS_ASSERT_EQUALS(d.day(), 30);
+            d++;
+            TS_ASSERT_EQUALS(d.day(), 1);
+            TS_ASSERT_EQUALS(d.month(), 12);
+        }
+
 };
 #endif

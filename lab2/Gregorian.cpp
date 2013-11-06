@@ -16,6 +16,19 @@ namespace lab2{
     Gregorian::Gregorian(const Date& d):Middle(d){
 
     }
+    
+    Gregorian Gregorian::operator++(int i) {
+        Gregorian g(*this);
+        _numeric++;
+        return g;
+    }
+
+    Gregorian Gregorian::operator--(int i) {
+        Gregorian g(*this);
+        _numeric--;
+        return g;
+    }
+    
     int Gregorian::year() const {
         if(calculatedDate != _numeric) calcYMD();
         return _year;
