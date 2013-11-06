@@ -124,7 +124,7 @@ namespace lab2{
     }
 
     Gregorian& Gregorian::add_day(int n) {
-
+        _numeric += n;
         return *this;
     }
 
