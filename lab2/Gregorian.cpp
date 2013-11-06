@@ -34,7 +34,7 @@ namespace lab2{
     inline int Gregorian::week_day() const {
         return _numeric % days_per_week() + 1;
     }
-    
+
     int Gregorian::months_per_year() const {
         return 12;
     }
@@ -42,7 +42,7 @@ namespace lab2{
     inline int Gregorian::days_per_week() const {
         return 7;
     }
-    
+
     int Gregorian::days_month(int y, int m) const{
         if(isLeapYear(y) && m == 2) return 29;
         return _daysOfMonth[m-1];
@@ -50,7 +50,7 @@ namespace lab2{
 
     int Gregorian::days_this_month() const {
         return days_month(year(), month());
-       
+
     }
 
     std::string Gregorian::week_day_name() const {
@@ -64,21 +64,21 @@ namespace lab2{
     Gregorian& Gregorian::add_year(int n) {
         return *this;
     }
-    
+
     Gregorian& Gregorian::add_month(int n) {
-       int fac = -1;
-       if( n > 0) fac = 1;
-       _month += n;
-       while(_month >= 13 || _month <= 0) {
-           _month -= fac*12;
-           _year += fac;
-       }
-       verifyDay();
-       return *this;
+        int fac = -1;
+        if( n > 0) fac = 1;
+        _month += n;
+        while(_month >= 13 || _month <= 0) {
+            _month -= fac*12;
+            _year += fac;
+        }
+        verifyDay();
+        return *this;
     }
 
     Gregorian& Gregorian::add_day(int n) {
-        
+
         return *this;
     }
 
@@ -98,14 +98,14 @@ namespace lab2{
         _month = ((h/s + m) % n) + 1;
         _year = e/p - y + (n+m - _month)/n;
     }
-    
+
     unsigned long long Gregorian::YMDtoNumeric(int year, int month, int day) const{
         int a = (14 - month)/12; 
         int y = year + 4800 - a;
         int m = month + 12*a - 3;
 
         return day + (153*m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
-        
+
     }
 
     void Gregorian::setCurrentDate() {
@@ -126,7 +126,11 @@ namespace lab2{
         _day = day;
         calculatedDate = _numeric;
     }
-   
+
+    void Gregorian::set_date(int y, int m, int d)  {
+        setDate(y,m,d);
+    }
+
 
     bool Gregorian::isLeapYear() const{
         return isLeapYear(year());

@@ -38,6 +38,8 @@ namespace lab2{
       virtual Julian& add_year(int n = 1);
       virtual Julian& add_month(int n = 1);
       virtual Julian& add_day(int n = 1);
+
+      virtual void set_date(int,int,int);
   };
 
 }
