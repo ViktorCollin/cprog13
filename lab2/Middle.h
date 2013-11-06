@@ -33,7 +33,7 @@ namespace lab2{
       virtual Middle& add_month(int n = 1) = 0;
       virtual Middle& add_day(int n = 1) = 0;
       
-      virtual void set_date(int, int, int);
+      virtual void set_date(int, int, int) = 0;
   };
 }
 #endif
