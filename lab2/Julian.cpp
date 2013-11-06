@@ -7,7 +7,7 @@ namespace lab2{
 
   Julian::Julian():Middle(){
   }
-  Julian::Julian(int year, int month, int day):Middle(){
+  Julian::Julian(int year, int month, int day){
 
   }
   int Julian::year() const {
@@ -72,7 +72,7 @@ namespace lab2{
 
   void Julian::setDate(int year, int month, int day) {
     unsigned long long days = 0;
-    _days = days;
+    _numeric = days;
   }
   Julian& Julian::add_month(int n) {
     int fac = -1;
@@ -84,6 +84,10 @@ namespace lab2{
     }
     verifyDay();
     return *this;
+  }
+
+  void Julian::set_date(int y, int m, int d) {
+      setDate(y,m,d);
   }
 
   bool Julian::isLeapYear() const{
