@@ -16,7 +16,7 @@ namespace lab2{
     Gregorian::Gregorian(const Date& d):Middle(d){
 
     }
-    
+
     Gregorian Gregorian::operator++(int i) {
         Gregorian g(*this);
         _numeric++;
@@ -28,7 +28,7 @@ namespace lab2{
         _numeric--;
         return g;
     }
-    
+
     int Gregorian::year() const {
         if(calculatedDate != _numeric) calcYMD();
         return _year;
@@ -79,14 +79,27 @@ namespace lab2{
     }
 
     Gregorian& Gregorian::add_month(int n) {
-        int fac = -1;
-        if( n > 0) fac = 1;
-        _month += n;
-        while(_month >= 13 || _month <= 0) {
-            _month -= fac*12;
-            _year += fac;
+        int sign = -1;
+        if( n > 0)  {
+            sign = 1;
         }
-        verifyDay();
+        n = std::abs(n);
+        //_month += n;
+        //while(_month >= 13 || _month <= 0) {
+            //_month -= fac*12;
+            //_year += fac;
+        //}
+        //verifyDay();
+        for(int i = 0; i < n; ++i) {
+            if(days_month(year(), month() + sign) < day()){
+                _numeric += 30 * sign;
+            } else if(sign > 0) {
+                _numeric += days_this_month();
+            } else {
+                _numeric -= days_month(year(), month()-1);
+            }
+
+        }
         return *this;
     }
 
@@ -95,10 +108,10 @@ namespace lab2{
         return *this;
     }
 
-    void Gregorian::verifyDay() {
+    //void Gregorian::verifyDay() {
         //TODO kolla skottår för februari
-        if(_day > _daysOfMonth[_month - 1]) _day = _daysOfMonth[_month -1];
-    }
+        //if(_day > _daysOfMonth[_month - 1]) _day = _daysOfMonth[_month -1];
+    //}
 
     void Gregorian::calcYMD() const{
         int y = 4716, j = 1401, m = 2, n = 12, r = 4, p = 1461, v = 3, u = 5,
@@ -116,9 +129,7 @@ namespace lab2{
         int a = (14 - month)/12; 
         int y = year + 4800 - a;
         int m = month + 12*a - 3;
-
         return day + (153*m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
-
     }
 
     void Gregorian::setCurrentDate() {

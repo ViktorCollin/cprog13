@@ -32,6 +32,9 @@ test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22b.o
 	$(compiler) $(cflags) -o $@ $^
 	./test
 
+clean:
+	rm *.o
+
 submit:
 	cp vector.h kth_cprog_vektor.cpp
 	submit.py kth_cprog_vektor.cpp

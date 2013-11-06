@@ -23,4 +23,6 @@ namespace lab2 {
 
     Middle::Middle(unsigned long long num) : Date(num) {}
     Middle::Middle(const Date& d) : Date(d) {}
+
+
 }

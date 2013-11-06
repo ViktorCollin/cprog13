@@ -54,6 +54,7 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.day(),30);
             d.add_month(-2);
             TS_ASSERT_EQUALS(d.month(),9);
+            TS_ASSERT_EQUALS(d.day(),30);
             d.add_month(10);
             TS_ASSERT_EQUALS(d.month(),7);
             TS_ASSERT_EQUALS(d.year(), 2013);

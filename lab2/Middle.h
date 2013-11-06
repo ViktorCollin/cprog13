@@ -8,19 +8,22 @@ namespace lab2{
 
     protected:
       const int _daysOfMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
-      const std::string nameOfDay[7] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
-      const std::string nameOfMonth[12] = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+      const std::string nameOfDay[7] = {"monday", "tuesday",
+          "wednesday", "thursday", "friday", "saturday", "sunday"};
+      const std::string nameOfMonth[12] = {"january", "february",
+          "march", "april", "may", "june", "july", "august",
+          "september", "october", "november", "december"};
       mutable unsigned long long calculatedDate; 
       mutable int _day, _month, _year;
-      virtual calcYMD() const;
-      virtual YMDtoNumeric();
+      virtual void calcYMD() const = 0;
+      virtual unsigned long long YMDtoNumeric(int, int, int) const = 0;
 
     public: 
       Middle();
       Middle(int, int, int);
       Middle(unsigned long long);
       Middle(const Date&);
-
+       
       int year() const; 
       int month() const; 
       int day() const; 
