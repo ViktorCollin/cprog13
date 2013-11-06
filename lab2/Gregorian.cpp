@@ -10,6 +10,12 @@ namespace lab2{
     Gregorian::Gregorian(int year, int month, int day):Middle(year,month,day){
 
     }
+    Gregorian::Gregorian(unsigned long long numeric):Middle(numeric){
+
+    }
+    Gregorian::Gregorian(const Date& d):Middle(d){
+
+    }
     int Gregorian::year() const {
         if(calculatedDate != _days) calcYMD();
         return _year;
@@ -28,18 +34,23 @@ namespace lab2{
     inline int Gregorian::week_day() const {
         return _days % days_per_week() + 1;
     }
+    
+    int Gregorian::months_per_year() const {
+        return 12;
+    }
 
     inline int Gregorian::days_per_week() const {
         return 7;
     }
-
-    int Gregorian::days_this_month() const {
-        if(isLeapYear() && month() == 2) return 29;
-        return _daysOfMonth[month()-1];
+    
+    int days_month(int y, int m){
+        if(isLeapYear(y) && m == 2) return 29;
+        return _daysOfMonth[m-1];
     }
 
-    int Gregorian::months_per_year() const {
-        return 12;
+    int Gregorian::days_this_month() const {
+        return days_month(year(), month());
+       
     }
 
     std::string Gregorian::week_day_name() const {
@@ -49,6 +60,8 @@ namespace lab2{
     std::string Gregorian::month_name() const {
         return nameOfMonth[month()-1];
     }
+
+    
 
     Gregorian& Gregorian::add_year(int n) {
         return *this;
@@ -67,7 +80,7 @@ namespace lab2{
     }
 
     Gregorian& Gregorian::add_day(int n) {
-        *this++;
+        
         return *this;
     }
 
@@ -78,6 +91,10 @@ namespace lab2{
 
     mutable void calcYMD(){
 
+    }
+    
+    unsigned long long YMDtoNumeric(int y, int m, int d){
+        
     }
 
     void Gregorian::setCurrentDate() {
@@ -92,12 +109,11 @@ namespace lab2{
     }
 
     void Gregorian::setDate(int year, int month, int day) {
-        unsigned long long days = 0;
-        _days = days;
+        _days = YMDtoNumeric(year, mont, day);
         _year = year;
         _month = month;
         _day = day;
-        calculatedDate = days;
+        calculatedDate = _days;
     }
    
 

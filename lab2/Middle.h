@@ -16,6 +16,7 @@ namespace lab2{
     public : 
       Middle();
       Middle(int, int, int);
+      Middle(unsigned long long);
       Middle(const Date&);
 
       virtual int year() const = 0; 
