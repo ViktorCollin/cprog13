@@ -10,7 +10,7 @@ namespace lab2 {
     protected: 
         unsigned long long _numeric;
 
-        unsigned long long getDays() const;
+        unsigned long long getNumeric() const;
 
     public:
         Date();

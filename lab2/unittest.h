@@ -48,24 +48,27 @@ class MyTestSuite : public CxxTest::TestSuite {
         }
 
         void testAddMonth(){
-        lab2::Gregorian d(2012,10, 31);
-        d.add_month();
-        TS_ASSERT_EQUALS(d.month(),11);
-        TS_ASSERT_EQUALS(d.day(),30);
-        d.add_month(-2);
-        TS_ASSERT_EQUALS(d.month(),9);
-        d.add_month(10);
-        TS_ASSERT_EQUALS(d.month(),7);
-        TS_ASSERT_EQUALS(d.year(), 2013);
-        d.add_month(-9);
-        TS_ASSERT_EQUALS(d.month(),10);
-        TS_ASSERT_EQUALS(d.year(), 2012);
+            lab2::Gregorian d(2012,10, 31);
+            d.add_month();
+            TS_ASSERT_EQUALS(d.month(),11);
+            TS_ASSERT_EQUALS(d.day(),30);
+            d.add_month(-2);
+            TS_ASSERT_EQUALS(d.month(),9);
+            d.add_month(10);
+            TS_ASSERT_EQUALS(d.month(),7);
+            TS_ASSERT_EQUALS(d.year(), 2013);
+            d.add_month(-9);
+            TS_ASSERT_EQUALS(d.month(),10);
+            TS_ASSERT_EQUALS(d.year(), 2012);
         }
 
-        //void testDaysThisMonth() {
-        //lab2::Gregorian d(2012,10, 31);
-
-        //lab2::Gregorian d(2012,10, 31);
-
+        void testprefix() {
+            lab2::Gregorian d(2013,11,29);
+            ++d;
+            TS_ASSERT_EQUALS(d.day(), 30);
+            ++d;
+            TS_ASSERT_EQUALS(d.day(), 1);
+            TS_ASSERT_EQUALS(d.month(), 12);
+        }
 };
 #endif
