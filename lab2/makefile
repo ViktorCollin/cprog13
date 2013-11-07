@@ -31,11 +31,13 @@ run: runtest
 
 testa: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22a.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test < lab22a.in | diff lab22a.out - -y --suppress-common-lines
+	./testa < lab22a.in | diff lab22a.out - -y --suppress-common-lines
+	rm testa
 
 testc: julian.o gregorian.o date.o middle.o kattistime.o cprog11lab22c.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test < lab22b.in | diff lab22c.out - -y --suppress-common-lines
+	./testc < lab22b.in | diff lab22c.out - -y --suppress-common-lines
+	rm testc
 
 clean:
 	rm *.o

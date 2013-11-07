@@ -87,13 +87,70 @@ class MyTestSuite : public CxxTest::TestSuite {
         }
 
         void testAddYear1010(){
-            lab2::Gregorian d(2096,2, 29);
-            d.add_year(4);
-            TS_ASSERT_EQUALS(d.month(),2);
-            TS_ASSERT_EQUALS(d.year(), 2100);
-            TS_ASSERT_EQUALS(d.day(),28);
+            lab2::Gregorian d(2202,3, 25);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2202);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2203);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2204);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2205);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2206);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2207);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2208);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2209);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2210);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2211);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2212);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2213);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(1);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2214);
+            TS_ASSERT_EQUALS(d.day(),25);
         }
-
+        void testAddYear11010101010(){
+            lab2::Gregorian d(2202,3, 25);
+            d.add_year(-13);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2189);
+            TS_ASSERT_EQUALS(d.day(),25);
+            d.add_year(13);
+            TS_ASSERT_EQUALS(d.month(),3);
+            TS_ASSERT_EQUALS(d.year(), 2202);
+            TS_ASSERT_EQUALS(d.day(),25);
+        } 
 
         void testAddYearKattis(){
             lab2::Gregorian d(1992,2, 29);

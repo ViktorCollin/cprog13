@@ -103,13 +103,14 @@ namespace lab2 {
                 n -= sign * 4;
                 return add_year(n);
             }else if((sign > 0 && (month() < 3 && !(month() == 2 && day() == 29 ))) ||
-                    (sign < 0 && (month() > 3 ||  (month() == 2 && day() == 29 )))) {
+                    (sign < 0 && (month() > 2 ||  (month() == 2 && day() == 29 )))) {
                 _numeric += 366 * sign;
                 n -= sign;
                 return add_year(n);
             }
-        } else if(isLeapYear(year() + sign) && (( month() > 3 && sign > 0) ||
-                    (sign < 0 && (month() < 3 )))) {
+        } else if(isLeapYear(year() + sign) &&
+                ((( month() > 2  ||  (month() == 2 && day() == 29 ))&& sign > 0) ||
+                    (sign < 0 && (month() < 3  && !(month() == 2 && day() == 29 ))))) {
             _numeric += 366 * sign;
             n -= sign;
             return add_year(n);
