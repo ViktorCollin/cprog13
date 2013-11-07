@@ -46,12 +46,12 @@ namespace lab2 {
         virtual Date& add_month(int n = 1) = 0;
         virtual Date& add_day(int n = 1) = 0;
 
-        inline bool operator==(const Date&) const; 
-        inline bool operator!=(const Date&) const; 
-        inline bool operator<(const Date&) const; 
-        inline bool operator<=(const Date&) const; 
-        inline bool operator>(const Date&) const; 
-        inline bool operator>=(const Date&) const; 
+        bool operator==(const Date&) const; 
+        bool operator!=(const Date&) const; 
+        bool operator<(const Date&) const; 
+        bool operator<=(const Date&) const; 
+        bool operator>(const Date&) const; 
+        bool operator>=(const Date&) const; 
 
 
         long mod_julian_day() const;
