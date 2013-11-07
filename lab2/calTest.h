@@ -1,7 +1,7 @@
 #ifndef CAL_TESTER
 #define CAL_TESTER 
 #include <cxxtest/TestSuite.h>
-
+#include <iostream>
 #include "gregorian.h"
 #include "julian.h"
 #include "calendar.h"
@@ -37,14 +37,33 @@ class CalTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(cal.getToday().month(), 12);
             TS_ASSERT_EQUALS(cal.getToday().day(), 24);
         } 
-        
+
         void testAddEvent(){
+            lab2::Calendar<Gregorian> cal;
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 0);
+            cal.add_event("Julafton", 24, 12, 2013);
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
+
+        }   
+        void testRemoveEvent(){
+            lab2::Calendar<Gregorian> cal;
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 0);
+            cal.add_event("Julafton", 24, 12, 2013);
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
+            cal.remove_event("Julafton", 24, 12, 2013);           
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 0);
+        }   
+        void testAddEasdsfvent(){
             lab2::Calendar<Gregorian> cal;
             cal.add_event("Julafton", 24, 12, 2013);
             TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
-            
+            std::ostringstream oss;
+            oss << cal;
+            TS_ASSERT_EQUALS(oss.str(), "2013-12-24 : Julafton\n");
+
+
         }   
-         //void testInvalidConstructorGreg1() {
+        //void testInvalidConstructorGreg1() {
         //             TS_ASSERT_THROWS(lab2::Gregorian d(2013, 2, 29),std::out_of_range);
         //         }    
         //         void testInvalidConstructorGreg2() {
