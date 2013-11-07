@@ -79,7 +79,7 @@ namespace lab2 {
     }
 
     std::string Middle::week_day_name() const {
-        return nameOfMonth[week_day()-1];
+        return nameOfDay[week_day()-1];
     }
 
     std::string Middle::month_name() const {

@@ -1,7 +1,9 @@
 #include <cstdio>
-    #include <string>
-    #include "julian.h"
-    #include <time.h>
+#include <string>
+#include "julian.h"
+#include <time.h>
+#include <stdexcept>
+#include <math.h>
 
 namespace lab2{
 
@@ -33,12 +35,12 @@ namespace lab2{
 
     void Julian::calcYMD() const{
         int b = _numeric + 1524;
-    	int c = (int)((b - 122.1) / 365.25);
-    	int da = (int)(365.25 * c);
-    	int e = (int)((b - da) / 30.6001);
-    	_month =(int)( (e < 14) ? (e - 1) : (e - 13) );
-    	_year = (int)( (month > 2 ) ? (c - 4716) : (c - 4715));
-    	_day = (int)(b-da-floor(30.6001*e));
+        int c = (int)((b - 122.1) / 365.25);
+        int da = (int)(365.25 * c);
+        int e = (int)((b - da) / 30.6001);
+        _month = (int)( (e < 14) ? (e - 1) : (e - 13) );
+        _year = (int)( (_month > 2 ) ? (c - 4716) : (c - 4715));
+        _day = (int)(b-da-floor(30.6001*e));
     }
 
     unsigned long long Julian::YMDtoNumeric(int year, int month, int day) const{

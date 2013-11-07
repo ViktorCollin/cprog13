@@ -43,6 +43,16 @@ namespace lab2 {
         return  _numeric - d.getNumeric();
     }
 
+    Date& Date::operator+=(int n){
+        _numeric += n;
+        return *this;
+    }
+    
+    Date& Date::operator-=(int n){
+        _numeric -= n;
+        return *this;
+    }
+
     Date& Date::operator+=(const Date& d){
         _numeric += d.getNumeric();
         return *this;

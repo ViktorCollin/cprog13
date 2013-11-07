@@ -29,9 +29,13 @@ run: runtest
 	./runtest
 	rm runtest
 
-test: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22a.o 
+testa: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22a.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test < lab22a.in | diff labb22a.ans - -y
+	./test < lab22a.in | diff lab22a.out - -y
+
+testb: julian.o gregorian.o date.o middle.o kattistime.o cprog11lab22b.o 
+	$(compiler) $(cflags) -o $@ $^
+	./test < cprog11lab22b.in | diff cprog11lab22b.out - -y
 
 clean:
 	rm *.o
@@ -42,3 +46,4 @@ submit:
 	cp vector.h kth_cprog_vektor.cpp
 	submit.py kth_cprog_vektor.cpp
 	rm kth_cprog_vektor.cpppyt
+
