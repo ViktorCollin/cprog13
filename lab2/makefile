@@ -1,5 +1,5 @@
 compiler = g++-4.8
-cflags   = -Wall -std=c++11
+cflags   = -g -O2 -static -std=gnu++0x
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
 tests    = unittest.h calTest.h
@@ -29,9 +29,9 @@ run: runtest
 	./runtest
 	rm runtest
 
-test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22b.o 
+test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22c.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test
+	./test < lab22b.in | diff labb22b.ans - -y
 
 clean:
 	rm *.o
