@@ -1,6 +1,6 @@
 #ifndef GREGORIAN_H
 #define GREGORIAN_H
-#include "Middle.h"
+#include "middle.h"
 
 
 namespace lab2{

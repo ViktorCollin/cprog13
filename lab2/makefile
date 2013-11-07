@@ -1,4 +1,4 @@
-compiler = g++-4.8
+compiler = g++
 cflags   = -g -O2 -static -std=gnu++0x
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
@@ -7,31 +7,31 @@ tests    = unittest.h calTest.h
 runner.cpp: $(tests)
 	python $(cxxpath)cxxtestgen.py --error-printer -o $@ $(tests)
 
-Date.o: Date.h Date.cpp
+date.o: date.h date.cpp
 	$(compiler) $(cflags) -c $^
 
-Gregorian.o: Gregorian.h Gregorian.cpp
+gregorian.o: gregorian.h gregorian.cpp
 	$(compiler) $(cflags) -c $^
 
-Julian.o: Julian.h Julian.cpp
+julian.o: julian.h julian.cpp
 	$(compiler) $(cflags) -c $^
 
-Middle.o: Middle.h Middle.cpp
+middle.o: middle.h middle.cpp
 	$(compiler) $(cflags) -c $^
 
 kattistime.o: kattistime.h kattistime.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest: Gregorian.o Date.o Middle.o kattistime.o Calendar.h runner.cpp 
+runtest: gregorian.o date.o middle.o kattistime.o calendar.h runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run: runtest
 	./runtest
 	rm runtest
 
-test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22c.o 
+test: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22a.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test < lab22b.in | diff labb22b.ans - -y
+	./test < lab22a.in | diff labb22a.ans - -y
 
 clean:
 	rm *.o

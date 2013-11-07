@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <string>
-#include "Gregorian.h"
+#include "gregorian.h"
 #include <time.h>
 #include <stdexcept>
 

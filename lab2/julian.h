@@ -1,6 +1,6 @@
 #ifndef JULIAN_H
 #define JULIAN_H
-#include "Middle.h"
+#include "middle.h"
 
 namespace lab2{
 

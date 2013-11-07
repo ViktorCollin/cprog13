@@ -1,4 +1,4 @@
-#include "Middle.h"
+#include "middle.h"
 #include "kattistime.h"
 #include <iostream>
 #include <iomanip>
@@ -25,13 +25,20 @@ namespace lab2 {
     }
 
     Middle::Middle(int year, int month, int day) : Date() {
-        
+
     }
 
     Middle::Middle(unsigned long long num) : Date(num) {}
     Middle::Middle(const Date& d) : Date(d) {}
-    
-    
+
+    const int Middle::_daysOfMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    const std::string Middle::nameOfDay[] = {"monday", "tuesday",
+        "wednesday", "thursday", "friday", "saturday", "sunday"};
+    const std::string Middle::nameOfMonth[] = {"january", "february",
+        "march", "april", "may", "june", "july", "august",
+        "september", "october", "november", "december"};
+
+
     int Middle::year() const {
         if(calculatedDate != _numeric) calcYMD();
         return _year;
@@ -79,7 +86,7 @@ namespace lab2 {
         return nameOfMonth[month()-1];
     }
 
-     Middle& Middle::add_year(int n) {
+    Middle& Middle::add_year(int n) {
         if(n == 0) return *this;
         int sign = -1;
         if( n > 0)  {

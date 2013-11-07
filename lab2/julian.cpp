@@ -1,6 +1,6 @@
 #include <cstdio>
     #include <string>
-    #include "Julian.h"
+    #include "julian.h"
     #include <time.h>
 
 namespace lab2{
@@ -8,6 +8,9 @@ namespace lab2{
     Julian::Julian() : Middle(){
     }
     Julian::Julian(int year, int month, int day) : Middle(){
+        if(month < 1 || month > 12 || day < 1 || day > days_month(year, month))
+            throw std::out_of_range("The date imported is not valid");
+        set_date(year,month,day);
     }
 
     Julian::Julian(unsigned long long numeric) : Middle(numeric){
@@ -29,15 +32,13 @@ namespace lab2{
     }
 
     void Julian::calcYMD() const{
-        int y = 4716, j = 1401, m = 2, n = 12, r = 4, p = 1461, v = 3, u = 5,
-            s = 153, w = 2, B = 274277, C = -38;
-        unsigned long long f = _numeric + j + (((4 * _numeric + B)/146097)*3)/4+C;
-        unsigned long long e = r * f + v;
-        unsigned int g = (e % p) /r;
-        unsigned int h = u * g + w;
-        _day = (h % s)/u + 1;
-        _month = ((h/s + m) % n) + 1;
-        _year = e/p - y + (n+m - _month)/n;
+        int b = _numeric + 1524;
+    	int c = (int)((b - 122.1) / 365.25);
+    	int da = (int)(365.25 * c);
+    	int e = (int)((b - da) / 30.6001);
+    	_month =(int)( (e < 14) ? (e - 1) : (e - 13) );
+    	_year = (int)( (month > 2 ) ? (c - 4716) : (c - 4715));
+    	_day = (int)(b-da-floor(30.6001*e));
     }
 
     unsigned long long Julian::YMDtoNumeric(int year, int month, int day) const{
@@ -48,7 +49,6 @@ namespace lab2{
     }
 
     bool Julian::isLeapYear(int year) const{
-        if (year % 100 == 0) return false; 
         if (year % 4 == 0) return true;
         return false;
     }

@@ -4,8 +4,8 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "Gregorian.h"
-#include "Julian.h"
+#include "gregorian.h"
+#include "julian.h"
 
 namespace lab2 {
     template <typename T>

@@ -2,9 +2,9 @@
 #define CAL_TESTER 
 #include <cxxtest/TestSuite.h>
 
-#include "Gregorian.h"
-#include "Julian.h"
-#include "Calendar.h"
+#include "gregorian.h"
+#include "julian.h"
+#include "calendar.h"
 #include "kattistime.h"
 using namespace lab2;
 
