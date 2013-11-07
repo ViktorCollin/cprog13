@@ -3,6 +3,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <string>
 #include "Gregorian.h"
 #include "Julian.h"
 
@@ -12,8 +13,6 @@ namespace lab2 {
     private:
         T _today;
         std::map<T, std::vector<std::string> > _eventList;
-        
-
         
     public:
         Calendar();
@@ -71,20 +70,74 @@ namespace lab2 {
         return _eventList;
     }
     
+    // Add_event
+    template <typename T>
+    bool Calendar<T>::add_event(std::string text, int day, int month, int year){
+        return Calendar<T>::add_event(text, T(year, month, day));
+    }
+    
+    template <typename T>
+    bool Calendar<T>::add_event(std::string text, int day, int month){
+        return Calendar<T>::add_event(text, T(_today.year(), month, day));
+    }
+    
+    template <typename T>
+    bool Calendar<T>::add_event(std::string text, int day){
+        return Calendar<T>::add_event(text, T(_today.year(), _today.month(), day));
+    }
+    
+    template <typename T>
+    bool Calendar<T>::add_event(std::string text){
+        return Calendar<T>::add_event(text, _today);
+    }
+    
     template <typename T>
     bool Calendar<T>::add_event(std::string text, T date){
-        return false;
+        std::vector<std::string> l = _eventList[date];
+        for(auto it = l.begin(); it < l.end(); ++it){
+            if(*it == text) return false;
+        }
+        l.push_back(text);
+        return true;
+    }
+    
+    // Remove event
+    template <typename T>
+    bool Calendar<T>::remove_event(std::string text, int day, int month, int year){
+        return Calendar<T>::remove_event(text, T(year, month, day));
+    }
+    
+    template <typename T>
+    bool Calendar<T>::remove_event(std::string text, int day, int month){
+        return Calendar<T>::remove_event(text, T(_today.year(), month, day));
+    }
+    
+    template <typename T>
+    bool Calendar<T>::remove_event(std::string text, int day){
+        return Calendar<T>::remove_event(text, T(_today.year(), _today.month(), day));
+    }
+    
+    template <typename T>
+    bool Calendar<T>::remove_event(std::string text){
+        return Calendar<T>::remove_event(text, _today);
     }
     
     template <typename T>
     bool Calendar<T>::remove_event(std::string text, T date){
-        return false;        
+        std::vector<std::string> l = _eventList[date];
+        for(auto it = l.begin(); it < l.end(); ++it){
+            if(*it == text){
+                l.erase(it);
+                return true;
+            }
+        }
+        return false;       
     }
     
     template <typename T>
     bool Calendar<T>::set_date(int year, int month, int day){
         try{
-            _today(year, month, day);
+            _today.set_date(year, month, day);
         }catch(...){
             return false;
         }

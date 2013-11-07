@@ -30,7 +30,14 @@ class CalTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(cal.getToday().year(), 2013); 
             TS_ASSERT_EQUALS(cal.getToday().month(), 12);
             TS_ASSERT_EQUALS(cal.getToday().day(), 24);
-        }    
+        } 
+        
+        void testAddEvent(){
+            lab2::Calendar<Gregorian> cal;
+            cal.add_event("Julafton", 24, 12, 2013);
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
+            
+        }   
         // void testInvalidConstructorGreg1() {
         //             TS_ASSERT_THROWS(lab2::Gregorian d(2013, 2, 29),std::out_of_range);
         //         }    
