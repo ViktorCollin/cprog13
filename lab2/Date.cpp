@@ -84,6 +84,8 @@ namespace lab2 {
         return os; 
     }
     long Date::mod_julian_day() const {
-        return _numeric - 24006;
+        //kanske 2400000 is så fall ändra också 1524 till 1525 i Julian::toYMD
+        return _numeric - 2400001;
+        
     }
 }
