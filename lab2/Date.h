@@ -56,6 +56,6 @@ namespace lab2 {
 
         long mod_julian_day() const;
     };
-    //std::ostream & operator<<(std::ostream &, const Date&);
+    std::ostream & operator<<(std::ostream &, const Date&);
 }
 #endif

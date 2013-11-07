@@ -16,6 +16,12 @@ class CalTestSuite : public CxxTest::TestSuite {
             time(&tp);
             set_k_time(tp);
         }
+        void testConstructorCal1() {
+            lab2::Calendar<Gregorian> cal;
+            std::ostringstream oss;
+            oss << cal.getToday();
+            TS_ASSERT_EQUALS(oss.str(), "2013-11-07");
+        }
 
         void testConstructorCal() {
             lab2::Calendar<Gregorian> cal;
@@ -38,7 +44,7 @@ class CalTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
             
         }   
-        // void testInvalidConstructorGreg1() {
+         //void testInvalidConstructorGreg1() {
         //             TS_ASSERT_THROWS(lab2::Gregorian d(2013, 2, 29),std::out_of_range);
         //         }    
         //         void testInvalidConstructorGreg2() {

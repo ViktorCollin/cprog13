@@ -27,6 +27,7 @@ runtest: Gregorian.o Date.o Middle.o kattistime.o Calendar.h runner.cpp
 
 run: runtest
 	./runtest
+	rm runtest
 
 test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22b.o 
 	$(compiler) $(cflags) -o $@ $^
@@ -34,6 +35,8 @@ test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22b.o
 
 clean:
 	rm *.o
+	rm runner.cpp
+	
 
 submit:
 	cp vector.h kth_cprog_vektor.cpp

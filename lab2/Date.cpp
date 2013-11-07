@@ -73,15 +73,14 @@ namespace lab2 {
         return _numeric >= d.getNumeric();
     }
 
-    //std::ostream& operator<<(std::ostream& os, const Date& d){
-        //std::streamsize w = os.width();
-        //char c = os.fill('0');
-        //os << std::setw(4) << d.year()%10000 << 
-        //std::setw(1) << "-" << std::setw(2) << d.month() << 
-        //std::setw(1) << "-" << std::setw(2) << d.day();
-        //os.width(w);
-        //os.fill(c);
-        //return os; 
-    //}
-
+    std::ostream& operator<<(std::ostream& os, const Date& d){
+        std::streamsize w = os.width();
+        char c = os.fill('0');
+        os << std::setw(4) << d.year()%10000 << 
+        std::setw(1) << "-" << std::setw(2) << d.month() << 
+        std::setw(1) << "-" << std::setw(2) << d.day();
+        os.width(w);
+        os.fill(c);
+        return os; 
+    }
 }

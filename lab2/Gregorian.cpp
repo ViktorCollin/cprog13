@@ -8,16 +8,17 @@ namespace lab2{
 
     Gregorian::Gregorian():Middle(){
     }
+
     Gregorian::Gregorian(int year, int month, int day):Middle(year,month,day){
         if(month < 1 || month > 12 || day < 1 || day > days_month(year, month))
             throw std::out_of_range("The date imported is not valid");
         set_date(year,month,day);
     }
+
     Gregorian::Gregorian(unsigned long long numeric):Middle(numeric){
-
     }
-    Gregorian::Gregorian(const Date& d):Middle(d){
 
+    Gregorian::Gregorian(const Date& d):Middle(d){
     }
 
     Gregorian Gregorian::operator++(int i) {
@@ -30,105 +31,6 @@ namespace lab2{
         Gregorian g(*this);
         _numeric--;
         return g;
-    }
-
-    int Gregorian::year() const {
-        if(calculatedDate != _numeric) calcYMD();
-        return _year;
-    }
-
-    int Gregorian::month() const {
-        if(calculatedDate != _numeric) calcYMD();
-        return _month;
-    }
-
-    int Gregorian::day() const {
-        if(calculatedDate != _numeric) calcYMD();
-        return _day;
-    }
-
-    inline int Gregorian::week_day() const {
-        return _numeric % days_per_week() + 1;
-    }
-
-    int Gregorian::months_per_year() const {
-        return 12;
-    }
-
-    inline int Gregorian::days_per_week() const {
-        return 7;
-    }
-
-    int Gregorian::days_month(int y, int m) const{
-        while(m > 12) { m -= 12; y++; }
-        while(m < 1) { m += 12; y--; }
-        if(isLeapYear(y) && m == 2) return 29;
-        return _daysOfMonth[m-1];
-    }
-
-    int Gregorian::days_this_month() const {
-        return days_month(year(), month());
-
-    }
-
-    std::string Gregorian::week_day_name() const {
-        return nameOfMonth[week_day()-1];
-    }
-
-    std::string Gregorian::month_name() const {
-        return nameOfMonth[month()-1];
-    }
-
-    Gregorian& Gregorian::add_year(int n) {
-        if(n == 0) return *this;
-        int sign = -1;
-        if( n > 0)  {
-            sign = 1;
-        }
-
-        if(isLeapYear()) {
-            if(std::abs(n) % 4 == 0) {
-                _numeric += (365*4 + 1 )*sign;
-                n -= sign * 4;
-                return add_year(n);
-            }else if((sign > 0 && (month() < 3 && !(month() == 2 && day() == 29 ))) ||
-                    (sign < 0 && month() > 3 )) {
-                _numeric += 366 * sign;
-                n -= sign;
-                return add_year(n);
-            }
-        } else if(isLeapYear(year() + sign) && (( month() > 3 && sign > 0) ||
-                    (sign < 0 && (month() < 3 )))) {
-            _numeric += 366 * sign;
-            n -= sign;
-            return add_year(n);
-        }
-        _numeric += 365 * sign;
-        n -= sign;
-        return add_year(n);
-    }
-
-    Gregorian& Gregorian::add_month(int n) {
-        int sign = -1;
-        if( n > 0)  {
-            sign = 1;
-        }
-        n = std::abs(n);
-        for(int i = 0; i < n; ++i) {
-            if(days_month(year(), month() + sign) < day()){
-                _numeric += 30 * sign;
-            } else if(sign > 0) {
-                _numeric += days_this_month();
-            } else {
-                _numeric -= days_month(year(), month()-1);
-            }
-        }
-        return *this;
-    }
-
-    Gregorian& Gregorian::add_day(int n) {
-        _numeric += n;
-        return *this;
     }
 
     void Gregorian::calcYMD() const{
@@ -158,25 +60,9 @@ namespace lab2{
         int month = aTime->tm_mon + 1; // Month is 0 - 11, add 1 to get a jan-dec 1-12 concept
         int year = aTime->tm_year + 1900; // Year is # years since 1900
 
-        setDate(year, month, day);
+        set_date(year, month, day);
     }
 
-    void Gregorian::setDate(int year, int month, int day) {
-        _numeric = YMDtoNumeric(year, month, day);
-        _year = year;
-        _month = month;
-        _day = day;
-        calculatedDate = _numeric;
-    }
-
-    void Gregorian::set_date(int y, int m, int d)  {
-        setDate(y,m,d);
-    }
-
-
-    bool Gregorian::isLeapYear() const{
-        return isLeapYear(year());
-    }
     bool Gregorian::isLeapYear(int year) const{
         if (year % 400 == 0) return true; 
         if (year % 100 == 0) return false; 
@@ -184,14 +70,14 @@ namespace lab2{
         return false;
     }
     
-    std::ostream& operator<<(std::ostream& os, const Gregorian& d){
-        std::streamsize w = os.width();
-        char c = os.fill('0');
-        os << std::setw(4) << d.year()%10000 << 
-        std::setw(1) << "-" << std::setw(2) << d.month() << 
-        std::setw(1) << "-" << std::setw(2) << d.day();
-        os.width(w);
-        os.fill(c);
-        return os; 
-    }
+    //std::ostream& operator<<(std::ostream& os, const Gregorian& d){
+        //std::streamsize w = os.width();
+        //char c = os.fill('0');
+        //os << std::setw(4) << d.year()%10000 << 
+        //std::setw(1) << "-" << std::setw(2) << d.month() << 
+        //std::setw(1) << "-" << std::setw(2) << d.day();
+        //os.width(w);
+        //os.fill(c);
+        //return os; 
+    //}
 }
