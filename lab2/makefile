@@ -40,10 +40,8 @@ testc: julian.o gregorian.o date.o middle.o kattistime.o cprog11lab22c.o
 clean:
 	rm *.o
 	rm runner.cpp
-	
+
 
 submit:
-	cp vector.h kth_cprog_vektor.cpp
-	submit.py kth_cprog_vektor.cpp
-	rm kth_cprog_vektor.cpppyt
+	submit.py julian.h julian.cpp gregorian.h gregorian.cpp meddle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22a.cpp 
 
