@@ -49,27 +49,27 @@ namespace lab2 {
         return *this;
     }
 
-    inline bool Date::operator==(const Date& d) const{
+    bool Date::operator==(const Date& d) const{
         return _numeric == d.getNumeric();
     }
 
-    inline bool Date::operator!=(const Date& d) const{
+    bool Date::operator!=(const Date& d) const{
         return _numeric != d.getNumeric();
     }
 
-    inline bool Date::operator<(const Date& d) const{
+    bool Date::operator<(const Date& d) const{
         return _numeric < d.getNumeric();
     }
 
-    inline bool Date::operator<=(const Date& d) const{
+    bool Date::operator<=(const Date& d) const{
         return _numeric <= d.getNumeric();
     }
 
-    inline bool Date::operator>(const Date& d) const{
+    bool Date::operator>(const Date& d) const{
         return _numeric > d.getNumeric();
     }
 
-    inline bool Date::operator>=(const Date& d) const{
+    bool Date::operator>=(const Date& d) const{
         return _numeric >= d.getNumeric();
     }
 
