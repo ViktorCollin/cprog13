@@ -84,7 +84,7 @@ namespace lab2 {
     template <typename T>
     bool Calendar<T>::set_date(int year, int month, int day){
         try{
-            _today(year, month, day);
+            _today.set_date(year, month, day);
         }catch(...){
             return false;
         }

@@ -22,11 +22,11 @@ Middle.o: Middle.h Middle.cpp
 kattistime.o: kattistime.h kattistime.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest0%: Gregorian.o Date.o Middle.o kattistime.o Calendar.h runner.cpp 
+runtest: Gregorian.o Date.o Middle.o kattistime.o Calendar.h runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
-run0%: runtest0%
-	./runtest0$*
+run: runtest
+	./runtest
 
 test: Julian.o Gregorian.o Date.o Middle.o kattistime.o cprog09lab22b.o 
 	$(compiler) $(cflags) -o $@ $^

@@ -49,11 +49,6 @@ namespace lab2 {
         return *this;
     }
 
-    Date& Date::operator=(const Date& d){
-        _numeric = d.getNumeric();
-        return *this;
-    }
-
     inline bool Date::operator==(const Date& d) const{
         return _numeric == d.getNumeric();
     }
