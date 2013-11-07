@@ -2,7 +2,7 @@ compiler = g++-4.8
 cflags   = -Wall -std=c++11
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
-tests    = unittest.h 
+tests    = unittest.h calTest.h
 
 runner.cpp: $(tests)
 	python $(cxxpath)cxxtestgen.py --error-printer -o $@ $(tests)
@@ -22,7 +22,7 @@ Middle.o: Middle.h Middle.cpp
 kattistime.o: kattistime.h kattistime.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest0%: Gregorian.o Date.o Middle.o kattistime.o runner.cpp 
+runtest0%: Gregorian.o Date.o Middle.o kattistime.o Calendar.h runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run0%: runtest0%

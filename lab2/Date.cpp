@@ -26,6 +26,16 @@ namespace lab2 {
         //_numeric--;
         //return *this;
     //}
+    Date& Date::operator=(Date&& d){
+        _numeric = std::move(d.getNumeric());
+        return *this;
+    }
+    
+    Date& Date::operator=(const Date& d){
+        _numeric = d.getNumeric();
+        return *this;
+    }
+    
     
     Date& Date::operator+=(const Date& d){
         _numeric += d.getNumeric();
