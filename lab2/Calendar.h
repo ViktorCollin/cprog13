@@ -18,7 +18,7 @@ namespace lab2 {
         Calendar();
         template <typename S> Calendar(const Calendar<S> &);
         Calendar(const Calendar<T> &);
-        ~Calendar();
+        //~Calendar();
         
         const T& getToday() const;
         const std::map<T, std::vector<std::string> >& getEventList() const;
