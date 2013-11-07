@@ -85,6 +85,31 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.year(), 2012);
             TS_ASSERT_EQUALS(d.day(),30);
         }
+        void testAddYear1010(){
+            lab2::Gregorian d(2012,2, 29);
+            d.add_year(-1);
+            TS_ASSERT_EQUALS(d.month(),2);
+            TS_ASSERT_EQUALS(d.year(), 2011);
+            TS_ASSERT_EQUALS(d.day(),28);
+        }
+
+
+        void testAddYearKattis(){
+            lab2::Gregorian d(1992,2, 29);
+            d.add_year(4);
+            TS_ASSERT_EQUALS(d.month(),2);
+            TS_ASSERT_EQUALS(d.year(), 1996);
+            TS_ASSERT_EQUALS(d.day(),29);
+            d.add_year(0);
+            TS_ASSERT_EQUALS(d.month(),2);
+            TS_ASSERT_EQUALS(d.year(), 1996);
+            TS_ASSERT_EQUALS(d.day(),29);
+            d.add_year(-5);
+            TS_ASSERT_EQUALS(d.month(),2);
+            TS_ASSERT_EQUALS(d.year(), 1991);
+            TS_ASSERT_EQUALS(d.day(),28);
+        }
+
 
         void testAddMonth2() {
             lab2::Gregorian d(2012,11, 30);

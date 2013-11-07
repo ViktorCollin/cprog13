@@ -33,9 +33,9 @@ testa: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22a.o
 	$(compiler) $(cflags) -o $@ $^
 	./test < lab22a.in | diff lab22a.out - -y --suppress-common-lines
 
-testb: julian.o gregorian.o date.o middle.o kattistime.o cprog11lab22b.o 
+testc: julian.o gregorian.o date.o middle.o kattistime.o cprog11lab22c.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test < cprog11lab22b.in | diff cprog11lab22b.out - -y
+	./test < lab22b.in | diff lab22c.out - -y --suppress-common-lines
 
 clean:
 	rm *.o

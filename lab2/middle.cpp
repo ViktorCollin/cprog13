@@ -98,12 +98,12 @@ namespace lab2 {
         }
 
         if(isLeapYear()) {
-            if(std::abs(n) % 4 == 0) {
+            if(std::abs(n) > 3) {
                 _numeric += (365*4 + 1 )*sign;
                 n -= sign * 4;
                 return add_year(n);
             }else if((sign > 0 && (month() < 3 && !(month() == 2 && day() == 29 ))) ||
-                    (sign < 0 && month() > 3 )) {
+                    (sign < 0 && (month() > 3 ||  (month() == 2 && day() == 29 )))) {
                 _numeric += 366 * sign;
                 n -= sign;
                 return add_year(n);
