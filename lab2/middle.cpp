@@ -21,15 +21,19 @@ namespace lab2 {
         int m = _month + 12*a - 3;
 
         _numeric = _day + (153*m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
-        calculatedDate = _numeric;
+        calculatedDate = 0;
     }
 
     Middle::Middle(int year, int month, int day) : Date() {
-
+        calculatedDate = 0;
     }
 
-    Middle::Middle(unsigned long long num) : Date(num) {}
-    Middle::Middle(const Date& d) : Date(d) {}
+    Middle::Middle(unsigned long long num) : Date(num) {
+        calculatedDate = 0;
+    }
+    Middle::Middle(const Date& d) : Date(d) {
+        calculatedDate = 0; 
+    }
 
     const int Middle::_daysOfMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
     const std::string Middle::nameOfDay[] = {"monday", "tuesday",
@@ -139,10 +143,6 @@ namespace lab2 {
     }
     void Middle::set_date(int year, int month, int day) {
         _numeric = YMDtoNumeric(year, month, day);
-        _year = year;
-        _month = month;
-        _day = day;
-        calculatedDate = _numeric;
     }
 
     bool Middle::isLeapYear() const{

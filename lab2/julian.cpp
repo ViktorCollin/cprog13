@@ -9,7 +9,7 @@ namespace lab2{
 
     Julian::Julian() : Middle(){
     }
-    Julian::Julian(int year, int month, int day) : Middle(){
+    Julian::Julian(int year, int month, int day) : Middle(year,month,day){
         if(month < 1 || month > 12 || day < 1 || day > days_month(year, month))
             throw std::out_of_range("The date imported is not valid");
         set_date(year,month,day);

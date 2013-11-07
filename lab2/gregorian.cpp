@@ -3,6 +3,7 @@
 #include "gregorian.h"
 #include <time.h>
 #include <stdexcept>
+#include "kattistime.h"
 
 namespace lab2{
 
@@ -22,11 +23,11 @@ namespace lab2{
     }
 
     //Gregorian Gregorian::operator-(const Date& d) const{
-        //return Gregorian(_numeric - d.getNumeric());
+    //return Gregorian(_numeric - d.getNumeric());
     //}
 
     //Gregorian Gregorian::operator+(const Date& d) const{
-        //return Gregorian(_numeric + d.getNumeric());
+    //return Gregorian(_numeric + d.getNumeric());
     //}
 
     Gregorian Gregorian::operator++(int i) {
@@ -78,15 +79,15 @@ namespace lab2{
         if (year % 4 == 0) return true; 
         return false;
     }
-    
+
     //std::ostream& operator<<(std::ostream& os, const Gregorian& d){
-        //std::streamsize w = os.width();
-        //char c = os.fill('0');
-        //os << std::setw(4) << d.year()%10000 << 
-        //std::setw(1) << "-" << std::setw(2) << d.month() << 
-        //std::setw(1) << "-" << std::setw(2) << d.day();
-        //os.width(w);
-        //os.fill(c);
-        //return os; 
+    //std::streamsize w = os.width();
+    //char c = os.fill('0');
+    //os << std::setw(4) << d.year()%10000 << 
+    //std::setw(1) << "-" << std::setw(2) << d.month() << 
+    //std::setw(1) << "-" << std::setw(2) << d.day();
+    //os.width(w);
+    //os.fill(c);
+    //return os; 
     //}
 }

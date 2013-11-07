@@ -22,7 +22,7 @@ middle.o: middle.h middle.cpp
 kattistime.o: kattistime.h kattistime.cpp
 	$(compiler) $(cflags) -c $^
 
-runtest: gregorian.o date.o middle.o kattistime.o calendar.h runner.cpp 
+runtest: julian.o gregorian.o date.o middle.o kattistime.o calendar.h runner.cpp 
 	$(compiler) $(cflags) -I $(cxxpath) -o $@ $^
 
 run: runtest
@@ -31,7 +31,7 @@ run: runtest
 
 testa: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22a.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test < lab22a.in | diff lab22a.out - -y
+	./test < lab22a.in | diff lab22a.out - -y --suppress-common-lines
 
 testb: julian.o gregorian.o date.o middle.o kattistime.o cprog11lab22b.o 
 	$(compiler) $(cflags) -o $@ $^

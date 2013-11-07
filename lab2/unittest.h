@@ -20,6 +20,7 @@ class MyTestSuite : public CxxTest::TestSuite {
             lab2::Gregorian d;
             TS_ASSERT_EQUALS(d.year(), 2013); 
             TS_ASSERT_EQUALS(d.month(), 11);
+            TS_ASSERT_EQUALS(d.day(), 7);
         }
 
         void testInvalidConstructorGreg() {
@@ -31,11 +32,32 @@ class MyTestSuite : public CxxTest::TestSuite {
         void testInvalidConstructorGreg2() {
             TS_ASSERT_THROWS_NOTHING(lab2::Gregorian d(2012, 2, 29));
         }    
-        //void testConstructorJuli() {
-        //lab2::Julian j;
-        //TS_ASSERT_EQUALS(j.year(), 2013); 
-        //TS_ASSERT_EQUALS(j.month(), 11);
-        //}
+        void testConstructorJuli() {
+            lab2::Julian j;
+            TS_ASSERT_EQUALS(j.year(), 2013); 
+            TS_ASSERT_EQUALS(j.month(), 10);
+            TS_ASSERT_EQUALS(j.day(), 25);
+        }
+         void testConstructorJuli1111() {
+            set_k_time(2005840054);
+            lab2::Date * d = new lab2::Julian();
+            TS_ASSERT_EQUALS((*d).year(), 2033); 
+            TS_ASSERT_EQUALS((*d).month(), 7);
+            TS_ASSERT_EQUALS((*d).day(), 11);
+        }
+       void testDataGivenConstructorJuli() {
+            lab2::Julian d(2012, 10, 9);
+            TS_ASSERT_EQUALS(d.year(), 2012);
+            TS_ASSERT_EQUALS(d.month(), 10);
+            TS_ASSERT_EQUALS(d.day(), 9);
+        }
+        void testDataGivenConstructorJuli1() {
+            lab2::Gregorian d(2012, 10, 9);
+            lab2::Julian j(d);
+            TS_ASSERT_EQUALS(j.year(), 2012);
+            TS_ASSERT_EQUALS(j.month(), 9);
+            TS_ASSERT_EQUALS(j.day(), 26);
+        }
 
         void testDataGivenConstructor() {
             lab2::Gregorian d(2012, 10, 9);
@@ -176,14 +198,14 @@ class MyTestSuite : public CxxTest::TestSuite {
             std::ostringstream oss;
             oss << d;
             TS_ASSERT_EQUALS(oss.str(), "2013-11-29");
-            
+
             lab2::Gregorian d2(12013,1,1);
             oss.str("");
             oss.clear();
             oss << d2;
             TS_ASSERT_EQUALS(oss.str(), "2013-01-01");
-            
-            
+
+
         }
 
 };
