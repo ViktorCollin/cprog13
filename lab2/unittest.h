@@ -171,7 +171,20 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.month(), 12);
         }
 
-        //void testWeekDayName() {
+        void testOutStream() {
+            lab2::Gregorian d(2013,11,29);
+            std::ostringstream oss;
+            oss << d;
+            TS_ASSERT_EQUALS(oss.str(), "2013-11-29");
+            
+            lab2::Gregorian d2(12013,1,1);
+            oss.str("");
+            oss.clear();
+            oss << d2;
+            TS_ASSERT_EQUALS(oss.str(), "2013-01-01");
+            
+            
+        }
 
 };
 #endif

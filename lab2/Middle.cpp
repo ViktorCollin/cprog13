@@ -1,6 +1,7 @@
 #include "Middle.h"
 #include "kattistime.h"
 #include <iostream>
+#include <iomanip>
 #include <stdexcept>
 
 namespace lab2 {
@@ -25,6 +26,8 @@ namespace lab2 {
     }
     Middle::Middle(unsigned long long num) : Date(num) {}
     Middle::Middle(const Date& d) : Date(d) {}
+    
+    
 
 
 }

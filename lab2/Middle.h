@@ -41,6 +41,8 @@ namespace lab2{
       
       virtual void set_date(int, int, int) = 0;
   };
+  
+  //std::ostream & operator<<(std::ostream &, const Middle&);
 }
 #endif
 

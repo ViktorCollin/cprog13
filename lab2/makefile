@@ -2,7 +2,7 @@ compiler = g++-4.8
 cflags   = -Wall -std=c++11
 cxxpath  = cxxtest/
 SHELL   := /bin/bash
-tests    = unittest.h
+tests    = unittest.h 
 
 runner.cpp: $(tests)
 	python $(cxxpath)cxxtestgen.py --error-printer -o $@ $(tests)
