@@ -10,7 +10,6 @@ namespace lab2 {
     protected: 
         unsigned long long _numeric;
 
-        unsigned long long getNumeric() const;
 
     public:
         Date();
@@ -38,10 +37,6 @@ namespace lab2 {
         Date& operator+=(const Date&);
         Date& operator-=(const Date&);
 
-        Date& operator+(const Date&);
-        Date& operator-(const Date&);
-        long long operator-(const Date&) const;
-
         virtual Date& add_year(int n = 1) = 0;
         virtual Date& add_month(int n = 1) = 0;
         virtual Date& add_day(int n = 1) = 0;
@@ -53,7 +48,7 @@ namespace lab2 {
         bool operator>(const Date&) const; 
         bool operator>=(const Date&) const; 
 
-
+        unsigned long long getNumeric() const;
         long mod_julian_day() const;
     };
     std::ostream & operator<<(std::ostream &, const Date&);
