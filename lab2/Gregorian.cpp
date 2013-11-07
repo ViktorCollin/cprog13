@@ -46,6 +46,7 @@ namespace lab2{
     }
 
     unsigned long long Gregorian::YMDtoNumeric(int year, int month, int day) const{
+        return 367*year - 7*(year + (month+9)/12)/4 - 3*((year + (month-9)/7)/100 + 1)/4 + (275*month)/9 + day + 1721029;
         int a = (14 - month)/12; 
         int y = year + 4800 - a;
         int m = month + 12*a - 3;

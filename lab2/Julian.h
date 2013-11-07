@@ -4,43 +4,24 @@
 
 namespace lab2{
 
-  class Julian : public Middle {
+    class Julian : public Middle {
     protected: 
-      bool isLeapYear() const;
+        bool isLeapYear(int) const;
 
-      void verifyDay();
+        void setCurrentDate();
 
-      void setDate(int, int,int);
-
-      void setCurrentDate();
+        void calcYMD() const; 
+        unsigned long long YMDtoNumeric(int,int,int) const;
+        
     public:
-      Julian();
-      Julian(int,int,int);
-      
-      virtual int year() const; 
+        Julian();
+        Julian(int,int,int);
+        Julian(unsigned long long);
+        Julian(const Date&);
 
-      virtual int month() const; 
-
-      virtual int day() const; 
-
-      virtual int week_day() const; 
-
-      virtual int days_per_week() const; 
-
-      virtual int days_this_month() const; 
-
-      virtual int months_per_year() const;
-
-      virtual std::string week_day_name() const; 
-
-      virtual std::string month_name() const;
-
-      virtual Julian& add_year(int n = 1);
-      virtual Julian& add_month(int n = 1);
-      virtual Julian& add_day(int n = 1);
-
-      virtual void set_date(int,int,int);
-  };
+        Julian operator++(int);
+        Julian operator--(int);
+    };
 
 }
 #endif

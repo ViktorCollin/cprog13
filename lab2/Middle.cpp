@@ -25,6 +25,7 @@ namespace lab2 {
     }
 
     Middle::Middle(int year, int month, int day) : Date() {
+        
     }
 
     Middle::Middle(unsigned long long num) : Date(num) {}
