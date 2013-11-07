@@ -21,13 +21,13 @@ namespace lab2{
     Gregorian::Gregorian(const Date& d):Middle(d){
     }
 
-    Gregorian Gregorian::operator-(const Date& d) const{
-        return Gregorian(_numeric - d.getNumeric());
-    }
+    //Gregorian Gregorian::operator-(const Date& d) const{
+        //return Gregorian(_numeric - d.getNumeric());
+    //}
 
-    Gregorian Gregorian::operator+(const Date& d) const{
-        return Gregorian(_numeric + d.getNumeric());
-    }
+    //Gregorian Gregorian::operator+(const Date& d) const{
+        //return Gregorian(_numeric + d.getNumeric());
+    //}
 
     Gregorian Gregorian::operator++(int i) {
         Gregorian g(*this);

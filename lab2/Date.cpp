@@ -39,6 +39,10 @@ namespace lab2 {
         return *this;
     }
     
+    long Date::operator-(const Date& d) const{
+        return  _numeric - d.getNumeric();
+    }
+
     Date& Date::operator+=(const Date& d){
         _numeric += d.getNumeric();
         return *this;
@@ -83,6 +87,7 @@ namespace lab2 {
         os.fill(c);
         return os; 
     }
+
     long Date::mod_julian_day() const {
         return _numeric - 24006;
     }
