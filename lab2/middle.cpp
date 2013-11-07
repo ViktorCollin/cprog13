@@ -98,7 +98,7 @@ namespace lab2 {
         }
 
         if(isLeapYear()) {
-            if(std::abs(n) > 3) {
+            if(std::abs(n) > 3 && isLeapYear(year() + 4*sign)) {
                 _numeric += (365*4 + 1 )*sign;
                 n -= sign * 4;
                 return add_year(n);

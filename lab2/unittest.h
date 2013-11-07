@@ -85,11 +85,12 @@ class MyTestSuite : public CxxTest::TestSuite {
             TS_ASSERT_EQUALS(d.year(), 2012);
             TS_ASSERT_EQUALS(d.day(),30);
         }
+
         void testAddYear1010(){
-            lab2::Gregorian d(2012,2, 29);
-            d.add_year(-1);
+            lab2::Gregorian d(2096,2, 29);
+            d.add_year(4);
             TS_ASSERT_EQUALS(d.month(),2);
-            TS_ASSERT_EQUALS(d.year(), 2011);
+            TS_ASSERT_EQUALS(d.year(), 2100);
             TS_ASSERT_EQUALS(d.day(),28);
         }
 
