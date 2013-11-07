@@ -83,4 +83,7 @@ namespace lab2 {
         os.fill(c);
         return os; 
     }
+    long Date::mod_julian_day() const {
+        return _numeric - 24006;
+    }
 }

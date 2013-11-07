@@ -21,6 +21,9 @@ namespace lab2{
       Gregorian(unsigned long long);
       Gregorian(const Date&);
       
+      Gregorian operator-(const Date&) const;
+      Gregorian operator+(const Date&) const;
+
       Gregorian operator++(int);
       Gregorian operator--(int);
 
