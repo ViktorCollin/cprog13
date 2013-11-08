@@ -54,7 +54,9 @@ namespace lab2 {
 
             unsigned long long getNumeric() const;
             long mod_julian_day() const;
+            
+            friend std::ostream & operator<<(std::ostream &, const Date&);
     };
-    std::ostream & operator<<(std::ostream &, const Date&);
+    
 }
 #endif

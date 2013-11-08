@@ -20,14 +20,14 @@ class CalTestSuite : public CxxTest::TestSuite {
             lab2::Calendar<Gregorian> cal;
             std::ostringstream oss;
             oss << cal.getToday();
-            TS_ASSERT_EQUALS(oss.str(), "2013-11-07");
+            TS_ASSERT_EQUALS(oss.str(), "2013-11-08");
         }
 
         void testConstructorCal() {
             lab2::Calendar<Gregorian> cal;
             TS_ASSERT_EQUALS(cal.getToday().year(), 2013); 
             TS_ASSERT_EQUALS(cal.getToday().month(), 11);
-            TS_ASSERT_EQUALS(cal.getToday().day(), 7);
+            TS_ASSERT_EQUALS(cal.getToday().day(), 8);
         }
 
         void testIntConstructorCal() {
