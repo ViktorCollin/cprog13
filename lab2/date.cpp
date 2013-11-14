@@ -1,9 +1,5 @@
-#include <cstdio>
-#include <string>
 #include "date.h"
-#include "kattistime.h"
-#include <time.h>
-#include <stdexcept>
+#include <iostream>
 #include <iomanip> 
 
 namespace lab2 {
@@ -18,11 +14,6 @@ namespace lab2 {
     unsigned long Date::getNumeric() const {
         return _numeric;
     }
-
-    //Date& Date::operator=(Date&& d){
-        //_numeric = std::move(d.getNumeric());
-        //return *this;
-    //}
     
     Date& Date::operator=(const Date& d){
         _numeric = d.getNumeric();
@@ -88,18 +79,13 @@ namespace lab2 {
     }
 
     std::ostream& operator<<(std::ostream& os, const Date& d){
-        std::streamsize w = os.width();
         char c = os.fill('0');
-        os << std::setw(4) << d.year()%10000 << 
-        std::setw(1) << "-" << std::setw(2) << d.month() << 
-        std::setw(1) << "-" << std::setw(2) << d.day();
-        os.width(w);
+        os << d.year() << "-" << std::setw(2) << d.month() << "-" << std::setw(2) << d.day();
         os.fill(c);
         return os; 
     }
 
     long Date::mod_julian_day() const {
-        //kanske 2400000 is sa fall andra också 1524 till 1525 i Julian::toYMD
         return _numeric - 2400001;
     }
 }

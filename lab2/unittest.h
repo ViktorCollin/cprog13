@@ -15,7 +15,26 @@ class MyTestSuite : public CxxTest::TestSuite {
             time(&tp);
             set_k_time(tp);
         }
-
+        
+        void testStupid(){
+            lab2::Gregorian g(1858, 1, 1);
+            TS_ASSERT_EQUALS(g.year(), 1858); 
+            TS_ASSERT_EQUALS(g.month(), 1);
+            TS_ASSERT_EQUALS(g.day(), 1);
+            lab2::Julian j(1858, 1, 1);
+            TS_ASSERT_EQUALS(j.year(), 1858); 
+            TS_ASSERT_EQUALS(j.month(), 1);
+            TS_ASSERT_EQUALS(j.day(), 1);
+            lab2::Gregorian g2(2558, 12, 31);
+            TS_ASSERT_EQUALS(g2.year(), 2558); 
+            TS_ASSERT_EQUALS(g2.month(), 12);
+            TS_ASSERT_EQUALS(g2.day(), 31);
+            lab2::Julian j2(2558, 12, 31);
+            TS_ASSERT_EQUALS(j2.year(), 2558); 
+            TS_ASSERT_EQUALS(j2.month(), 12);
+            TS_ASSERT_EQUALS(j2.day(), 31);
+        }
+        
         void testConstructorGreg() {
             lab2::Gregorian d;
             TS_ASSERT_EQUALS(d.year(), 2013); 
@@ -282,7 +301,7 @@ class MyTestSuite : public CxxTest::TestSuite {
             oss << d;
             TS_ASSERT_EQUALS(oss.str(), "2013-11-29");
 
-            lab2::Gregorian d2(12013,1,1);
+            lab2::Gregorian d2(2013,1,1);
             oss.str("");
             oss.clear();
             oss << d2;

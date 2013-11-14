@@ -1,8 +1,5 @@
 #include "middle.h"
 #include "kattistime.h"
-#include <iostream>
-#include <iomanip>
-#include <stdexcept>
 
 namespace lab2 {
 
@@ -35,10 +32,10 @@ namespace lab2 {
         calculatedDate = 0; 
     }
 
-    const int Middle::_daysOfMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
-    const std::string Middle::nameOfDay[] = {"monday", "tuesday",
+    const int Middle::_daysOfMonth[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    const std::string Middle::nameOfDay[] = {"","monday", "tuesday",
         "wednesday", "thursday", "friday", "saturday", "sunday"};
-    const std::string Middle::nameOfMonth[] = {"january", "february",
+    const std::string Middle::nameOfMonth[] = {"","january", "february",
         "march", "april", "may", "june", "july", "august",
         "september", "october", "november", "december"};
 
@@ -74,7 +71,7 @@ namespace lab2 {
         while(m > 12) { m -= 12; y++; }
         while(m < 1) { m += 12; y--; }
         if(isLeapYear(y) && m == 2) return 29;
-        return _daysOfMonth[m-1];
+        return _daysOfMonth[m];
     }
 
     int Middle::days_this_month() const {
@@ -83,11 +80,11 @@ namespace lab2 {
     }
 
     std::string Middle::week_day_name() const {
-        return nameOfDay[week_day()-1];
+        return nameOfDay[week_day()];
     }
 
     std::string Middle::month_name() const {
-        return nameOfMonth[month()-1];
+        return nameOfMonth[month()];
     }
 
     Middle& Middle::add_year(int n) {

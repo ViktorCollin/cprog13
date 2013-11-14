@@ -11,7 +11,7 @@ namespace lab2{
       static const std::string nameOfDay[];
       static const std::string nameOfMonth[];
 
-      mutable unsigned long calculatedDate; 
+      mutable unsigned long calculatedDate;
       mutable int _day, _month, _year;
       
       bool isLeapYear() const;
