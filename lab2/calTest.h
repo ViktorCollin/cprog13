@@ -20,14 +20,14 @@ class CalTestSuite : public CxxTest::TestSuite {
             lab2::Calendar<Gregorian> cal;
             std::ostringstream oss;
             oss << cal.getToday();
-            TS_ASSERT_EQUALS(oss.str(), "2013-11-08");
+            TS_ASSERT_EQUALS(oss.str(), "2013-11-14");
         }
 
         void testConstructorCal() {
             lab2::Calendar<Gregorian> cal;
             TS_ASSERT_EQUALS(cal.getToday().year(), 2013); 
             TS_ASSERT_EQUALS(cal.getToday().month(), 11);
-            TS_ASSERT_EQUALS(cal.getToday().day(), 8);
+            TS_ASSERT_EQUALS(cal.getToday().day(), 14);
         }
 
         void testIntConstructorCal() {
@@ -51,7 +51,10 @@ class CalTestSuite : public CxxTest::TestSuite {
             cal.add_event("Julafton", 24, 12, 2013);
             TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
             cal.remove_event("Julafton", 24, 12, 2013);           
-            TS_ASSERT_EQUALS(cal.getEventList().size(), 0);
+            TS_ASSERT_EQUALS(cal.getEventList().size(), 1);
+            std::map<Gregorian, std::vector<std::string> > g = cal.getEventList();
+
+            TS_ASSERT_EQUALS(g[Gregorian(2013,12,24)].size(), 0);
         }   
         void testAddEasdsfvent(){
             lab2::Calendar<Gregorian> cal;

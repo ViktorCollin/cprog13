@@ -38,7 +38,6 @@ namespace lab2 {
         bool remove_event(std::string, T);
 
         bool set_date(int, int, int);
-
         //friend std::ostream& operator<<(std::ostream&, const Calendar<T>&);
     };
 

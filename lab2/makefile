@@ -1,5 +1,5 @@
 compiler = g++-4.8
-cflags	 = -g -O2 -std=c++11
+cflags	 = -O2 -std=c++11
 cxxpath	 = cxxtest/
 SHELL	:= /bin/bash
 tests	 = unittest.h calTest.h
@@ -17,6 +17,15 @@ julian.o: julian.h julian.cpp
 	$(compiler) $(cflags) -c $^
 
 middle.o: middle.h middle.cpp
+	$(compiler) $(cflags) -c $^
+
+cprog09lab23.o: cprog09lab23.cpp
+	$(compiler) $(cflags) -c $^
+
+cprog09lab22a.o: cprog09lab22a.cpp
+	$(compiler) $(cflags) -c $^
+
+cprog09lab22c.o: cprog09lab22c.cpp
 	$(compiler) $(cflags) -c $^
 
 kattistime.o: kattistime.h kattistime.cpp

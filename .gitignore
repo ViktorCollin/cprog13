@@ -18,3 +18,5 @@
 runner
 runner.cpp
 runtest
+._*
+test*
