@@ -28,7 +28,7 @@ namespace lab2 {
         calculatedDate = 0;
     }
 
-    Middle::Middle(unsigned long long num) : Date(num) {
+    Middle::Middle(unsigned long num) : Date(num) {
         calculatedDate = 0;
     }
     Middle::Middle(const Date& d) : Date(d) {

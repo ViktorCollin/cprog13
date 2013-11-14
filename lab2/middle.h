@@ -11,18 +11,18 @@ namespace lab2{
       static const std::string nameOfDay[];
       static const std::string nameOfMonth[];
 
-      mutable unsigned long long calculatedDate; 
+      mutable unsigned long calculatedDate; 
       mutable int _day, _month, _year;
       
       bool isLeapYear() const;
       virtual bool isLeapYear(int) const = 0;
       virtual void calcYMD() const = 0;
-      virtual unsigned long long YMDtoNumeric(int, int, int) const = 0;
+      virtual unsigned long YMDtoNumeric(int, int, int) const = 0;
 
     public: 
       Middle();
       Middle(int, int, int);
-      Middle(unsigned long long);
+      Middle(unsigned long);
       Middle(const Date&);
        
       int year() const; 

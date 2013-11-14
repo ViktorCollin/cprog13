@@ -14,7 +14,7 @@ namespace lab2{
         set_date(year,month,day);
     }
 
-    Gregorian::Gregorian(unsigned long long numeric):Middle(numeric){
+    Gregorian::Gregorian(unsigned long numeric):Middle(numeric){
     }
 
     Gregorian::Gregorian(const Date& d):Middle(d){
@@ -35,8 +35,8 @@ namespace lab2{
     void Gregorian::calcYMD() const{
         int y = 4716, j = 1401, m = 2, n = 12, r = 4, p = 1461, v = 3, u = 5,
             s = 153, w = 2, B = 274277, C = -38;
-        unsigned long long f = _numeric + j + (((4 * _numeric + B)/146097)*3)/4+C;
-        unsigned long long e = r * f + v;
+        unsigned long f = _numeric + j + (((4 * _numeric + B)/146097)*3)/4+C;
+        unsigned long e = r * f + v;
         unsigned int g = (e % p) /r;
         unsigned int h = u * g + w;
         _day = (h % s)/u + 1;
@@ -44,7 +44,7 @@ namespace lab2{
         _year = e/p - y + (n+m - _month)/n;
     }
 
-    unsigned long long Gregorian::YMDtoNumeric(int year, int month, int day) const{
+    unsigned long Gregorian::YMDtoNumeric(int year, int month, int day) const{
         if(month < 1 || month > 12 || day < 1 || day > days_month(year, month))
             throw std::out_of_range("The date imported is not valid");
         int a = (14 - month)/12; 

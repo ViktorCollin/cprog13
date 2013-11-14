@@ -12,12 +12,12 @@ namespace lab2{
         void setCurrentDate();
 
         void calcYMD() const; 
-        unsigned long long YMDtoNumeric(int,int,int) const; 
+        unsigned long YMDtoNumeric(int,int,int) const; 
 
     public:
         Gregorian();
         Gregorian(int,int,int);
-        Gregorian(unsigned long long);
+        Gregorian(unsigned long);
         Gregorian(const Date&);
 
         //Gregorian operator-(const Date&) const;

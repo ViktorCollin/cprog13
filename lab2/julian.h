@@ -11,12 +11,12 @@ namespace lab2{
         void setCurrentDate();
 
         void calcYMD() const; 
-        unsigned long long YMDtoNumeric(int,int,int) const;
+        unsigned long YMDtoNumeric(int,int,int) const;
         
     public:
         Julian();
         Julian(int,int,int);
-        Julian(unsigned long long);
+        Julian(unsigned long);
         Julian(const Date&);
 
         Julian operator++(int);

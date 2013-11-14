@@ -8,13 +8,13 @@ namespace lab2 {
 
     class Date {
         protected: 
-            unsigned long long _numeric;
+            unsigned long _numeric;
 
 
         public:
             Date();
             Date(int,int,int);
-            Date(unsigned long long);
+            Date(unsigned long);
             Date(const Date&);
 
             virtual int year() const = 0;
@@ -52,7 +52,7 @@ namespace lab2 {
             bool operator>(const Date&) const; 
             bool operator>=(const Date&) const; 
 
-            unsigned long long getNumeric() const;
+            unsigned long getNumeric() const;
             long mod_julian_day() const;
             
             friend std::ostream & operator<<(std::ostream &, const Date&);

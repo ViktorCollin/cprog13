@@ -13,7 +13,7 @@ namespace lab2{
         set_date(year,month,day);
     }
 
-    Julian::Julian(unsigned long long numeric) : Middle(numeric){
+    Julian::Julian(unsigned long numeric) : Middle(numeric){
     }
 
     Julian::Julian(const Date& d) : Middle(d){
@@ -41,7 +41,7 @@ namespace lab2{
         _day = (int)(b-da-floor(30.6001*e));
     }
 
-    unsigned long long Julian::YMDtoNumeric(int year, int month, int day) const{
+    unsigned long Julian::YMDtoNumeric(int year, int month, int day) const{
         if(month < 1 || month > 12 || day < 1 || day > days_month(year, month))
             throw std::out_of_range("The date imported is not valid");
         int a = (14 - month)/12; 

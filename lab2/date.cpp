@@ -10,12 +10,12 @@ namespace lab2 {
 
     Date::Date(){
     }
-    Date::Date(unsigned long long days): _numeric(days) {};
+    Date::Date(unsigned long days): _numeric(days) {};
     Date::Date(const Date& d){
         if(this == &d) return;
         _numeric = d.getNumeric();
     }
-    unsigned long long Date::getNumeric() const {
+    unsigned long Date::getNumeric() const {
         return _numeric;
     }
 

@@ -220,7 +220,7 @@ namespace CxxTest
     CXXTEST_COPY_CONST_TRAITS( signed _CXXTEST_LONGLONG );
 
     //
-    // ValueTraits: unsigned long long
+    // ValueTraits: unsigned long
     //
     CXXTEST_TEMPLATE_INSTANTIATION
     class ValueTraits<const unsigned _CXXTEST_LONGLONG>
