@@ -43,7 +43,6 @@ namespace lab2{
       void set_date(int, int, int);
   };
   
-  //std::ostream & operator<<(std::ostream &, const Middle&);
 }
 #endif
 
