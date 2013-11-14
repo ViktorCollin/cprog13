@@ -128,7 +128,7 @@ namespace lab2 {
             std::vector<std::string> l = _eventList[date];
             for(typename std::vector<std::string>::iterator it = l.begin(); it < l.end(); ++it){
                 if(*it == text){
-                    l.erase(it);
+                    _eventList[date].erase(it);
                     return true;
                 }
             }

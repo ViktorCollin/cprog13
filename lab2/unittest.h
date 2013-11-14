@@ -20,7 +20,7 @@ class MyTestSuite : public CxxTest::TestSuite {
             lab2::Gregorian d;
             TS_ASSERT_EQUALS(d.year(), 2013); 
             TS_ASSERT_EQUALS(d.month(), 11);
-            TS_ASSERT_EQUALS(d.day(), 7);
+            TS_ASSERT_EQUALS(d.day(), 14);
         }
 
         void testInvalidConstructorGreg() {
@@ -35,8 +35,8 @@ class MyTestSuite : public CxxTest::TestSuite {
         void testConstructorJuli() {
             lab2::Julian j;
             TS_ASSERT_EQUALS(j.year(), 2013); 
-            TS_ASSERT_EQUALS(j.month(), 10);
-            TS_ASSERT_EQUALS(j.day(), 25);
+            TS_ASSERT_EQUALS(j.month(), 11);
+            TS_ASSERT_EQUALS(j.day(), 1);
         }
          void testConstructorJuli1111() {
             set_k_time(2005840054);
