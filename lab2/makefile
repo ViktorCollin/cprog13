@@ -1,8 +1,8 @@
-compiler = g++
-cflags   = -g -O2 -static -std=gnu++0x
-cxxpath  = cxxtest/
-SHELL   := /bin/bash
-tests    = unittest.h calTest.h
+compiler = g++-4.8
+cflags	 = -O2 -std=c++11
+cxxpath	 = cxxtest/
+SHELL	:= /bin/bash
+tests	 = unittest.h calTest.h
 
 runner.cpp: $(tests)
 	python $(cxxpath)cxxtestgen.py --error-printer -o $@ $(tests)
@@ -17,6 +17,15 @@ julian.o: julian.h julian.cpp
 	$(compiler) $(cflags) -c $^
 
 middle.o: middle.h middle.cpp
+	$(compiler) $(cflags) -c $^
+
+cprog09lab23.o: cprog09lab23.cpp
+	$(compiler) $(cflags) -c $^
+
+cprog09lab22a.o: cprog09lab22a.cpp
+	$(compiler) $(cflags) -c $^
+
+cprog09lab22c.o: cprog09lab22c.cpp
 	$(compiler) $(cflags) -c $^
 
 kattistime.o: kattistime.h kattistime.cpp
@@ -52,10 +61,12 @@ test2a: calendar.h julian.o gregorian.o date.o middle.o kattistime.o cprog09lab2
 clean:
 	rm *.o
 	rm runner.cpp
-	
 
-submit:
-	cp vector.h kth_cprog_vektor.cpp
-	submit.py kth_cprog_vektor.cpp
-	rm kth_cprog_vektor.cpppyt
+submit1:
+	submit.py -p cprog09lab22a julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22a.cpp 
 
+submit2:	
+	submit.py -p cprog09lab22b julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22b.cpp
+
+submit3:	
+	submit.py -p cprog09lab22c julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22c.cpp 
