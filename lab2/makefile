@@ -58,15 +58,20 @@ test2a: calendar.h julian.o gregorian.o date.o middle.o kattistime.o cprog09lab2
 	./test2a < lab23a.in
 	rm test2a
 
+testall: testa testc test2
+
 clean:
 	rm *.o
 	rm runner.cpp
 
 submit1:
-	submit.py -p cprog09lab22a julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22a.cpp 
+	submit.py -p oldkattis:cprog09lab22a julian.h julian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22a.cpp 
 
 submit2:	
-	submit.py -p cprog09lab22b julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22b.cpp
+	submit.py -p oldkattis:cprog09lab22b gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22b.cpp
 
 submit3:	
-	submit.py -p cprog09lab22c julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22c.cpp 
+	submit.py -p oldkattis:cprog09lab22c julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab22c.cpp 
+
+submit4:	
+	submit.py -p oldkattis:cprog09lab23 calendar.h julian.h julian.cpp gregorian.h gregorian.cpp middle.h middle.cpp date.h date.cpp kattistime.h kattistime.cpp cprog09lab23.cpp 
