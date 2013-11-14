@@ -41,8 +41,13 @@ testc: julian.o gregorian.o date.o middle.o kattistime.o cprog09lab22c.o
 
 test2: calendar.h julian.o gregorian.o date.o middle.o kattistime.o cprog09lab23.o 
 	$(compiler) $(cflags) -o $@ $^
-	./test2 < lab23.in | diff lab23.out - -y 
+	./test2 < lab23.in  | diff lab23.out - -y --suppress-common-lines
 	rm test2
+
+test2a: calendar.h julian.o gregorian.o date.o middle.o kattistime.o cprog09lab23.o 
+	$(compiler) $(cflags) -o $@ $^
+	./test2a < lab23a.in
+	rm test2a
 
 clean:
 	rm *.o
