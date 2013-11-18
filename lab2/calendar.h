@@ -4,8 +4,6 @@
 #include <vector>
 #include <iostream>
 #include <string>
-#include "gregorian.h"
-#include "julian.h"
 
 namespace lab2 {
     template <typename T>
@@ -18,12 +16,9 @@ namespace lab2 {
         Calendar();
         template <typename S> Calendar(const Calendar<S> &);
         Calendar(const Calendar<T> &);
-                //~Calendar();
 
         const T& getToday() const;
         const std::map<T, std::vector<std::string> >& getEventList() const;
-
-
 
         bool add_event(std::string, int, int, int);
         bool add_event(std::string, int, int);
@@ -90,7 +85,8 @@ namespace lab2 {
 
     template <typename T>
     bool Calendar<T>::add_event(std::string text, T date){
-        for(typename std::vector<std::string>::const_iterator it = _eventList[date].begin(); it < _eventList[date].end(); ++it){
+        //typename std::vector<std::string>::const_iterator
+        for(auto it = _eventList[date].begin(); it < _eventList[date].end(); ++it){
             if(*it == text) return false;
         }
         _eventList[date].push_back(text);
@@ -122,7 +118,8 @@ namespace lab2 {
 
     template <typename T>
     bool Calendar<T>::remove_event(std::string text, T date){
-        for(typename std::vector<std::string>::iterator it = _eventList[date].begin(); it < _eventList[date].end(); ++it){
+        //typename std::vector<std::string>::iterator
+        for(auto it = _eventList[date].begin(); it < _eventList[date].end(); ++it){
             if(*it == text){
                 _eventList[date].erase(it);
                 return true;

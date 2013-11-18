@@ -1,9 +1,5 @@
-#include <cstdio>
-#include <string>
 #include "gregorian.h"
-#include <time.h>
 #include <stdexcept>
-#include "kattistime.h"
 
 namespace lab2{
 
@@ -33,6 +29,7 @@ namespace lab2{
     }
 
     void Gregorian::calcYMD() const{
+        if(calculatedDate == _numeric) return;
         int y = 4716, j = 1401, m = 2, n = 12, r = 4, p = 1461, v = 3, u = 5,
             s = 153, w = 2, B = 274277, C = -38;
         unsigned long f = _numeric + j + (((4 * _numeric + B)/146097)*3)/4+C;
@@ -42,6 +39,7 @@ namespace lab2{
         _day = (h % s)/u + 1;
         _month = ((h/s + m) % n) + 1;
         _year = e/p - y + (n+m - _month)/n;
+        calculatedDate = _numeric;
     }
 
     unsigned long Gregorian::YMDtoNumeric(int year, int month, int day) const{
@@ -53,32 +51,10 @@ namespace lab2{
         return day + (153*m + 2)/5 + 365*y + y/4 - y/100 + y/400 - 32045;
     }
 
-    void Gregorian::setCurrentDate() {
-        time_t theTime = time(NULL);
-        struct tm *aTime = localtime(&theTime);
-
-        int day = aTime->tm_mday;
-        int month = aTime->tm_mon + 1; // Month is 0 - 11, add 1 to get a jan-dec 1-12 concept
-        int year = aTime->tm_year + 1900; // Year is # years since 1900
-
-        set_date(year, month, day);
-    }
-
     bool Gregorian::isLeapYear(int year) const{
         if (year % 400 == 0) return true; 
         if (year % 100 == 0) return false; 
-        if (year % 4 == 0) return true; 
+        if (!(year & 3)) return true; // year % 4 == 0 
         return false;
     }
-
-    //std::ostream& operator<<(std::ostream& os, const Gregorian& d){
-    //std::streamsize w = os.width();
-    //char c = os.fill('0');
-    //os << std::setw(4) << d.year()%10000 << 
-    //std::setw(1) << "-" << std::setw(2) << d.month() << 
-    //std::setw(1) << "-" << std::setw(2) << d.day();
-    //os.width(w);
-    //os.fill(c);
-    //return os; 
-    //}
 }
