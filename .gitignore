@@ -20,3 +20,5 @@ runner.cpp
 runtest
 ._*
 test*
+
+.DS_Store
