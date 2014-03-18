@@ -13,16 +13,16 @@ namespace the_lion_king_saga {
 	void User::go(std::string) {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::fight(Animal) {
+	void User::fight(Animal&) {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::pick_up(Item) {
+	void User::pick_up(Item&) {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::drop(Item) {
+	void User::drop(Item&) {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::talk_to(Animal) {
+	void User::talk_to(Animal&) {
 		std::cout << "Not implemented" << std::endl;
 	}
 }

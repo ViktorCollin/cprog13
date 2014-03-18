@@ -10,8 +10,8 @@ namespace the_lion_king_saga {
 
 		public:
 			Animal();
-			virtual std::string type();
-			virtual std::string name();
+			virtual std::string type() = 0;
+			virtual std::string name() = 0;
 
 	};
 }

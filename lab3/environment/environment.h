@@ -14,16 +14,15 @@ namespace the_lion_king_saga {
 		protected:
 
 		public:
-			Environment();
 
-			virtual std::vector<std::string> derections() const;
-			virtual Environment neighbor(std::string);
-			virtual std::string description() const;
-			virtual void enter(Animal);
-			virtual void leave(Animal);
+			virtual std::vector<std::string> derections() const = 0;
+			virtual Environment& neighbor(std::string) = 0;
+			virtual std::string description() const = 0;
+			virtual void enter(Animal&) = 0;
+			virtual void leave(Animal&) = 0;
 
-			void remove(Item);
-			void add(Item);
+			void remove(Item&);
+			void add(Item&);
 	};
 }
 #endif

@@ -18,10 +18,10 @@ namespace the_lion_king_saga {
 			void list_actions();
 			void look();
 			void go(std::string);
-			void fight(Animal);
-			void pick_up(Item);
-			void drop(Item);
-			void talk_to(Animal);
+			void fight(Animal&);
+			void pick_up(Item&);
+			void drop(Item&);
+			void talk_to(Animal&);
 
 
 	};
