@@ -15,4 +15,4 @@ clean:
 	@- rm -rf $(CPP_OBJS)
 
 %.o: %.cpp %.h
-	$(CC) $(CPPFLAGS) -c $^ -o $@
+	$(CC) $(CPPFLAGS) -c $< -o $@
