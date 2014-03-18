@@ -10,7 +10,7 @@ namespace the_lion_king_saga {
 	void User::look() {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::go(std::String) {
+	void User::go(std::string) {
 		std::cout << "Not implemented" << std::endl;
 	}
 	void User::fight(Animal) {

@@ -7,8 +7,9 @@ namespace the_lion_king_saga {
 		protected:
 
 		public:
+			Item();
 			virtual int weight();
 
-	}
+	};
 }
 #endif
