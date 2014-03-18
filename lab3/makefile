@@ -9,12 +9,13 @@ SHELL := /bin/bash
 all: $(PROG_NAME)
 	./$(PROG_NAME)
 
-$(PROG_NAME): main.cpp $(CPP_OBJS)
+$(PROG_NAME): $(CPP_OBJS) main.cpp
 	$(CC) $(CPPFLAGS) -o $@ $^
 
 clean:
 	@- rm -rf $(PROG_NAME)
 	@- rm -rf $(CPP_OBJS)
+	@- rm -rf ${CPP_OBJS:.o=.h.gch}
 
 %.o: %.cpp %.h
 	$(CC) $(CPPFLAGS) -c $< -o $@
