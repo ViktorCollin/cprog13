@@ -3,18 +3,20 @@
 
 namespace the_lion_king_saga {
 
-class Environment {
-	protected:
+	class Environment {
+		protected:
 
-	public:
-		Environment();
+		public:
+			Environment();
 
-		virtual std::vector<std::String> derections() const;
-		virtual Environment neighbor(std::String);
-		virtual std::String description() const;
-		virtual void enter(Character);
-		virtual void leave(Character);
+			virtual std::vector<std::String> derections() const;
+			virtual Environment neighbor(std::String);
+			virtual std::String description() const;
+			virtual void enter(Animal);
+			virtual void leave(Animal);
 
-}
+			void remove(Item);
+			void add(Item);
+	}
 
 #endif
