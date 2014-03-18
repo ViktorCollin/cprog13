@@ -8,11 +8,11 @@ SHELL := /bin/bash
 all: $(PROG_NAME)
 
 $(PROG_NAME): $(CPP_OBJS)
-	$(CC) $(CPPFLAGS) $(CPP_OBJS) -o $(PROG_NAME)
+	$(CC) $(CPPFLAGS) -o $@ $^
 
 clean:
 	@- rm -rf $(PROG_NAME)
 	@- rm -rf $(CPP_OBJS)
 
 %.o: %.cpp %.h
-	$(CC) $(CPPFLAGS) -c $<
+	$(CC) $(CPPFLAGS) -c $^ -o $@
