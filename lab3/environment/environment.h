@@ -18,5 +18,5 @@ namespace the_lion_king_saga {
 			void remove(Item);
 			void add(Item);
 	}
-
+}
 #endif
