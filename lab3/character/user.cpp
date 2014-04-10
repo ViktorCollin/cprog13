@@ -7,7 +7,7 @@ namespace the_lion_king_saga {
 	void User::list_actions() {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::look() {
+	void User::look(std::string derections = NULL) {
 		std::cout << "Not implemented" << std::endl;
 	}
 	void User::go(std::string) {
