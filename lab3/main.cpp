@@ -46,9 +46,15 @@ void run(the_lion_king_saga::User &user){
 		istream_iterator<string> beg(buf), end;
 		vector<string> reply(beg, end);
 		switch (mapActions[reply[0]]) {
-			case Go : //go
+			case Go :
 				if(reply.size() > 1)
 					user.go(reply[1]);
+				else
+					cout << "Need another parameter (Try North :P)" << endl;
+				break;
+			case Look :
+				if(reply.size() > 1)
+					user.look(reply[1]);
 				else
 					cout << "Need another parameter (Try North :P)" << endl;
 				break;
