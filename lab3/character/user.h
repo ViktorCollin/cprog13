@@ -16,7 +16,7 @@ namespace the_lion_king_saga {
 		public:
 			User();
 			void list_actions();
-			void look();
+			void look(std::string);
 			void go(std::string);
 			void fight(std::string);
 			void take(std::string);

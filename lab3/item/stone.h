@@ -3,14 +3,15 @@
 
 #include "item.h"
 
+#include <string>
+
 namespace the_lion_king_saga {
 
 	class Stone : Item {
 		protected:
 
 		public:
-			Stone();
-			int weight();
+			Stone(std::string, std::string, int);
 
 	};
 }
