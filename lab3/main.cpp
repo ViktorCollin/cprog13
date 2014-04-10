@@ -12,7 +12,10 @@ using namespace std;
 enum actions{
 	Go = 1,
 	Look = 2,
-	Exit = 3
+	Exit = 3,
+	Fight = 4,
+	Take = 5,
+	Drop = 6
 };
 
 static map<string, actions> mapActions;
@@ -61,6 +64,9 @@ void run(the_lion_king_saga::User &user){
 			case Exit :
 				running = 0;
 				break;
+			case Fight :
+			case Take :
+			case Drop :
 			default:
 				cout << "Unknown command" << endl;
 		}
@@ -80,4 +86,7 @@ void init() {
 	mapActions["Go"] = Go;
 	mapActions["Look"] = Look;
 	mapActions["Exit"] = Exit;
+	mapActions["Fight"] = Fight;
+	mapActions["Take"] = Take;
+	mapActions["Drop"] = Drop;
 }
