@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
+#include <map>
 #include <string>
 #include <iostream>
 
@@ -12,6 +13,7 @@ namespace the_lion_king_saga {
 
 	class User {
 		protected:
+			std::map<std::string,Item*> _inventory;
 
 		public:
 			User();
