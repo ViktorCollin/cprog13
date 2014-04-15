@@ -36,6 +36,10 @@ void storeState(){
 
 }
 
+void needMoreParams(){
+	cout << "Need another parameter" << endl;
+}
+
 void run(the_lion_king_saga::User &user){
 	char c_input[256];
 	string s_input;
@@ -53,19 +57,24 @@ void run(the_lion_king_saga::User &user){
 				if(reply.size() > 1)
 					user.go(reply[1]);
 				else
-					cout << "Need another parameter (Try North :P)" << endl;
+					needMoreParams();
 				break;
 			case Look :
 				if(reply.size() > 1)
 					user.look(reply[1]);
 				else
-					cout << "Need another parameter (Try North :P)" << endl;
+					needMoreParams();
 				break;
 			case Exit :
 				running = 0;
 				break;
 			case Fight :
 			case Take :
+				if(reply.size() > 1)
+					user.take(reply[1]);
+				else
+					needMoreParams();
+				break;
 			case Drop :
 			default:
 				cout << "Unknown command" << endl;
