@@ -17,7 +17,7 @@ namespace the_lion_king_saga {
             std::string _shortDescription;
             std::string _description;
 		public:
-			virtual std::map<std::string, std::string> derections() const = 0;
+			virtual std::map<std::string, std::string> directions() const = 0;
 			virtual Environment& neighbor(std::string) = 0;
             std::string description() const;
 			std::string shortDescription() const;
