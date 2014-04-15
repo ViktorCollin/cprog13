@@ -6,6 +6,11 @@
 #include <map>
 
 #include "character/user.h"
+#include "environment/day.h"
+#include "environment/environment.h"
+
+#define DEBUG 1
+
 
 using namespace std;
 
@@ -24,8 +29,9 @@ static map<string, actions> mapActions;
 
 static void init();
 
-void loadMap(){
-
+the_lion_king_saga::Environment* loadMap(){
+	the_lion_king_saga::Environment *day = new the_lion_king_saga::Day();
+	return day;
 }
 
 void loadState(){
@@ -76,6 +82,11 @@ void run(the_lion_king_saga::User &user){
 					needMoreParams();
 				break;
 			case Drop :
+				if(reply.size() > 1)
+					user.drop(reply[1]);
+				else
+					needMoreParams();
+				break;
 			default:
 				cout << "Unknown command" << endl;
 		}
@@ -85,8 +96,8 @@ void run(the_lion_king_saga::User &user){
 
 int main(){
 	init();
-	the_lion_king_saga::User* simba = new the_lion_king_saga::User();
-	loadMap();
+	the_lion_king_saga::Environment* startposition = loadMap();
+	the_lion_king_saga::User* simba = new the_lion_king_saga::User(*startposition);
 	run(*simba);
 	return 0;
 }

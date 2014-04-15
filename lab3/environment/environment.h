@@ -19,7 +19,7 @@ namespace the_lion_king_saga {
 		public:
 			virtual std::map<std::string, std::string> directions() const = 0;
 			virtual Environment& neighbor(std::string) = 0;
-            std::string description() const;
+      std::string description() const;
 			std::string shortDescription() const;
 			virtual void enter(Animal&) = 0;
 			virtual void leave(Animal&) = 0;

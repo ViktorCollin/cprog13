@@ -2,12 +2,14 @@
 
 #include "user.h"
 #include "../item/item.h"
+#include "../environment/environment.h"
 
-#define DEBUG 1
+#define DEBUG 0
 
 namespace the_lion_king_saga {
 
-	User::User() {
+	User::User(the_lion_king_saga::Environment& startPosition):
+		_currentPosition(startPosition) {
 #if DEBUG
 		Item *i = new Item("Coffeecup","HOT",1);
 		_inventory["Coffeecup"] = i;

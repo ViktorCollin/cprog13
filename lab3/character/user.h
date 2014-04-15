@@ -7,6 +7,7 @@
 
 #include "animal.h"
 #include "../item/item.h"
+#include "../environment/environment.h"
 
 
 namespace the_lion_king_saga {
@@ -14,9 +15,10 @@ namespace the_lion_king_saga {
 	class User {
 		protected:
 			std::map<std::string,Item*> _inventory;
+			the_lion_king_saga::Environment& _currentPosition;
 
 		public:
-			User();
+			User(the_lion_king_saga::Environment&);
 			void list_actions();
 			void look(std::string);
 			void go(std::string);
