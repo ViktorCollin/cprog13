@@ -4,6 +4,8 @@
 #include "environment.h"
 #include "../item/item.h"
 
+#define DEBUG 1
+
 namespace the_lion_king_saga {
 
 	Environment::Environment():_items(){}
@@ -20,9 +22,7 @@ namespace the_lion_king_saga {
 	}
 
 	void Environment::add(Item& item) {
-		std::cerr << "Fuck this " << _items.size() << item.name() << std::endl;
 		_items[item.name()] = &item;
-		std::cerr << "Fuck this2" << std::endl;
 	}
 
 	std::string Environment::description() const{
