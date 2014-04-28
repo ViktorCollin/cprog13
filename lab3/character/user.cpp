@@ -28,6 +28,12 @@ namespace the_lion_king_saga {
 	void User::fight(std::string s) {
 		std::cout << "Not implemented" << std::endl;
 	}
+	void User::showInventory() {
+		std::cout << "Currently in your inventory:" << std::endl;
+		for(auto imap: _inventory) {
+			std::cout << imap.first << std::endl;
+		}
+	}
 	void User::take(std::string s) {
 		Item& item = _currentPosition.get(s);
 		if(&item == 0)

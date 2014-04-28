@@ -20,7 +20,8 @@ enum actions{
 	Exit = 3,
 	Fight = 4,
 	Take = 5,
-	Drop = 6
+	Drop = 6,
+	Inventory = 7
 };
 
 static map<string, actions> mapActions;
@@ -74,6 +75,9 @@ void run(the_lion_king_saga::User &user){
 			case Exit :
 				running = 0;
 				break;
+			case Inventory:
+				user.showInventory();
+				break;
 			case Fight :
 			case Take :
 				if(reply.size() > 1)
@@ -109,4 +113,5 @@ void init() {
 	mapActions["Fight"] = Fight;
 	mapActions["Take"] = Take;
 	mapActions["Drop"] = Drop;
+	mapActions["Inventory"] = Inventory;
 }
