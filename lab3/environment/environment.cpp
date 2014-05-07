@@ -12,13 +12,9 @@ namespace the_lion_king_saga {
 
 
 	Item& Environment::get(std::string s) {
-		//if(_items.count(s)){
 			Item *i = _items[s];
 			_items.erase(s);
 			return *i;
-		//}
-		//else
-		//throw new std::exception
 	}
 
 	void Environment::add(Item& item) {
