@@ -9,6 +9,9 @@ SHELL := /bin/bash
 all: $(PROG_NAME)
 	./$(PROG_NAME)
 
+debug: CC += -DDEBUG=1 -g
+debug: all
+
 $(PROG_NAME): $(CPP_OBJS) main.cpp
 	$(CC) $(CPPFLAGS) -o $@ $^
 

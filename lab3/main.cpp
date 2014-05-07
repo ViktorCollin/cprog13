@@ -9,9 +9,6 @@
 #include "environment/day.h"
 #include "environment/environment.h"
 
-#define DEBUG 1
-
-
 using namespace std;
 
 enum actions{
@@ -99,6 +96,9 @@ void run(the_lion_king_saga::User &user){
 }
 
 int main(){
+#if DEBUG
+	std::cout << "In debug mode" << std::endl;
+#endif
 	init();
 	the_lion_king_saga::Environment* startposition = loadMap();
 	the_lion_king_saga::User* simba = new the_lion_king_saga::User(*startposition);

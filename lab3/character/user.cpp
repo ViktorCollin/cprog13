@@ -4,8 +4,6 @@
 #include "../item/item.h"
 #include "../environment/environment.h"
 
-#define DEBUG 1
-
 namespace the_lion_king_saga {
 
 	User::User(the_lion_king_saga::Environment& startPosition):
