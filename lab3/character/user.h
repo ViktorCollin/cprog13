@@ -15,10 +15,10 @@ namespace the_lion_king_saga {
 	class User {
 		protected:
 			std::map<std::string,Item*> _inventory;
-			the_lion_king_saga::Environment& _currentPosition;
+			Environment* _currentPosition;
 
 		public:
-			User(the_lion_king_saga::Environment&);
+			User(the_lion_king_saga::Environment*);
 			void list_actions();
 			void look(std::string);
 			void go(std::string);

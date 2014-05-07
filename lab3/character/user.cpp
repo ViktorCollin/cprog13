@@ -6,11 +6,14 @@
 
 namespace the_lion_king_saga {
 
-	User::User(the_lion_king_saga::Environment& startPosition):
+	User::User(the_lion_king_saga::Environment* startPosition):
 		_currentPosition(startPosition) {
 #if DEBUG
 			Item *i = new Item("Coffeecup","HOT",1);
 			_inventory[i->name()] = i;
+			std::cout << _currentPosition->_description << " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
+			std::cout << _currentPosition->getNeighbor(North)._description << " has nrNeighbors " << _currentPosition->getNeighbor(North)._neighbors.size() << std::endl;
+			std::cout << _currentPosition->getNeighbor(North).getNeighbor(South)._description << " has nrNeighbors " << _currentPosition->getNeighbor(North).getNeighbor(South)._neighbors.size() << std::endl;
 #endif
 		}
 
@@ -21,7 +24,25 @@ namespace the_lion_king_saga {
 		std::cout << "Not implemented" << std::endl;
 	}
 	void User::go(std::string s) {
-		std::cout << "Not implemented" << std::endl;
+		direction direction;
+		if(s=="North") direction = North;
+		if(s=="South") direction = South;
+		if(s=="East") direction = East;
+		if(s=="West") direction = West;
+#if DEBUG
+		std::cout << "Trying to walk " << s << direction << std::endl;
+#endif
+		Environment& e = _currentPosition->getNeighbor(direction);
+		if(&e == 0){
+			std::cout << "You're not able to walk " << s << std::endl;
+		}
+		else {
+			std::cout << "You walked " << s << "into " << e._description << std::endl;
+			_currentPosition = &e;
+#if DEBUG
+			std::cout << "Hej " << _currentPosition->_neighbors.size() << std::endl;
+#endif
+		}
 	}
 	void User::fight(std::string s) {
 		std::cout << "Not implemented" << std::endl;
@@ -33,7 +54,7 @@ namespace the_lion_king_saga {
 		}
 	}
 	void User::take(std::string s) {
-		Item& item = _currentPosition.get(s);
+		Item& item = _currentPosition->get(s);
 		if(&item == 0)
 			std::cout << "No item with the name \"" <<
 				s << "\" exists" << std::endl;
@@ -50,7 +71,7 @@ namespace the_lion_king_saga {
 		if(_inventory.count(s)){
 			Item *i = _inventory[s];
 			_inventory.erase(s);
-			_currentPosition.add(*i);	
+			_currentPosition->add(*i);	
 			std::cout << "You dropped \"" + s + "\"" << std::endl;
 		}
 		else

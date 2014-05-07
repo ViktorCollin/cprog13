@@ -8,18 +8,11 @@
 #include "character/user.h"
 #include "environment/day.h"
 #include "environment/environment.h"
+#include "enums.cpp"
 
 using namespace std;
+using namespace the_lion_king_saga;
 
-enum actions{
-	Go = 1,
-	Look = 2,
-	Exit = 3,
-	Fight = 4,
-	Take = 5,
-	Drop = 6,
-	Inventory = 7
-};
 //Global variable declarations
 static map<string, actions> mapActions;
 
@@ -30,6 +23,18 @@ static void init();
 
 the_lion_king_saga::Environment* loadMap(){
 	the_lion_king_saga::Environment *day = new the_lion_king_saga::Day();
+#if DEBUG
+	the_lion_king_saga::Environment *day2 = new the_lion_king_saga::Day();
+	day->_description = "day";
+	day2->_description = "day2";
+	day->addNeighbor(*day2, North);
+	day2->addNeighbor(*day, South);
+	cout << day->_description << " mapsize " << day->_neighbors.size() << endl;
+	cout << day2->_description << " mapsize " << day2->_neighbors.size() << endl;
+	cout << day->getNeighbor(North)._description << " mapsize " << day->getNeighbor(North)._neighbors.size() << endl;
+	cout << day2->getNeighbor(South)._description << " mapsize " << day2->getNeighbor(South)._neighbors.size() << endl;
+	
+#endif
 	return day;
 }
 
@@ -103,7 +108,7 @@ int main(){
 #endif
 	init();
 	the_lion_king_saga::Environment* startposition = loadMap();
-	the_lion_king_saga::User* simba = new the_lion_king_saga::User(*startposition);
+	the_lion_king_saga::User* simba = new the_lion_king_saga::User(startposition);
 	run(*simba);
 	return 0;
 }
