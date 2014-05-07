@@ -20,12 +20,13 @@ enum actions{
 	Drop = 6,
 	Inventory = 7
 };
-
+//Global variable declarations
 static map<string, actions> mapActions;
 
-
-
+//Metod declarations (no header file)
 static void init();
+
+
 
 the_lion_king_saga::Environment* loadMap(){
 	the_lion_king_saga::Environment *day = new the_lion_king_saga::Day();
@@ -76,6 +77,7 @@ void run(the_lion_king_saga::User &user){
 				user.showInventory();
 				break;
 			case Fight :
+				break;
 			case Take :
 				if(reply.size() > 1)
 					user.take(reply[1]);
