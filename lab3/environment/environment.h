@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <exception>
+#include <memory>
 
 #include "../character/animal.h"
 #include "../item/item.h"
@@ -15,7 +16,7 @@ namespace the_lion_king_saga {
 	class Environment {
 
 		protected:
-			std::map<std::string,Item*> _items;
+			std::map<std::string,std::unique_ptr<Item>> _items;
 			std::string _shortDescription;
 		public:
 			std::string _description;
@@ -30,8 +31,8 @@ namespace the_lion_king_saga {
 			virtual void enter(Animal&) = 0;
 			virtual void leave(Animal&) = 0;
 
-			Item& get(std::string s);
-			void add(Item&);
+			std::unique_ptr<Item> get(std::string s);
+			void add(std::unique_ptr<Item>);
 	};
 }
 #endif

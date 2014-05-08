@@ -1,16 +1,12 @@
-#include <string>
-
 #include "user.h"
-#include "../item/item.h"
-#include "../environment/environment.h"
 
 namespace the_lion_king_saga {
 
 	User::User(the_lion_king_saga::Environment* startPosition):
 		_currentPosition(startPosition) {
 #if DEBUG
-			Item *i = new Item("Coffeecup","HOT",1);
-			_inventory[i->name()] = i;
+			std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
+			_inventory[i->name()] = std::move(i);
 			std::cout << _currentPosition->_description << " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
 			std::cout << _currentPosition->getNeighbor(North)._description << " has nrNeighbors " << _currentPosition->getNeighbor(North)._neighbors.size() << std::endl;
 			std::cout << _currentPosition->getNeighbor(North).getNeighbor(South)._description << " has nrNeighbors " << _currentPosition->getNeighbor(North).getNeighbor(South)._neighbors.size() << std::endl;
@@ -49,17 +45,17 @@ namespace the_lion_king_saga {
 	}
 	void User::showInventory() {
 		std::cout << "Currently in your inventory:" << std::endl;
-		for(auto imap: _inventory) {
+		for(auto& imap: _inventory) {
 			std::cout << imap.first << std::endl;
 		}
 	}
 	void User::take(std::string s) {
-		Item& item = _currentPosition->get(s);
-		if(&item == 0)
+		std::unique_ptr<Item> item(_currentPosition->get(s));
+		if(item == 0)
 			std::cout << "No item with the name \"" <<
 				s << "\" exists" << std::endl;
 		else {
-			_inventory[s] = &item;
+			_inventory[s] = std::move(item);
 			std::cout << "Picked up \"" << s << "\"" << std::endl;
 		}
 #if DEBUG
@@ -69,9 +65,8 @@ namespace the_lion_king_saga {
 	}
 	void User::drop(std::string s) {
 		if(_inventory.count(s)){
-			Item *i = _inventory[s];
+			_currentPosition->add(std::move(_inventory[s]));	
 			_inventory.erase(s);
-			_currentPosition->add(*i);	
 			std::cout << "You dropped \"" + s + "\"" << std::endl;
 		}
 		else

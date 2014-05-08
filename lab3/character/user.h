@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <memory>
 
 #include "animal.h"
 #include "../item/item.h"
@@ -14,7 +15,7 @@ namespace the_lion_king_saga {
 
 	class User {
 		protected:
-			std::map<std::string,Item*> _inventory;
+			std::map<std::string,std::unique_ptr<Item>> _inventory;
 			Environment* _currentPosition;
 
 		public:
