@@ -2,14 +2,14 @@
 
 namespace the_lion_king_saga {
 
-	User::User(the_lion_king_saga::Environment* startPosition):
+	User::User(std::shared_ptr<Environment> startPosition):
 		_currentPosition(startPosition) {
 #if DEBUG
 			std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
 			_inventory[i->name()] = std::move(i);
-			std::cout << _currentPosition->_description << " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
-			std::cout << _currentPosition->getNeighbor(North)._description << " has nrNeighbors " << _currentPosition->getNeighbor(North)._neighbors.size() << std::endl;
-			std::cout << _currentPosition->getNeighbor(North).getNeighbor(South)._description << " has nrNeighbors " << _currentPosition->getNeighbor(North).getNeighbor(South)._neighbors.size() << std::endl;
+			std::cout << _currentPosition->description ()<< " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
+			std::cout << _currentPosition->getNeighbor(North)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->_neighbors.size() << std::endl;
+			std::cout << _currentPosition->getNeighbor(North)->getNeighbor(South)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->getNeighbor(South)->_neighbors.size() << std::endl;
 #endif
 		}
 
@@ -28,13 +28,13 @@ namespace the_lion_king_saga {
 #if DEBUG
 		std::cout << "Trying to walk " << s << direction << std::endl;
 #endif
-		Environment& e = _currentPosition->getNeighbor(direction);
+		std::shared_ptr<Environment> e = _currentPosition->getNeighbor(direction);
 		if(&e == 0){
 			std::cout << "You're not able to walk " << s << std::endl;
 		}
 		else {
-			std::cout << "You walked " << s << "into " << e._description << std::endl;
-			_currentPosition = &e;
+			//std::cout << "You walked " << s << "into " << e->description << std::endl;
+			_currentPosition = e;
 #if DEBUG
 			std::cout << "Hej " << _currentPosition->_neighbors.size() << std::endl;
 #endif

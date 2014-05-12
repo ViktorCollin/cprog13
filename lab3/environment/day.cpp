@@ -4,7 +4,7 @@
 
 namespace the_lion_king_saga {
 
-  Day::Day(){}
+  Day::Day(std::string s): Environment::Environment(s){}
 
   std::map<std::string, std::string> Day::directions() const{
     std::map<std::string, std::string> s;

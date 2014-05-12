@@ -2,7 +2,7 @@
 
 namespace the_lion_king_saga {
 
-	Environment::Environment():_items(), _neighbors() {}
+	Environment::Environment(std::string description):_items(), _neighbors(), _description(description) {}
 
 
 	std::unique_ptr<Item> Environment::get(std::string s) {
@@ -12,15 +12,15 @@ namespace the_lion_king_saga {
 	}
 
 	//Will return address 0 if not found
-	Environment& Environment::getNeighbor(direction d) {
-		return *_neighbors[d];
+	std::shared_ptr<Environment> Environment::getNeighbor(direction d) {
+		return _neighbors[d];
 	}
 	void Environment::add(std::unique_ptr<Item> item) {
 		_items[item->name()] = std::move(item);
 	}
 
-	void Environment::addNeighbor(Environment& e, direction d) {
-		_neighbors[d] = &e;
+	void Environment::addNeighbor(std::shared_ptr<Environment> e, direction d) {
+		_neighbors[d] = e;
 	}
 	std::string Environment::description() const{
 		return _description;

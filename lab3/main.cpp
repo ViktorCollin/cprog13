@@ -21,18 +21,16 @@ static void init();
 
 
 
-the_lion_king_saga::Environment* loadMap(){
-	the_lion_king_saga::Environment *day = new the_lion_king_saga::Day();
+std::shared_ptr<Environment> loadMap(){
+	std::shared_ptr<Environment> day(new Day("day"));
 #if DEBUG
-	the_lion_king_saga::Environment *day2 = new the_lion_king_saga::Day();
-	day->_description = "day";
-	day2->_description = "day2";
-	day->addNeighbor(*day2, North);
-	day2->addNeighbor(*day, South);
-	cout << day->_description << " mapsize " << day->_neighbors.size() << endl;
-	cout << day2->_description << " mapsize " << day2->_neighbors.size() << endl;
-	cout << day->getNeighbor(North)._description << " mapsize " << day->getNeighbor(North)._neighbors.size() << endl;
-	cout << day2->getNeighbor(South)._description << " mapsize " << day2->getNeighbor(South)._neighbors.size() << endl;
+	std::shared_ptr<Environment> day2(new Day("day2"));
+	day->addNeighbor(day2, North);
+	day2->addNeighbor(day, South);
+	cout << day->description() << std::endl;
+	cout << day2->description() << " mapsize " << day2->_neighbors.size() << endl;
+	cout << day->getNeighbor(North)->description() << " mapsize " << day->getNeighbor(North)->_neighbors.size() << endl;
+	cout << day2->getNeighbor(South)->description() << " mapsize " << day2->getNeighbor(South)->_neighbors.size() << endl;
 	
 #endif
 	return day;
@@ -107,7 +105,7 @@ int main(){
 	std::cout << "In debug mode" << std::endl;
 #endif
 	init();
-	the_lion_king_saga::Environment* startposition = loadMap();
+	std::shared_ptr<Environment> startposition = loadMap();
 	the_lion_king_saga::User* simba = new the_lion_king_saga::User(startposition);
 	run(*simba);
 	return 0;
