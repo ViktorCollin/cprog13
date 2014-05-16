@@ -1,7 +1,8 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 namespace the_lion_king_saga {
-	enum Actions{
+	enum Action{
+	    INVALID_ACTION,
 		Go,
 		Look,
 		Exit,
@@ -12,19 +13,58 @@ namespace the_lion_king_saga {
 	};
 
 	enum Direction{
-	    MISSING,
+	    INVALID_DIRECTION,
 		North,
 		South,
 		East,
 		West
 	};
 	
+    static const std::map<std::string, Action> actionMap = {
+        {"Go", Go}, 
+        {"Look", Look}, 
+        {"Exit", Exit},
+        {"Fight", Fight},
+        {"Take", Take},
+        {"Drop", Drop},
+        {"Inventory", Inventory}
+    };
+    
+    static const std::map<std::string, Direction> directionMap = {
+        {"North", North},
+        {"South", South},
+        {"East", East},
+        {"West", West}
+    };
+	
 	static Direction strToDirection(std::string str){
-        if(str == "North") return North;
-        if(str == "South") return South;
-        if(str == "East") return East;
-        if(str == "West") return West;
-        return MISSING;
+        auto it = directionMap.find(str);
+        if(it == directionMap.end()) return INVALID_DIRECTION;
+        return it->second;
+	}
+	
+	static Action strToAction(std::string str){
+        auto it = actionMap.find(str);
+        if(it == actionMap.end()) return INVALID_ACTION;
+        return it->second;
+	}
+	
+	static std::string listActions(){
+        std::string ret;
+        for(auto i : actionMap){
+            ret.append(", ");
+            ret.append(i.first);
+        }
+        return ret.substr(2);
+	}
+	
+	static std::string listDirections(){
+        std::string ret;
+        for(auto i : directionMap){
+            ret.append(", ");
+            ret.append(i.first);
+        }
+        return ret.substr(2);
 	}
 }
 #endif

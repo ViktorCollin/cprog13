@@ -12,8 +12,6 @@
 
 using namespace the_lion_king_saga;
 
-//Global variable declarations
-static std::map<std::string, Actions> mapActions;
 
 //Metod declarations (no header file)
 static void init();
@@ -62,7 +60,7 @@ void run(User &user){
 		std::istringstream buf(s_input);
 		std::istream_iterator<std::string> beg(buf), end;
 		std::vector<std::string> reply(beg, end);
-		switch (mapActions[reply[0]]) {
+		switch (strToAction(reply[0])) {
 			case Go :
 				if(reply.size() > 1)
 					user.go(reply[1]);
@@ -118,11 +116,5 @@ int main(){
 }
 
 void init() {
-	mapActions["Go"] = Go;
-	mapActions["Look"] = Look;
-	mapActions["Exit"] = Exit;
-	mapActions["Fight"] = Fight;
-	mapActions["Take"] = Take;
-	mapActions["Drop"] = Drop;
-	mapActions["Inventory"] = Inventory;
+
 }
