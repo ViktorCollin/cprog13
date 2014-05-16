@@ -1,21 +1,30 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 namespace the_lion_king_saga {
-	enum actions{
-		Go = 1,
-		Look = 2,
-		Exit = 3,
-		Fight = 4,
-		Take = 5,
-		Drop = 6,
-		Inventory = 7
+	enum Actions{
+		Go,
+		Look,
+		Exit,
+		Fight,
+		Take,
+		Drop,
+		Inventory
 	};
 
-	enum direction{
+	enum Direction{
+	    MISSING,
 		North,
 		South,
 		East,
 		West
 	};
+	
+	static Direction strToDirection(std::string str){
+        if(str == "North") return North;
+        if(str == "South") return South;
+        if(str == "East") return East;
+        if(str == "West") return West;
+        return MISSING;
+	}
 }
 #endif

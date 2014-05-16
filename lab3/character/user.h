@@ -9,6 +9,7 @@
 #include "animal.h"
 #include "../item/item.h"
 #include "../environment/environment.h"
+#include "../enums.cpp"
 
 
 namespace the_lion_king_saga {
@@ -17,6 +18,7 @@ namespace the_lion_king_saga {
 		protected:
 			std::map<std::string,std::unique_ptr<Item>> _inventory;
 			std::shared_ptr<Environment> _currentPosition;
+            std::map<std::string, Direction> _mapDirections;
 
 		public:
 			User(std::shared_ptr<Environment>);
