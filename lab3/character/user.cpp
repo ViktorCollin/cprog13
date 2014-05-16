@@ -36,8 +36,11 @@ namespace the_lion_king_saga {
         std::cout << "You walked " << s << " into " << _currentPosition->name() << std::endl;	
     }
     void User::fight(std::string s) {
-        //Check that animal exists
-        User::attack(_currentPosition->getAnimal(s));
+        Animal* a = _currentPosition->getAnimal(s);
+        if(a == 0)
+            std::cout << "No animal named " << s << " could be found" << std::endl;
+        else
+            User::attack(a);
     }
     void User::showInventory() {
         std::cout << "Currently in your inventory:" << std::endl;

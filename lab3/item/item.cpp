@@ -10,7 +10,6 @@ namespace the_lion_king_saga {
     Item::Item(std::string name, std::string description, int weight):
         _name(name), _description(description), _weight(weight), _usable(false) {}
 
-
     std::string Item::name() const {
         return _name;
     }
