@@ -11,7 +11,7 @@ namespace the_lion_king_saga {
     protected:
 
     public:
-      Day( std::string);
+      Day(std::string, std::string);
       std::map<std::string, std::string> directions() const;
       Environment& neighbor(std::string);
 

@@ -2,8 +2,16 @@
 
 namespace the_lion_king_saga {
 
-	Environment::Environment(std::string description):_items(), _neighbors(), _animals() ,_description(description) {}
+	Environment::Environment(std::string name, std::string description):
+		_items(), 
+		_neighbors(), 
+		_animals(),
+		_name(name),
+		_description(description) {}
 
+	std::string Environment::name() {
+		return _name;
+	}
 
 	std::unique_ptr<Item> Environment::get(std::string s) {
 		std::unique_ptr<Item> i = std::move(_items[s]);
@@ -24,7 +32,7 @@ namespace the_lion_king_saga {
 	void Environment::addNeighbor(std::shared_ptr<Environment> e, Direction d) {
 		_neighbors[d] = e;
 	}
-	std::string Environment::description() const{
+	void Environment::printDescription() const{
 		if(!_animals.empty()) {
 			std::cout << "There are other animals here:" << std::endl;
 			for(auto& imap: _animals) {
@@ -32,11 +40,18 @@ namespace the_lion_king_saga {
 
 			}
 		}
-		return _description;
+		if(!_items.empty()) {
+			std::cout << "There are things here:" << std::endl;
+			for(auto& imap: _items) {
+				std::cout << imap.first << std::endl;
+
+			}
+		}
+		std::cout << _description << std::endl;
 	}
 
-	std::string Environment::shortDescription() const{
-		return _shortDescription;
+	std::string Environment::description() const{
+		return _description;
 	}
 
 	void Environment::addAnimal(std::unique_ptr<Animal> animal) {

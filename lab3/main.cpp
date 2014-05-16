@@ -19,20 +19,17 @@ static void init();
 
 
 std::shared_ptr<Environment> loadMap(){
-	std::shared_ptr<Environment> day(new Day("day"));
+	std::shared_ptr<Environment> day(new Day("day", "The green grass"));
+
 #if DEBUG
-	std::shared_ptr<Environment> day2(new Day("day2"));
+	std::shared_ptr<Environment> day2(new Day("day2", "The big prairie"));
 	day->addNeighbor(day2, North);
 	day2->addNeighbor(day, South);
-	std::cout << day->description() << std::endl;
-	std::cout << day2->description() << " mapsize " << day2->_neighbors.size() << std::endl;
-	std::cout << day->getNeighbor(North)->description() << " mapsize " << day->getNeighbor(North)->_neighbors.size() << std::endl;
-	std::cout << day2->getNeighbor(South)->description() << " mapsize " << day2->getNeighbor(South)->_neighbors.size() << std::endl;
-	
+
 	std::unique_ptr<Animal> scar(new Cat("Scar", 100));	
 	day2->addAnimal(std::move(scar));
-
 #endif
+
 	return day;
 }
 

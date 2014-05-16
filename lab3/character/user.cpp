@@ -7,15 +7,13 @@ namespace the_lion_king_saga {
 #if DEBUG
 		std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
 		_inventory[i->name()] = std::move(i);
-		std::cout << _currentPosition->description ()<< " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
-		std::cout << _currentPosition->getNeighbor(North)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->_neighbors.size() << std::endl;
-		std::cout << _currentPosition->getNeighbor(North)->getNeighbor(South)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->getNeighbor(South)->_neighbors.size() << std::endl;
 #endif
 	}
 
 	void User::look(std::string direction_s /* = "" */) {
+		//This needs to handle different types of rooms
 		if(direction_s=="") {
-			std::cout << _currentPosition->description() << std::endl;
+			_currentPosition->printDescription();
 		} else {
 			std::cout << "Not implemented" << std::endl;
 		}
@@ -35,10 +33,7 @@ namespace the_lion_king_saga {
 			return;
 		}
 		_currentPosition = e;
-		std::cout << "You walked " << s << " into " << _currentPosition->shortDescription() << std::endl;	
-#if DEBUG
-		std::cout << "Welcome " << _currentPosition->_neighbors.size() << std::endl;
-#endif
+		std::cout << "You walked " << s << " into " << _currentPosition->name() << std::endl;	
 	}
 	void User::fight(std::string s) {
 		//Check that animal exists
