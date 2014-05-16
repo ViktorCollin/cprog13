@@ -4,6 +4,10 @@ namespace the_lion_king_saga {
 
 	User::User(std::shared_ptr<Environment> startPosition):
 		_currentPosition(startPosition) {
+            _mapDirections["North"] = North;
+            _mapDirections["South"] = South;
+            _mapDirections["East"] = East;
+            _mapDirections["West"] = West;
 #if DEBUG
 			std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
 			_inventory[i->name()] = std::move(i);
@@ -20,25 +24,27 @@ namespace the_lion_king_saga {
 		std::cout << "Not implemented" << std::endl;
 	}
 	void User::go(std::string s) {
-		direction direction;
-		if(s=="North") direction = North;
-		if(s=="South") direction = South;
-		if(s=="East") direction = East;
-		if(s=="West") direction = West;
+        Direction dir = strToDirection(s);
 #if DEBUG
-		std::cout << "Trying to walk " << s << direction << std::endl;
+		std::cout << "Trying to walk " << s << " (" << dir << ")" << std::endl;
 #endif
-		std::shared_ptr<Environment> e = _currentPosition->getNeighbor(direction);
-		if(&e == 0){
+        if(dir == 0){
+            std::cout << s << " is NOT a vaild direction, try one of " <<std::endl;
+            for(auto& imap: _mapDirections) {
+    			std::cout  << imap.first << std::endl;
+    		}
+            return;
+        }
+		std::shared_ptr<Environment> e = _currentPosition->getNeighbor(dir);
+		if(e == NULL){
 			std::cout << "You're not able to walk " << s << std::endl;
+            return;
 		}
-		else {
-			//std::cout << "You walked " << s << "into " << e->description << std::endl;
-			_currentPosition = e;
+		_currentPosition = e;
+		std::cout << "You walked " << s << "into " << _currentPosition->description() << std::endl;	
 #if DEBUG
-			std::cout << "Hej " << _currentPosition->_neighbors.size() << std::endl;
+		std::cout << "Welcome " << _currentPosition->_neighbors.size() << std::endl;
 #endif
-		}
 	}
 	void User::fight(std::string s) {
 		std::cout << "Not implemented" << std::endl;

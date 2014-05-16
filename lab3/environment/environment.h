@@ -20,12 +20,12 @@ namespace the_lion_king_saga {
 			std::string _shortDescription;
 			std::string _description;
 		public:
-			std::map<direction, std::shared_ptr<Environment>> _neighbors;
+			std::map<Direction, std::shared_ptr<Environment>> _neighbors;
 
 			Environment(std::string);
 			virtual std::map<std::string, std::string> directions() const = 0;
-			std::shared_ptr<Environment> getNeighbor(direction);
-			void addNeighbor(std::shared_ptr<Environment>, direction);
+			std::shared_ptr<Environment> getNeighbor(Direction);
+			void addNeighbor(std::shared_ptr<Environment>, Direction);
 			std::string description() const;
 			std::string shortDescription() const;
 			virtual void enter(Animal&) = 0;

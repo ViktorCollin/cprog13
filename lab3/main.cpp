@@ -10,11 +10,10 @@
 #include "environment/environment.h"
 #include "enums.cpp"
 
-using namespace std;
 using namespace the_lion_king_saga;
 
 //Global variable declarations
-static map<string, actions> mapActions;
+static std::map<std::string, Actions> mapActions;
 
 //Metod declarations (no header file)
 static void init();
@@ -27,10 +26,10 @@ std::shared_ptr<Environment> loadMap(){
 	std::shared_ptr<Environment> day2(new Day("day2"));
 	day->addNeighbor(day2, North);
 	day2->addNeighbor(day, South);
-	cout << day->description() << std::endl;
-	cout << day2->description() << " mapsize " << day2->_neighbors.size() << endl;
-	cout << day->getNeighbor(North)->description() << " mapsize " << day->getNeighbor(North)->_neighbors.size() << endl;
-	cout << day2->getNeighbor(South)->description() << " mapsize " << day2->getNeighbor(South)->_neighbors.size() << endl;
+	std::cout << day->description() << std::endl;
+	std::cout << day2->description() << " mapsize " << day2->_neighbors.size() << std::endl;
+	std::cout << day->getNeighbor(North)->description() << " mapsize " << day->getNeighbor(North)->_neighbors.size() << std::endl;
+	std::cout << day2->getNeighbor(South)->description() << " mapsize " << day2->getNeighbor(South)->_neighbors.size() << std::endl;
 	
 #endif
 	return day;
@@ -45,21 +44,21 @@ void storeState(){
 }
 
 void needMoreParams(){
-	cout << "Need another parameter" << endl;
+	std::cout << "Need another parameter" << std::endl;
 }
 
-void run(the_lion_king_saga::User &user){
+void run(User &user){
 	char c_input[256];
-	string s_input;
+	std::string s_input;
 	int running = 1;
 	while(running){
 		//user.list_actions();
-		std::cin.getline (c_input,256);
-		s_input = string(c_input);
+		std::cin.getline(c_input,256);
+		s_input = std::string(c_input);
 		//Split
-		istringstream buf(s_input);
-		istream_iterator<string> beg(buf), end;
-		vector<string> reply(beg, end);
+		std::istringstream buf(s_input);
+		std::istream_iterator<std::string> beg(buf), end;
+		std::vector<std::string> reply(beg, end);
 		switch (mapActions[reply[0]]) {
 			case Go :
 				if(reply.size() > 1)
@@ -94,7 +93,7 @@ void run(the_lion_king_saga::User &user){
 					needMoreParams();
 				break;
 			default:
-				cout << "Unknown command" << endl;
+				std::cout << "Unknown command" << std::endl;
 		}
 	}
 	storeState();
@@ -106,7 +105,7 @@ int main(){
 #endif
 	init();
 	std::shared_ptr<Environment> startposition = loadMap();
-	the_lion_king_saga::User* simba = new the_lion_king_saga::User(startposition);
+	User* simba = new User(startposition);
 	run(*simba);
 	return 0;
 }
