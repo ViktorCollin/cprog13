@@ -45,6 +45,12 @@ namespace the_lion_king_saga {
 			std::cout << imap.first << std::endl;
 		}
 	}
+	void User::use(std::string s) {
+		if(_inventory.count(s)){
+			_currentPosition->add(std::move(_inventory[s]));	
+			_inventory.erase(s);
+			std::cout << "You dropped \"" + s + "\"" << std::endl;
+		}
 	void User::take(std::string s) {
 		std::unique_ptr<Item> item(_currentPosition->get(s));
 		if(item == 0)

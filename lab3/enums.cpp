@@ -9,7 +9,8 @@ namespace the_lion_king_saga {
 		Fight,
 		Take,
 		Drop,
-		Inventory
+		Inventory,
+		Use
 	};
 
 	enum Direction{
@@ -27,7 +28,8 @@ namespace the_lion_king_saga {
         {"Fight", Fight},
         {"Take", Take},
         {"Drop", Drop},
-        {"Inventory", Inventory}
+        {"Inventory", Inventory},
+        {"Use", Use}
     };
     
     static const std::map<std::string, Direction> directionMap = {

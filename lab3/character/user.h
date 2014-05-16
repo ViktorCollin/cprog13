@@ -26,6 +26,7 @@ namespace the_lion_king_saga {
 			void go(std::string);
 			void fight(std::string);
 			void take(std::string);
+			void use(std::string);
 			void drop(std::string);
 			void talk_to(std::string);
 			void showInventory();

@@ -89,6 +89,12 @@ void run(User &user){
 				else
 					needMoreParams();
 				break;
+			case Use :
+				if(reply.size() > 1)
+					user.use(reply[1]);
+				else
+					needMoreParams();
+				break;
 			case Drop :
 				if(reply.size() > 1)
 					user.drop(reply[1]);
