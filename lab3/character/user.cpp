@@ -2,12 +2,12 @@
 
 namespace the_lion_king_saga {
 
-	User::User(std::shared_ptr<Environment> startPosition): Animal::Animal("simba", 1000),
+	User::User(std::shared_ptr<Environment> startPosition): Animal::Animal("Simba", 100),
 	_currentPosition(startPosition) {
-            _mapDirections["North"] = North;
-            _mapDirections["South"] = South;
-            _mapDirections["East"] = East;
-            _mapDirections["West"] = West;
+		_mapDirections["North"] = North;
+		_mapDirections["South"] = South;
+		_mapDirections["East"] = East;
+		_mapDirections["West"] = West;
 #if DEBUG
 		std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
 		_inventory[i->name()] = std::move(i);
@@ -28,21 +28,21 @@ namespace the_lion_king_saga {
 		}
 	}
 	void User::go(std::string s) {
-        Direction dir = strToDirection(s);
+		Direction dir = strToDirection(s);
 #if DEBUG
 		std::cout << "Trying to walk " << s << " (" << dir << ")" << std::endl;
 #endif
-        if(dir == 0){
-            std::cout << s << " is NOT a vaild direction, try one of " <<std::endl;
-            for(auto& imap: _mapDirections) {
-    			std::cout  << imap.first << std::endl;
-    		}
-            return;
-        }
+		if(dir == 0){
+			std::cout << s << " is NOT a vaild direction, try one of " <<std::endl;
+			for(auto& imap: _mapDirections) {
+				std::cout  << imap.first << std::endl;
+			}
+			return;
+		}
 		std::shared_ptr<Environment> e = _currentPosition->getNeighbor(dir);
 		if(e == NULL){
 			std::cout << "You're not able to walk " << s << std::endl;
-            return;
+			return;
 		}
 		_currentPosition = e;
 		std::cout << "You walked " << s << "into " << _currentPosition->description() << std::endl;	
@@ -51,7 +51,8 @@ namespace the_lion_king_saga {
 #endif
 	}
 	void User::fight(std::string s) {
-		std::cout << "Not implemented" << std::endl;
+		//Check that animal exists
+		User::attack(_currentPosition->getAnimal(s));
 	}
 	void User::showInventory() {
 		std::cout << "Currently in your inventory:" << std::endl;
@@ -92,7 +93,15 @@ namespace the_lion_king_saga {
 		std::cout << "Not implemented" << std::endl;
 	}
 
-	int  User::attack(Animal* a) {
-		std::cout << "No attack implemented for simba" << std::endl;
+	void  User::attack(Animal* a) {
+		int damage = 60;
+		std::cout << "Attacking " << a->name() << std::endl;
+		if(a->isDead()) damage = 0;
+		std::cout << "Did " << damage << " damage and " << a->name() << "'s health is now " << a->health(damage) << std::endl;
+		if(a->isDead()) {
+			std::cout << "The only thing left is " << a->name() << std::endl;
+		} else {
+			a->attack(this);
+		}
 	}
 }

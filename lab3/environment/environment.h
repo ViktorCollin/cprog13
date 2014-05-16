@@ -31,7 +31,7 @@ namespace the_lion_king_saga {
 			std::string shortDescription() const;
 
 			void addAnimal(std::unique_ptr<Animal>);
-			std::unique_ptr<Animal> removeAnimal(std::string);
+			Animal* getAnimal(std::string);
 
 			std::unique_ptr<Item> get(std::string s);
 			void add(std::unique_ptr<Item>);

@@ -42,4 +42,9 @@ namespace the_lion_king_saga {
 	void Environment::addAnimal(std::unique_ptr<Animal> animal) {
 		_animals[animal->name()] = std::move(animal);
 	}
+
+	Animal* Environment::getAnimal(std::string s) {
+		Animal* a = _animals[s].get();
+		return a;
+	}
 }

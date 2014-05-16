@@ -12,7 +12,7 @@ namespace the_lion_king_saga {
 
 		public:
 			Cat(std::string, int);
-			virtual int attack(Animal*);
+			virtual void attack(Animal*);
 	};
 }
 

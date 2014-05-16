@@ -82,6 +82,10 @@ void run(User &user){
 				user.showInventory();
 				break;
 			case Fight :
+				if(reply.size() > 1)
+					user.fight(reply[1]);
+				else
+					needMoreParams();
 				break;
 			case Take :
 				if(reply.size() > 1)
