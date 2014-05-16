@@ -49,8 +49,9 @@ namespace the_lion_king_saga {
 		if(_inventory.count(s)){
 			_currentPosition->add(std::move(_inventory[s]));	
 			_inventory.erase(s);
-			std::cout << "You dropped \"" + s + "\"" << std::endl;
+			std::cout << "You used \"" + s + "\"" << std::endl;
 		}
+    }
 	void User::take(std::string s) {
 		std::unique_ptr<Item> item(_currentPosition->get(s));
 		if(item == 0)

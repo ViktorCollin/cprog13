@@ -51,6 +51,7 @@ void run(User &user){
 	std::string s_input;
 	int running = 1;
 	while(running){
+        std::cout << std::endl;
 		//user.list_actions();
 		std::cin.getline(c_input,256);
 		s_input = std::string(c_input);
@@ -74,7 +75,7 @@ void run(User &user){
 			case Exit :
 				running = 0;
 				break;
-			case Inventory:
+			case Cheeks:
 				user.showInventory();
 				break;
 			case Fight :
@@ -101,8 +102,11 @@ void run(User &user){
 				else
 					needMoreParams();
 				break;
+		    case Help:
+				printHelpMsg();
+				break;
 			default:
-				std::cout << "Unknown command" << std::endl;
+				std::cout << "Unknown command, write 'Help' for more information about what you can do" << std::endl;
 		}
 	}
 	storeState();
