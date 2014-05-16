@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <iterator>
 #include <map>
 
@@ -19,6 +20,18 @@ static void init();
 
 
 std::shared_ptr<Environment> loadMap(){
+    std::string line;
+    std::ifstream mapFile("map.txt");
+    if (mapFile.is_open()){
+        while(getline(mapFile, line)){
+            std::cout << line << std::endl;
+        }
+        mapFile.close();
+    } else {
+#if DEBUG == 0
+        return NULL;
+#endif
+    }
 	std::shared_ptr<Environment> day(new Day("day", "The green grass", "lies the green grass"));
 
 #if DEBUG
@@ -118,6 +131,10 @@ int main(){
 #endif
 	init();
 	std::shared_ptr<Environment> startposition = loadMap();
+    if(startposition == NULL) {
+        std::cout << "Unable to open map, Exiting the game!" << std::endl; 
+        return 1;
+    }
 	User* simba = new User(startposition);
 	run(*simba);
 	return 0;
