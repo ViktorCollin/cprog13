@@ -4,10 +4,6 @@ namespace the_lion_king_saga {
 
 	User::User(std::shared_ptr<Environment> startPosition): Animal::Animal("simba", 1000),
 	_currentPosition(startPosition) {
-            _mapDirections["North"] = North;
-            _mapDirections["South"] = South;
-            _mapDirections["East"] = East;
-            _mapDirections["West"] = West;
 #if DEBUG
 		std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
 		_inventory[i->name()] = std::move(i);
@@ -17,9 +13,6 @@ namespace the_lion_king_saga {
 #endif
 	}
 
-	void User::list_actions() {
-		std::cout << "Not implemented" << std::endl;
-	}
 	void User::look(std::string direction_s /* = "" */) {
 		if(direction_s=="") {
 			std::cout << _currentPosition->description() << std::endl;
@@ -33,10 +26,7 @@ namespace the_lion_king_saga {
 		std::cout << "Trying to walk " << s << " (" << dir << ")" << std::endl;
 #endif
         if(dir == 0){
-            std::cout << s << " is NOT a vaild direction, try one of " <<std::endl;
-            for(auto& imap: _mapDirections) {
-    			std::cout  << imap.first << std::endl;
-    		}
+            std::cout << s << " is NOT a vaild direction, try one of " << listDirections() <<std::endl;
             return;
         }
 		std::shared_ptr<Environment> e = _currentPosition->getNeighbor(dir);
@@ -45,7 +35,7 @@ namespace the_lion_king_saga {
             return;
 		}
 		_currentPosition = e;
-		std::cout << "You walked " << s << "into " << _currentPosition->description() << std::endl;	
+		std::cout << "You walked " << s << " into " << _currentPosition->shortDescription() << std::endl;	
 #if DEBUG
 		std::cout << "Welcome " << _currentPosition->_neighbors.size() << std::endl;
 #endif

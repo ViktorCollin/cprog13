@@ -52,17 +52,19 @@ namespace the_lion_king_saga {
 	static std::string listActions(){
         std::string ret;
         for(auto i : actionMap){
+            ret.append(", ");
             ret.append(i.first);
         }
-        return ret;
+        return ret.substr(2);
 	}
 	
 	static std::string listDirections(){
         std::string ret;
         for(auto i : directionMap){
+            ret.append(", ");
             ret.append(i.first);
         }
-        return ret;
+        return ret.substr(2);
 	}
 }
 #endif
