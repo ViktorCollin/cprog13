@@ -13,7 +13,7 @@
 
 namespace the_lion_king_saga {
 
-	class User {
+	class User : public Animal{
 		protected:
 			std::map<std::string,std::unique_ptr<Item>> _inventory;
 			std::shared_ptr<Environment> _currentPosition;
@@ -21,13 +21,15 @@ namespace the_lion_king_saga {
 		public:
 			User(std::shared_ptr<Environment>);
 			void list_actions();
-			void look(std::string);
+			void look(std::string direction_s = "");
 			void go(std::string);
 			void fight(std::string);
 			void take(std::string);
 			void drop(std::string);
 			void talk_to(std::string);
 			void showInventory();
+
+			virtual int attack(Animal*);
 
 	};
 }

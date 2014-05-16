@@ -7,11 +7,14 @@ namespace the_lion_king_saga {
 
 	class Animal {
 		protected:
+			std::string _name;
+			int _health;
 
 		public:
-			Animal();
-			virtual std::string type() = 0;
-			virtual std::string name() = 0;
+			Animal(std::string, int);
+			std::string name();
+			int health();
+			virtual int attack(Animal*) = 0;
 
 	};
 }

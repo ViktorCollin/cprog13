@@ -6,8 +6,8 @@
 #include <map>
 
 #include "character/user.h"
+#include "character/cat.h"
 #include "environment/day.h"
-#include "environment/environment.h"
 #include "enums.cpp"
 
 using namespace std;
@@ -31,7 +31,8 @@ std::shared_ptr<Environment> loadMap(){
 	cout << day2->description() << " mapsize " << day2->_neighbors.size() << endl;
 	cout << day->getNeighbor(North)->description() << " mapsize " << day->getNeighbor(North)->_neighbors.size() << endl;
 	cout << day2->getNeighbor(South)->description() << " mapsize " << day2->getNeighbor(South)->_neighbors.size() << endl;
-	
+	std::unique_ptr<Animal> scar(new Cat("Scar", 100));	
+	day2->addAnimal(std::move(scar));
 #endif
 	return day;
 }
@@ -71,7 +72,7 @@ void run(the_lion_king_saga::User &user){
 				if(reply.size() > 1)
 					user.look(reply[1]);
 				else
-					needMoreParams();
+					user.look();
 				break;
 			case Exit :
 				running = 0;

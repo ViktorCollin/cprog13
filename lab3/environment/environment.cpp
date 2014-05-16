@@ -2,7 +2,7 @@
 
 namespace the_lion_king_saga {
 
-	Environment::Environment(std::string description):_items(), _neighbors(), _description(description) {}
+	Environment::Environment(std::string description):_items(), _neighbors(), _animals() ,_description(description) {}
 
 
 	std::unique_ptr<Item> Environment::get(std::string s) {
@@ -23,9 +23,21 @@ namespace the_lion_king_saga {
 		_neighbors[d] = e;
 	}
 	std::string Environment::description() const{
+		if(!_animals.empty()) {
+			std::cout << "There are other animals here:" << std::endl;
+			for(auto& imap: _animals) {
+				std::cout << imap.first << std::endl;
+
+			}
+		}
 		return _description;
 	}
+
 	std::string Environment::shortDescription() const{
 		return _shortDescription;
+	}
+
+	void Environment::addAnimal(std::unique_ptr<Animal> animal) {
+		_animals[animal->name()] = std::move(animal);
 	}
 }

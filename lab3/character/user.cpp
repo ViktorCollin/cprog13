@@ -2,22 +2,26 @@
 
 namespace the_lion_king_saga {
 
-	User::User(std::shared_ptr<Environment> startPosition):
-		_currentPosition(startPosition) {
+	User::User(std::shared_ptr<Environment> startPosition): Animal::Animal("simba", 1000),
+	_currentPosition(startPosition) {
 #if DEBUG
-			std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
-			_inventory[i->name()] = std::move(i);
-			std::cout << _currentPosition->description ()<< " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
-			std::cout << _currentPosition->getNeighbor(North)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->_neighbors.size() << std::endl;
-			std::cout << _currentPosition->getNeighbor(North)->getNeighbor(South)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->getNeighbor(South)->_neighbors.size() << std::endl;
+		std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1));
+		_inventory[i->name()] = std::move(i);
+		std::cout << _currentPosition->description ()<< " has nrNeighbors " << _currentPosition->_neighbors.size() << std::endl;
+		std::cout << _currentPosition->getNeighbor(North)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->_neighbors.size() << std::endl;
+		std::cout << _currentPosition->getNeighbor(North)->getNeighbor(South)->description() << " has nrNeighbors " << _currentPosition->getNeighbor(North)->getNeighbor(South)->_neighbors.size() << std::endl;
 #endif
-		}
+	}
 
 	void User::list_actions() {
 		std::cout << "Not implemented" << std::endl;
 	}
-	void User::look(std::string derections = NULL) {
-		std::cout << "Not implemented" << std::endl;
+	void User::look(std::string direction_s /* = "" */) {
+		if(direction_s=="") {
+			std::cout << _currentPosition->description() << std::endl;
+		} else {
+			std::cout << "Not implemented" << std::endl;
+		}
 	}
 	void User::go(std::string s) {
 		direction direction;
@@ -80,5 +84,9 @@ namespace the_lion_king_saga {
 	}
 	void User::talk_to(std::string s) {
 		std::cout << "Not implemented" << std::endl;
+	}
+
+	int  User::attack(Animal* a) {
+		std::cout << "No attack implemented for simba" << std::endl;
 	}
 }

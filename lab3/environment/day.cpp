@@ -1,7 +1,5 @@
 #include "day.h"
 
-#include <string>
-
 namespace the_lion_king_saga {
 
   Day::Day(std::string s): Environment::Environment(s){}
