@@ -2,12 +2,13 @@
 
 namespace the_lion_king_saga {
 
-	Environment::Environment(std::string name, std::string description):
+	Environment::Environment(std::string name, std::string description, std::string farAwayDescription):
 		_items(), 
 		_neighbors(), 
 		_animals(),
 		_name(name),
-		_description(description) {}
+		_description(description), 
+		_farAwayDescription(farAwayDescription) {}
 
 	std::string Environment::name() {
 		return _name;
@@ -21,8 +22,8 @@ namespace the_lion_king_saga {
 
 	//Will return address 0 if not found
 	std::shared_ptr<Environment> Environment::getNeighbor(Direction d) {
-        auto it = _neighbors.find(d);
-        if(it == _neighbors.end()) return NULL;
+		auto it = _neighbors.find(d);
+		if(it == _neighbors.end()) return NULL;
 		return it->second;
 	}
 	void Environment::add(std::unique_ptr<Item> item) {
@@ -33,27 +34,32 @@ namespace the_lion_king_saga {
 		_neighbors[d] = e;
 	}
 	void Environment::printDescription() const{
+		std::cout << _description << std::endl;
+		for(auto& imap: _neighbors) {
+			std::cout << "\tTo the " << imap.first << " " << imap.second->farAwayDescription() << std::endl;
+		}
 		if(!_animals.empty()) {
 			std::cout << "There are other animals here:" << std::endl;
 			for(auto& imap: _animals) {
-				std::cout << imap.first << std::endl;
+				std::cout << "\t" << imap.first << std::endl;
 
 			}
 		}
 		if(!_items.empty()) {
 			std::cout << "There are things here:" << std::endl;
 			for(auto& imap: _items) {
-				std::cout << imap.first << std::endl;
+				std::cout << "\t" <<  imap.first << std::endl;
 
 			}
 		}
-		std::cout << _description << std::endl;
 	}
 
 	std::string Environment::description() const{
 		return _description;
 	}
-
+	std::string Environment::farAwayDescription() const{
+		return _farAwayDescription;
+	}
 	void Environment::addAnimal(std::unique_ptr<Animal> animal) {
 		_animals[animal->name()] = std::move(animal);
 	}
