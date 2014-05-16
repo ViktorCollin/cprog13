@@ -36,7 +36,7 @@ namespace the_lion_king_saga {
 	void Environment::printDescription() const{
 		std::cout << _description << std::endl;
 		for(auto& imap: _neighbors) {
-			std::cout << "\tTo the " << imap.first << " " << imap.second->farAwayDescription() << std::endl;
+			std::cout << "\tTo the " << directionToStr(imap.first) << " " << imap.second->farAwayDescription() << std::endl;
 		}
 		if(!_animals.empty()) {
 			std::cout << "There are other animals here:" << std::endl;
