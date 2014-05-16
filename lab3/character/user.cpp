@@ -25,7 +25,7 @@ namespace the_lion_king_saga {
 #if DEBUG
 		std::cout << "Trying to walk " << s << " (" << dir << ")" << std::endl;
 #endif
-        if(dir == 0){
+        if(dir == INVALID_DIRECTION){
             std::cout << s << " is NOT a vaild direction, try one of " << listDirections() <<std::endl;
             return;
         }
