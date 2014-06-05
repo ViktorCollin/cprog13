@@ -8,6 +8,7 @@
 
 #include "animal.h"
 #include "../item/item.h"
+#include "../item/breakable.h"
 #include "../environment/environment.h"
 #include "../enums.cpp"
 

@@ -5,7 +5,7 @@ namespace the_lion_king_saga {
     User::User(std::shared_ptr<Environment> startPosition): Animal::Animal("Simba", 100),
     _currentPosition(startPosition) {
 #if DEBUG
-        std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1, true));
+        std::unique_ptr<Item> i(new Breakable("Coffeecup","HOT",1));
         _inventory[i->name()] = std::move(i);
 #endif
     }
