@@ -18,7 +18,7 @@ namespace the_lion_king_saga {
 		protected:
 			std::map<std::string,std::unique_ptr<Item>> _items;
 			std::map<std::string,std::unique_ptr<Animal>> _animals;
-			std::map<Direction, std::shared_ptr<Environment>> _neighbors;
+			std::map<Direction, Environment*> _neighbors;
 			std::string _description;
 			std::string _farAwayDescription;
 			std::string _name;
@@ -27,8 +27,8 @@ namespace the_lion_king_saga {
 			Environment(std::string, std::string, std::string);
 			std::string name();
 			virtual std::map<std::string, std::string> directions() const = 0;
-			std::shared_ptr<Environment> getNeighbor(Direction);
-			void addNeighbor(std::shared_ptr<Environment>, Direction);
+			Environment* getNeighbor(Direction);
+			void addNeighbor(Environment*, Direction);
 			std::string description() const;
 			std::string farAwayDescription() const;
 			void printDescription() const;

@@ -18,10 +18,10 @@ namespace the_lion_king_saga {
 	class User : public Animal{
 		protected:
 			std::map<std::string,std::unique_ptr<Item>> _inventory;
-			std::shared_ptr<Environment> _currentPosition;
+			Environment* _currentPosition;
 
 		public:
-			User(std::shared_ptr<Environment>);
+			User(Environment*);
 			void list_actions();
 			void look(std::string direction_s = "");
 			void go(std::string);

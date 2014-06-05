@@ -1,7 +1,5 @@
 #include "item.h"
 
-#include <string>
-
 namespace the_lion_king_saga {
 
     Item::Item(std::string name, std::string description, int weight, bool usable):
