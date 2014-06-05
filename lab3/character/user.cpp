@@ -2,7 +2,7 @@
 
 namespace the_lion_king_saga {
 
-    User::User(std::shared_ptr<Environment> startPosition): Animal::Animal("Simba", 100),
+    User::User(Environment* startPosition): Animal::Animal("Simba", 100),
     _currentPosition(startPosition) {
 #if DEBUG
         std::unique_ptr<Item> i(new Item("Coffeecup","HOT",1, true));
@@ -27,7 +27,7 @@ namespace the_lion_king_saga {
             std::cout << s << " is NOT a vaild direction, try one of " << listDirections() <<std::endl;
             return;
         }
-        std::shared_ptr<Environment> e = _currentPosition->getNeighbor(dir);
+        Environment* e = _currentPosition->getNeighbor(dir);
         if(e == NULL){
             std::cout << "You're not able to walk " << s << std::endl;
             return;

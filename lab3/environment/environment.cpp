@@ -21,7 +21,7 @@ namespace the_lion_king_saga {
 	}
 
 	//Will return address 0 if not found
-	std::shared_ptr<Environment> Environment::getNeighbor(Direction d) {
+	Environment* Environment::getNeighbor(Direction d) {
 		auto it = _neighbors.find(d);
 		if(it == _neighbors.end()) return NULL;
 		return it->second;
@@ -30,7 +30,7 @@ namespace the_lion_king_saga {
 		_items[item->name()] = std::move(item);
 	}
 
-	void Environment::addNeighbor(std::shared_ptr<Environment> e, Direction d) {
+	void Environment::addNeighbor(Environment* e, Direction d) {
 		_neighbors[d] = e;
 	}
 	void Environment::printDescription() const{
