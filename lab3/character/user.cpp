@@ -43,7 +43,7 @@ namespace the_lion_king_saga {
             User::attack(a);
     }
     void User::showInventory() {
-        std::cout << "Currently in your inventory:" << std::endl;
+        std::cout << "Currently in your cheeks:" << std::endl;
         for(auto& imap: _inventory) {
             std::cout << imap.first << std::endl;
         }
