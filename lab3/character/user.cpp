@@ -45,7 +45,7 @@ namespace the_lion_king_saga {
     void User::showInventory() {
         std::cout << "Currently in your cheeks:" << std::endl;
         for(auto& imap: _inventory) {
-            std::cout << imap.first << std::endl;
+            std::cout << imap.first << " " << imap.second->status() << std::endl;
         }
     }
     void User::use(std::string s) {

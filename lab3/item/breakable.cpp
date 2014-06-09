@@ -8,7 +8,7 @@ namespace the_lion_king_saga {
         Item::Item(name, description, weight, true) {}
 
     void Breakable::use() {
-        _name = "Broken " + _name;
+        Item::addStatus("Broken");
         _usable = false;
     }
 }
