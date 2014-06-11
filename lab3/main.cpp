@@ -45,7 +45,7 @@ void run(){
                 if(reply.size() > 1)
                     user->talk_to(reply[1]);
                 else
-                    std::cout << user->getSpeach() << std::endl;
+                    user->printSpeach();
                 break;
             case Go :
                 if(reply.size() > 1)
