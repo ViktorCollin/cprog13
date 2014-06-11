@@ -9,7 +9,6 @@
 #include "animal.h"
 #include "enemy.h"
 #include "../item/item.h"
-#include "../item/breakable.h"
 #include "../environment/environment.h"
 #include "../enums.cpp"
 
@@ -28,7 +27,7 @@ namespace the_lion_king_saga {
 			void go(std::string);
 			void fight(std::string);
 			void take(std::string);
-			void use(std::string);
+			void eat(std::string);
 			void drop(std::string);
 			void talk_to(std::string);
 			void showInventory();

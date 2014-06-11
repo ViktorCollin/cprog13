@@ -2,6 +2,8 @@
 #define DJUNGLE_H
 
 #include "environment.h"
+#include "../item/item.h"
+#include "../item/eatable.h"
 
 namespace the_lion_king_saga {
 

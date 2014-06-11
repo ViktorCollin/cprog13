@@ -11,7 +11,7 @@ namespace the_lion_king_saga {
 		Fight,
 		Take,
 		Drop,
-		Use,
+		Eat,
 		Cheeks,
 		Help
 	};
@@ -31,7 +31,7 @@ namespace the_lion_king_saga {
         {"Fight", Fight},
         {"Take", Take},
         {"Drop", Drop},
-        {"Use", Use},
+        {"Eat", Eat},
         {"Cheeks", Cheeks},
         {"Help", Help},
         {"Exit", Exit}
@@ -102,6 +102,7 @@ namespace the_lion_king_saga {
 	    "Take:\t\'Take <Item>\'\t\t- Is used to pick up an item in your mouth if it is not full.\n" <<
 	    "Drop:\t\'Drop <Item>\'\t\t- Is used to drop an item from your mouth to make room for more.\n" <<
 	    "Cheeks:\t\'Cheeks\'\t\t- Lists all items you are currently holding in your cheeks pouches.\n"<<
+	    "Eat:\t\'Eat\'\t\t- Eat something in your cheeks.\n"<<
 	    "Help:\t\'Help\'\t\t\t- Prints this message.\n" <<
 	    "Exit:\t\'Exit\'\t\t\t- Quits the game without saving." << std::endl;
 	}

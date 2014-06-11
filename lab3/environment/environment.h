@@ -29,6 +29,7 @@ namespace the_lion_king_saga {
 			//virtual std::map<std::string, std::string> directions() const = 0;
 			Environment* getNeighbor(Direction);
 			void addNeighbor(Environment*, Direction);
+			void removeNeighbor(Direction);
 			std::string description() const;
 			std::string farAwayDescription() const;
 			virtual void printDescription() const;

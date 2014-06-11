@@ -13,6 +13,7 @@
 #include "environment/night.h"
 #include "environment/djungle.h"
 #include "enums.cpp"
+#include "item/eatable.h"
 
 using namespace the_lion_king_saga;
 
@@ -32,6 +33,11 @@ void run(){
     std::string s_input;
     int running = 1;
     while(running){
+        if(user->isDead()) {
+            std::cout << "You died, better luck next time" << std::endl;
+            running = 0;
+            break;
+        }
         std::cout << std::endl;
         //user.list_actions();
         std::cin.getline(c_input,256);
@@ -77,9 +83,9 @@ void run(){
                 else
                     needMoreParams();
                 break;
-            case Use :
+            case Eat :
                 if(reply.size() > 1)
-                    user->use(reply[1]);
+                    user->eat(reply[1]);
                 else
                     needMoreParams();
                 break;
@@ -137,7 +143,7 @@ void updateProgress(std::string input){
             }
             break;
     }
-    
+
 }
 
 Environment* loadMap(){
@@ -160,25 +166,39 @@ Environment* loadMap(){
     std::unique_ptr<Environment> djungle(new Djungle("Djungle", "The big lush djungle", "lies the djungle"));
     std::unique_ptr<Environment> djungle2(new Night("Djungle", "The night has fallen over the djungle", "lies the djungle"));
     std::unique_ptr<Environment> prideLands2(new Night("Pride lands", "This is what use to be your home", "lies the kingdom of the pride lands"));
-    
+
     prideLands->addNeighbor(scarsPlace.get(), West);
     scarsPlace->addNeighbor(prideLands.get(), East);
     prideLands->addNeighbor(waterHole.get(), North);
     waterHole->addNeighbor(prideLands.get(), South);
     //waterHole->addNeighbor(elephantGraveyard.get(), North);
-    
+
     djungle->addNeighbor(djungle.get(), North);
     djungle->addNeighbor(djungle.get(), South);
     djungle->addNeighbor(djungle.get(), East);
     djungle->addNeighbor(djungle.get(), West);
 
     std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
-    "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life.\n\tYou are NOT allowed to go to the areas the sun dont reach."));
+                "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life.\n\tYou are NOT allowed to go to the areas the sun dont reach."));
     std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
-    "Scar:\tI do not have time for you right now."));
-    
-    //std::unique_ptr<Item> i(new Breakable("cc", "cc", 1));
-    //prideLands->addItem(std::move(i));
+                "Scar:\tI do not have time for you right now."));
+
+    std::unique_ptr<Animal> hygena1(new Enemy("Shanzi", 1000, "Shanzi:\tMorr"));
+    std::unique_ptr<Animal> hygena2(new Enemy("Banzai", 1000, "Banzai:\tHehehe!")); 
+    std::unique_ptr<Animal> hygena3(new Enemy("Ed", 1000, "Ed:\tWho's this?"));
+
+    std::unique_ptr<Animal> timone(new Friend("Timone", 100, "Timoe:\tHi there!"));
+    std::unique_ptr<Animal> pumba(new Friend("Pumba", 100, "Pumba:\tHi there!"));
+
+    elephantGraveyard->addAnimal(std::move(hygena1));
+    elephantGraveyard->addAnimal(std::move(hygena2));
+    elephantGraveyard->addAnimal(std::move(hygena3));
+
+    djungle->addAnimal(std::move(timone));
+    djungle->addAnimal(std::move(pumba));
+
+    std::unique_ptr<Item> i(new Eatable("Bugs", "Bugs", 1));
+    djungle->addItem(std::move(i));
 
     prideLands->addAnimal(std::move(mufasa));
     scarsPlace->addAnimal(std::move(scar));

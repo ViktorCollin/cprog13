@@ -16,13 +16,13 @@ namespace the_lion_king_saga {
         public:
             Item(std::string, std::string, int, bool);
             Item(std::string, std::string, int);
-            Item( const Item&);
+            Item(const Item&);
             std::string name() const;
             std::string description() const;
             std::string status() const;
             int weight() const;
             bool isUsable() const;
-            virtual void use();
+            virtual void eat();
 
             void addStatus(const std::string&);
             void removeStatus(const std::string&);

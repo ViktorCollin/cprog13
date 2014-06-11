@@ -6,10 +6,6 @@ namespace the_lion_king_saga {
 
     User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Simba:\tMjau\nThere is nobody listening, try talking to someone."),
     _currentPosition(startPosition) {
-#if DEBUG
-        std::unique_ptr<Item> i(new Breakable("Coffeecup","HOT",1));
-        _inventory[i->name()] = std::move(i);
-#endif
     }
 
     void User::look(std::string direction_s /* = "" */) {
@@ -55,13 +51,13 @@ namespace the_lion_king_saga {
             std::cout << imap.first << " " << imap.second->status() << std::endl;
         }
     }
-    void User::use(std::string s) {
+    void User::eat(std::string s) {
         if(_inventory.count(s)) {
             if(_inventory[s].get()->isUsable()){
-                _inventory[s].get()->use();	
-                std::cout << "You used \"" + s + "\"" << std::endl;
+                _inventory[s].get()->eat();	
+                std::cout << "You have eaten \"" + s + "\"" << std::endl;
             } else{
-                std::cout << "This item is not usable" << std::endl;
+                std::cout << "This item is not eatable" << std::endl;
             }
         } else {
             std::cout << "You do not have " << s << std::endl;
