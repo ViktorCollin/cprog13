@@ -4,7 +4,7 @@
 
 namespace the_lion_king_saga {
 
-    User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Simba:\tMjau\nIt may be inefective to talk when nobody listens, try talking to someone."),
+    User::User(Environment* startPosition): Animal::Animal("Simba", 10, "Simba:\tMjau\nIt may be inefective to talk when nobody listens, try talking to someone."),
     _currentPosition(startPosition) {
     }
 
@@ -130,5 +130,9 @@ namespace the_lion_king_saga {
     }
     Environment* User::currentPosition(){
         return _currentPosition;
+    }
+
+    void User::newHealth(int newHealth) {
+        _health = newHealth;
     }
 }

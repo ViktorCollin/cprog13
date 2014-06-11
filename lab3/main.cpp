@@ -138,10 +138,18 @@ void updateProgress(std::string input){
             break;
         case 3:
             if(input == "Talk" && user->currentPosition()->name() == "The elephant graveyard"){
-                std::cout << "Mufasa:\tRAARW!\nThe hyenas flee the seen\nMufasa:\tSimba, I'm very disappointed in you.\nSimba:\tI know.\nMufasa:\tYou could have been killed! You deliberately disobeyed me! And what's worse, you put Nala in danger!\nSimba:\tI was just trying to be brave like you.\nMufasa:\tSimba, I'm only brave when I have to be. Being brave doesn't mean you go looking for trouble.\nSimba:\tBut you're not scared of anything.\nMufasa:\tI was today.\nSimba:\tYou were?\nMufasa:\tYes. I thought I might lose you.\nSimba:\tWhoah. I guess even kings get scared, huh?\nMufasa:\tMmm-hmm.\nSimba:\tBut you know what?\nMufasa:\tWhat?\nSimba:\tI bet those hyenas were even scareder.\nMufasa:\tThat's 'cause nobody messes with your dad! Come here, you!" << std::endl;
+                std::cout << "Mufasa:\tRAARW!\nThe hyenas flee the seen" << std::endl;
                 _map[3]->addNeighbor(_map[0].get(), South);
                 _map[1]->getAnimal("Scar")->setSpeach("Scar:\tYou are a disgrace for our famely, leave the pride lands and never come back!");
                 _map[0]->removeNeighbor(North);
+                _map[3]->removeAnimal("Ed");
+                _map[3]->removeAnimal("Shanzi");
+                _map[3]->removeAnimal("Banzai");
+                std::unique_ptr<Animal> mufasa100(new Friend("Mufasa", 100,
+"Mufasa:\tSimba, I'm very disappointed in you.\nSimba:\tI know.\nMufasa:\tYou could have been killed! You deliberately disobeyed me! And what's worse, you put Nala in danger!\nSimba:\tI was just trying to be brave like you.\nMufasa:\tSimba, I'm only brave when I have to be. Being brave doesn't mean you go looking for trouble.\nSimba:\tBut you're not scared of anything.\nMufasa:\tI was today.\nSimba:\tYou were?\nMufasa:\tYes. I thought I might lose you.\nSimba:\tWhoah. I guess even kings get scared, huh?\nMufasa:\tMmm-hmm.\nSimba:\tBut you know what?\nMufasa:\tWhat?\nSimba:\tI bet those hyenas were even scareder.\nMufasa:\tThat's 'cause nobody messes with your dad! Come here, you!"
+                    ));
+                _map[3]->addAnimal(std::move(mufasa100));
+
                 ++level;
             }
             break;
@@ -168,6 +176,7 @@ void updateProgress(std::string input){
             if(input == "Eat Bugs"){
                 std::cout << "You have now grown into a magnificant lion" << std::endl;
                 user->setSpeach("Simba:\tRAAAWR!");
+                user->newHealth(100);
                 _map[4]->addNeighbor(_map[5].get(), East);
                 ++level;
             }else if(input == "Drop Bugs"){
