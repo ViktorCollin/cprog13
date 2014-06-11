@@ -115,7 +115,14 @@ namespace the_lion_king_saga {
     }
 
     void  User::attack(Animal* a) {
-        int damage = 60;
+        srand (time(NULL));
+        int damage = rand() % 90 + 10;
+        Enemy* e = dynamic_cast<Enemy*> (a);
+        if(e == NULL) 
+        {
+            std::cout << "Why would you attack someone who is not evil" << std::endl;
+            return;
+        }
         std::cout << "Attacking " << a->name() << std::endl;
         if(a->isDead()) damage = 0;
         std::cout << "Did " << damage << " damage and " << a->name() << "'s health is now " << a->health(damage) << std::endl;

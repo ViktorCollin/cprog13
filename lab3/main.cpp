@@ -8,6 +8,7 @@
 
 #include "character/user.h"
 #include "character/friend.h"
+#include "character/enemy.h"
 #include "environment/day.h"
 #include "environment/night.h"
 #include "environment/djungle.h"

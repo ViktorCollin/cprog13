@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "animal.h"
+#include "enemy.h"
 #include "../item/item.h"
 #include "../item/breakable.h"
 #include "../environment/environment.h"
