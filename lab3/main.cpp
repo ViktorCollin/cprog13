@@ -15,14 +15,17 @@
 
 using namespace the_lion_king_saga;
 
+User* user;
 std::vector<std::unique_ptr<Environment>> _map;
+int level;
 //Metod declarations (no header file) 
 static void init();
+void updateProgress(std::string);
 
 
 
 Environment* loadMap(){
-#if FILE
+#ifdef FILE
     std::string line;
     std::ifstream mapFile("map.txt");
     if (mapFile.is_open()){
@@ -46,7 +49,7 @@ Environment* loadMap(){
     scarsPlace->addNeighbor(prideLands.get(), East);
     prideLands->addNeighbor(waterHole.get(), North);
     waterHole->addNeighbor(prideLands.get(), South);
-    waterHole->addNeighbor(elephantGraveyard.get(), North);
+    //waterHole->addNeighbor(elephantGraveyard.get(), North);
     
     djungle->addNeighbor(djungle.get(), North);
     djungle->addNeighbor(djungle.get(), South);
@@ -54,9 +57,12 @@ Environment* loadMap(){
     djungle->addNeighbor(djungle.get(), West);
 
     std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
-    "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life."));
+    "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life.\n\tYou are NOT allowed to go to the areas the sun dont reach."));
+    std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
+    "Scar:\tI do not have time for you right now."));
     
     prideLands->addAnimal(std::move(mufasa));
+    scarsPlace->addAnimal(std::move(scar));
     Environment* start = prideLands.get();
 
     _map.push_back(std::move(prideLands));
@@ -71,14 +77,14 @@ Environment* loadMap(){
 #endif
 }
 
-void storeMap(User &user){
+void storeMap(){
 }
 
 void needMoreParams(){
     std::cout << "Need another parameter" << std::endl;
 }
 
-void run(User &user){
+void run(){
     char c_input[256];
     std::string s_input;
     int running = 1;
@@ -94,49 +100,49 @@ void run(User &user){
         switch (strToAction(reply[0])) {
             case Talk :
                 if(reply.size() > 1)
-                    user.talk_to(reply[1]);
+                    user->talk_to(reply[1]);
                 else
-                    std::cout << user.getSpeach() << std::endl;
+                    std::cout << user->getSpeach() << std::endl;
                 break;
             case Go :
                 if(reply.size() > 1)
-                    user.go(reply[1]);
+                    user->go(reply[1]);
                 else
                     needMoreParams();
                 break;
             case Look :
                 if(reply.size() > 1)
-                    user.look(reply[1]);
+                    user->look(reply[1]);
                 else
-                    user.look();
+                    user->look();
                 break;
             case Exit :
                 running = 0;
                 break;
             case Cheeks:
-                user.showInventory();
+                user->showInventory();
                 break;
             case Fight :
                 if(reply.size() > 1)
-                    user.fight(reply[1]);
+                    user->fight(reply[1]);
                 else
                     needMoreParams();
                 break;
             case Take :
                 if(reply.size() > 1)
-                    user.take(reply[1]);
+                    user->take(reply[1]);
                 else
                     needMoreParams();
                 break;
             case Use :
                 if(reply.size() > 1)
-                    user.use(reply[1]);
+                    user->use(reply[1]);
                 else
                     needMoreParams();
                 break;
             case Drop :
                 if(reply.size() > 1)
-                    user.drop(reply[1]);
+                    user->drop(reply[1]);
                 else
                     needMoreParams();
                 break;
@@ -145,7 +151,9 @@ void run(User &user){
                 break;
             default:
                 std::cout << "Unknown command, write 'Help' for more information about what you can do" << std::endl;
+                continue;
         }
+        updateProgress(s_input);
     }
 }
 
@@ -154,16 +162,29 @@ int main(){
     std::cout << "In debug mode" << std::endl;
 #endif
     init();
+    level = 0;
     Environment* startposition = loadMap();
     if(startposition == NULL) {
         std::cout << "Unable to open map, Exiting the game!" << std::endl; 
         return 1;
     }
-    User* simba = new User(startposition);
-    run(*simba);
-    storeMap(*simba);
-    delete simba;
+    user = new User(startposition);
+    run();
+    storeMap();
+    delete user;
     return 0;
+}
+
+void updateProgress(std::string input){
+    switch(level){
+        case 1:
+            if(input == "Talk Mufasa"){
+                _map[1]->getAnimal("Scar")->setSpeach("Simba:\tHey, Uncle Scar, guess what?\nScar:\tI despise guessing games.\nSimba:\tI'm gonna be King of Pride Rock.\nScar:\tOh, goody.\nSimba:\tMy dad just showed me the whole kingdom. And I'm gonna rule it all. Heheh.\nScar:\tYes. Well, forgive me for not leaping for joy. Bad back, you know.\nSimba:\tHey Uncle Scar, when I'm King, what'll that make you?\nScar:\tA monkey's uncle.\nSimba:\tYou're so weird.\nScar:\tYou have no idea.");
+                ++level;
+            }
+            break;
+    }
+    
 }
 
 void init() {
