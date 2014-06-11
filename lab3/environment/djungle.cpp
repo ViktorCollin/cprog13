@@ -6,7 +6,7 @@ namespace the_lion_king_saga {
         Environment(name, description, farAwayDescription) {}
 
     std::unique_ptr<Item> Djungle::getItem(std::string s) {
-        auto i = new Item(*_items[s]);
+        Eatable* i = new Eatable(*_items[s]);
         std::unique_ptr<Item> u_i(i);
         return u_i;
     }

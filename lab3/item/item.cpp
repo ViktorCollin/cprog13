@@ -8,8 +8,8 @@ namespace the_lion_king_saga {
     Item::Item(std::string name, std::string description, int weight):
         _name(name), _description(description), _weight(weight), _usable(false), _status() {}
 
-    Item::Item( const Item& i):
-        _name(i._name), _description(i._description), _weight(i._weight), _usable(i._usable), _status(i._status) {}
+    Item::Item(const Item& i):
+        _name(i._name), _description(i._description), _weight(i._weight), _usable(i._usable), _status() {}
     
 
     std::string Item::name() const {
@@ -32,7 +32,7 @@ namespace the_lion_king_saga {
             status.append(", " + *nx);
         }
         status.append(")");
-        return status;
+        return status; 
     }
 
     int Item::weight() const {
@@ -51,7 +51,7 @@ namespace the_lion_king_saga {
         _status.erase(s);
     }
 
-    void Item::use() {
+    void Item::eat() {
         _usable = false;
     }
 }
