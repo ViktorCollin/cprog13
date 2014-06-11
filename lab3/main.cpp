@@ -35,7 +35,7 @@ Environment* loadMap(){
     }
 #else
     std::unique_ptr<Environment> prideLands(new Day("Pride lands", "Home sweet home", "lies the kingdom of the pride lands"));
-    /*std::unique_ptr<Environment> scarsPlace(new Night("Scars place", "You find your self in the shadows of the lion cliff, it is a spoky place to stay", "is a shadowy place where uncle scar lives"));
+    std::unique_ptr<Environment> scarsPlace(new Night("Scars place", "You find your self in the shadows of the lion cliff, it is a spoky place to stay", "is a shadowy place where uncle scar lives"));
     std::unique_ptr<Environment> waterHole(new Day("The water hole", "You are on the your way to the water hole, but the plan is to reach the elephant graveyard. If you just could get rid of that stupid bird Zazu.", "lies the water hole"));
     std::unique_ptr<Environment> elephantGraveyard(new Night("The elephant graveyard", "you have arived at the scariest place in the world, the elephat graveyard. Ther is a lot of elephant skulls with large dark holes where the eyes used to be.", "lies the big dark elephant graveyard"));
     std::unique_ptr<Environment> djungle(new Djungle("Djungle", "The big lush djungle", "lies the djungle"));
@@ -46,20 +46,26 @@ Environment* loadMap(){
     scarsPlace->addNeighbor(prideLands.get(), East);
     prideLands->addNeighbor(waterHole.get(), North);
     waterHole->addNeighbor(prideLands.get(), South);
-    waterHole->addNeighbor(elephantGraveyard.get(), Noth);
+    waterHole->addNeighbor(elephantGraveyard.get(), North);
     
     djungle->addNeighbor(djungle.get(), North);
     djungle->addNeighbor(djungle.get(), South);
     djungle->addNeighbor(djungle.get(), East);
-    djungle->addNeighbor(djungle.get(), West);*/
+    djungle->addNeighbor(djungle.get(), West);
 
     std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
     "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life."));
     
     prideLands->addAnimal(std::move(mufasa));
     Environment* start = prideLands.get();
-    _map.push_back(std::move(prideLands));
 
+    _map.push_back(std::move(prideLands));
+    _map.push_back(std::move(scarsPlace));
+    _map.push_back(std::move(waterHole));
+    _map.push_back(std::move(elephantGraveyard));
+    _map.push_back(std::move(djungle));
+    _map.push_back(std::move(djungle2));
+    _map.push_back(std::move(prideLands2));
 
     return start;
 #endif
