@@ -189,8 +189,8 @@ Environment* loadMap(){
 
     std::unique_ptr<Animal> scar2(new Enemy("Scar", 100, "Scar:\tWhy did you come back?"));
 
-    std::unique_ptr<Animal> timone(new Friend("Timone", 100, "Timoe:\tHi there!"));
-    std::unique_ptr<Animal> pumba(new Friend("Pumba", 100, "Pumba:\tHi there!"));
+    std::unique_ptr<Animal> timone(new Friend("Timone", 100, "Timoe:\tHi there, Friend!"));
+    std::unique_ptr<Animal> pumba(new Friend("Pumba", 100, "Pumba:\tHakuna Matata"));
 
     elephantGraveyard->addAnimal(std::move(hygena1));
     elephantGraveyard->addAnimal(std::move(hygena2));

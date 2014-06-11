@@ -74,11 +74,17 @@ namespace the_lion_king_saga {
     std::string Environment::description() const{
         return _description;
     }
+
     std::string Environment::farAwayDescription() const{
         return _farAwayDescription;
     }
+
     void Environment::addAnimal(std::unique_ptr<Animal> animal) {
         _animals[animal->name()] = std::move(animal);
+    }
+
+    void Environment::removeAnimal(std::string s) {
+        _animals.erase(s);
     }
 
     Animal* Environment::getAnimal(std::string s) {
