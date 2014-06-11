@@ -53,7 +53,7 @@ Environment* loadMap(){
     djungle->addNeighbor(djungle.get(), West);*/
 
     std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
-    "Mufasa:\tEverything you see exists together in a delicate balance. As king, you need to understand that balance and respect all the creatures, from the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain. When we die, our bodies become the grass, and the antelope eat the grass. And so we are all connnected in the great Circle of Life."));
+    "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life."));
     
     prideLands->addAnimal(std::move(mufasa));
     Environment* start = prideLands.get();
