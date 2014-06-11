@@ -32,6 +32,7 @@ namespace the_lion_king_saga {
 			void drop(std::string);
 			void talk_to(std::string);
 			void showInventory();
+            Environment* currentPosition();
 
 			virtual void attack(Animal*);
 
