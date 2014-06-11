@@ -183,9 +183,11 @@ Environment* loadMap(){
     std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
                 "Scar:\tI do not have time for you right now."));
 
-    std::unique_ptr<Animal> hygena1(new Enemy("Shanzi", 1000, "Shanzi:\tMorr"));
-    std::unique_ptr<Animal> hygena2(new Enemy("Banzai", 1000, "Banzai:\tHehehe!")); 
-    std::unique_ptr<Animal> hygena3(new Enemy("Ed", 1000, "Ed:\tWho's this?"));
+    std::unique_ptr<Animal> hygena1(new Enemy("Shanzi", 100, "Shanzi:\tMorr"));
+    std::unique_ptr<Animal> hygena2(new Enemy("Banzai", 100, "Banzai:\tHehehe!")); 
+    std::unique_ptr<Animal> hygena3(new Enemy("Ed", 100, "Ed:\tWho's this?"));
+
+    std::unique_ptr<Animal> scar2(new Enemy("Scar", 100, "Scar:\tWhy did you come back?"));
 
     std::unique_ptr<Animal> timone(new Friend("Timone", 100, "Timoe:\tHi there!"));
     std::unique_ptr<Animal> pumba(new Friend("Pumba", 100, "Pumba:\tHi there!"));
@@ -194,6 +196,8 @@ Environment* loadMap(){
     elephantGraveyard->addAnimal(std::move(hygena2));
     elephantGraveyard->addAnimal(std::move(hygena3));
 
+    prideLands2->addAnimal(std::move(scar2));
+    
     djungle->addAnimal(std::move(timone));
     djungle->addAnimal(std::move(pumba));
 
