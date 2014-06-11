@@ -10,6 +10,7 @@
 #include "character/cat.h"
 #include "environment/day.h"
 #include "environment/night.h"
+#include "environment/djungle.h"
 #include "enums.cpp"
 
 using namespace the_lion_king_saga;
@@ -33,7 +34,7 @@ Environment* loadMap(){
         return NULL;
 #endif
     }
-    std::unique_ptr<Environment> day(new Day("day", "The green grass", "lies the green grass"));
+    std::unique_ptr<Environment> day(new Djungle("day", "The green grass", "lies the green grass"));
 
 #if DEBUG
     std::unique_ptr<Environment> day2(new Night("day2", "The big prairie", "you see the big prairie"));

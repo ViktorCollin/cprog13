@@ -16,6 +16,7 @@ namespace the_lion_king_saga {
         public:
             Item(std::string, std::string, int, bool);
             Item(std::string, std::string, int);
+            Item( const Item&);
             std::string name() const;
             std::string description() const;
             std::string status() const;

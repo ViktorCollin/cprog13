@@ -66,7 +66,7 @@ namespace the_lion_king_saga {
         }
     }
     void User::take(std::string s) {
-        std::unique_ptr<Item> item(_currentPosition->get(s));
+        std::unique_ptr<Item> item(_currentPosition->getItem(s));
         if(item == 0)
             std::cout << "No item with the name \"" <<
                 s << "\" exists" << std::endl;
@@ -81,7 +81,7 @@ namespace the_lion_king_saga {
     }
     void User::drop(std::string s) {
         if(_inventory.count(s)){
-            _currentPosition->add(std::move(_inventory[s]));	
+            _currentPosition->addItem(std::move(_inventory[s]));	
             _inventory.erase(s);
             std::cout << "You dropped \"" + s + "\"" << std::endl;
         }

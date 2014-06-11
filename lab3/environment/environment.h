@@ -38,8 +38,8 @@ namespace the_lion_king_saga {
 			void addAnimal(std::unique_ptr<Animal>);
 			Animal* getAnimal(std::string);
 
-			std::unique_ptr<Item> get(std::string s);
-			void add(std::unique_ptr<Item>);
+			virtual std::unique_ptr<Item> getItem(std::string);
+			void addItem(std::unique_ptr<Item>);
 	};
 }
 #endif

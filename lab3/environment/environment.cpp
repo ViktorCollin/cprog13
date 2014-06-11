@@ -14,7 +14,7 @@ namespace the_lion_king_saga {
         return _name;
     }
 
-    std::unique_ptr<Item> Environment::get(std::string s) {
+    std::unique_ptr<Item> Environment::getItem(std::string s) {
         std::unique_ptr<Item> i = std::move(_items[s]);
         _items.erase(s);
         return i;
@@ -26,7 +26,7 @@ namespace the_lion_king_saga {
         if(it == _neighbors.end()) return NULL;
         return it->second;
     }
-    void Environment::add(std::unique_ptr<Item> item) {
+    void Environment::addItem(std::unique_ptr<Item> item) {
         _items[item->name()] = std::move(item);
     }
 
