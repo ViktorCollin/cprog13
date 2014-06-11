@@ -58,8 +58,14 @@ Environment* loadMap(){
     
     prideLands->addAnimal(std::move(mufasa));
     Environment* start = prideLands.get();
-    _map.push_back(std::move(prideLands));
 
+    _map.push_back(std::move(prideLands));
+    _map.push_back(std::move(scarsPlace));
+    _map.push_back(std::move(waterHole));
+    _map.push_back(std::move(elephantGraveyard));
+    _map.push_back(std::move(djungle));
+    _map.push_back(std::move(djungle2));
+    _map.push_back(std::move(prideLands2));
 
     return start;
 #endif
