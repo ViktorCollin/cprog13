@@ -105,12 +105,12 @@ namespace the_lion_king_saga {
 
     }
     void User::talk_to(std::string s) {
-        std::unique_ptr<Animal> character(_currentPosition->getAnimal(s));
-        if(character== 0)
+        Animal* character(_currentPosition->getAnimal(s));
+        if(character== NULL)
             std::cout << "There is no one with the name \"" <<
                 s << "\" here" << std::endl;
         else {
-            std::cout << character->getSpeach() << std::endl;
+            character->printSpeach();
         }
     }
 

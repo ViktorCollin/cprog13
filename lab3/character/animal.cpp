@@ -14,10 +14,11 @@ namespace the_lion_king_saga {
 		return _name;
 	}
 	
-	std::string Animal::getSpeach() {
+	void Animal::printSpeach() {
 		if(isDead()) 
-			return "Dead animals can't talk";
-		return _speach;
+			std::cout << "Dead animals can't talk" << std::endl;
+        else
+		std::cout << _speach << std::endl;
 	}
 	
 	void Animal::setSpeach(std::string speach) {

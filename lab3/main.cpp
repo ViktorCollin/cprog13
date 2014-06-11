@@ -106,7 +106,7 @@ void run(){
                 if(reply.size() > 1)
                     user->talk_to(reply[1]);
                 else
-                    std::cout << user->getSpeach() << std::endl;
+                    user->printSpeach();
                 break;
             case Go :
                 if(reply.size() > 1)
@@ -166,7 +166,7 @@ int main(){
     std::cout << "In debug mode" << std::endl;
 #endif
     init();
-    level = 0;
+    level = 1;
     Environment* startposition = loadMap();
     if(startposition == NULL) {
         std::cout << "Unable to open map, Exiting the game!" << std::endl; 

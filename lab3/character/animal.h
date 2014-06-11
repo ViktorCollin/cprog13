@@ -2,6 +2,7 @@
 #define ANIMAL_H
 
 #include <string>
+#include <iostream>
 
 namespace the_lion_king_saga {
 
@@ -15,7 +16,7 @@ namespace the_lion_king_saga {
 		public:
 			Animal(std::string, int, std::string);
 			std::string name();
-            std::string getSpeach();
+            void printSpeach();
             void setSpeach(std::string);
 			int health( int = 0);
 			virtual void attack(Animal*) = 0;
