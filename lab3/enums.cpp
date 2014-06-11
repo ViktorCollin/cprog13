@@ -4,6 +4,7 @@
 namespace the_lion_king_saga {
 	enum Action{
 	    INVALID_ACTION,
+	    Talk,
 		Go,
 		Look,
 		Exit,
@@ -24,6 +25,7 @@ namespace the_lion_king_saga {
 	};
 	
     static const std::map<std::string, Action> actionMap = {
+        {"Talk", Talk},
         {"Go", Go}, 
         {"Look", Look}, 
         {"Fight", Fight},
