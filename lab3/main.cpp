@@ -56,6 +56,9 @@ Environment* loadMap(){
     std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
     "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life."));
     
+    //std::unique_ptr<Item> i(new Breakable("cc", "cc", 1));
+    //prideLands->addItem(std::move(i));
+
     prideLands->addAnimal(std::move(mufasa));
     Environment* start = prideLands.get();
 

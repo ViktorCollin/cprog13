@@ -77,7 +77,10 @@ namespace the_lion_king_saga {
     }
 
     Animal* Environment::getAnimal(std::string s) {
-        Animal* a = _animals[s].get();
+        Animal* a = NULL;
+        if(_animals.count(s)>0){
+            a = _animals[s].get();
+        }
         return a;
     }
 }

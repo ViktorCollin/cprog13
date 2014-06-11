@@ -1,5 +1,7 @@
 #include "user.h"
 
+#define MAXWEIGHT 1
+
 namespace the_lion_king_saga {
 
     User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Simba:\tMjau\nThere is nobody listening, try talking to someone."),
@@ -42,7 +44,7 @@ namespace the_lion_king_saga {
     }
     void User::fight(std::string s) {
         Animal* a = _currentPosition->getAnimal(s);
-        if(a == 0)
+        if(a == NULL)
             std::cout << "No animal named " << s << " could be found" << std::endl;
         else
             User::attack(a);
@@ -71,6 +73,14 @@ namespace the_lion_king_saga {
             std::cout << "No item with the name \"" <<
                 s << "\" exists" << std::endl;
         else {
+            int w = 0;
+            for(auto& item : _inventory) {
+                w += item.second->weight();
+            }
+            if(w >= MAXWEIGHT) {
+                std::cout << "Your cheeks are full" << std::endl;
+                return; 
+            }
             _inventory[s] = std::move(item);
             std::cout << "Picked up \"" << s << "\"" << std::endl;
         }
