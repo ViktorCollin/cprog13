@@ -131,7 +131,7 @@ void updateProgress(std::string input){
             }
             break;
         case 3:
-            if(input == "Talk" && user->getCurrentPosition()->name() == "The elephant graveyard"){
+            if(input == "Talk" && user->currentPosition()->name() == "The elephant graveyard"){
                 _map[2]->addNeighbor(_map[3].get(), North);
                 ++level;
             }
