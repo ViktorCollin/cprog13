@@ -11,12 +11,17 @@ namespace the_lion_king_saga {
     }
 
     void User::look(std::string direction_s /* = "" */) {
-        //This needs to handle different types of rooms
         if(direction_s=="") {
             _currentPosition->printDescription();
         } else {
-            std::cout << "Not implemented" << std::endl;
+            Direction dir = strToDirection(direction_s);
+            if(dir == INVALID_DIRECTION) {
+                std::cout << direction_s << " is NOT a vaild direction, try one of " << listDirections() <<std::endl;
+                return;
+            }
+            _currentPosition->printDescription(dir);
         }
+        _currentPosition->printAnimalsAndItems();
     }
     void User::go(std::string s) {
         Direction dir = strToDirection(s);

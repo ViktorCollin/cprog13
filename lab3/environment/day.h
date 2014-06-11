@@ -12,11 +12,9 @@ namespace the_lion_king_saga {
 
     public:
       Day(std::string, std::string, std::string);
-      std::map<std::string, std::string> directions() const;
+      //std::map<std::string, std::string> directions() const;
       Environment& neighbor(std::string);
 
-      void enter(Animal&);
-      void leave(Animal&);
   };
 }
 #endif

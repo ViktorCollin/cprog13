@@ -26,12 +26,14 @@ namespace the_lion_king_saga {
 		public:
 			Environment(std::string, std::string, std::string);
 			std::string name();
-			virtual std::map<std::string, std::string> directions() const = 0;
+			//virtual std::map<std::string, std::string> directions() const = 0;
 			Environment* getNeighbor(Direction);
 			void addNeighbor(Environment*, Direction);
 			std::string description() const;
 			std::string farAwayDescription() const;
-			void printDescription() const;
+			virtual void printDescription() const;
+            void printDescription(Direction) const;
+            void printAnimalsAndItems() const;
 
 			void addAnimal(std::unique_ptr<Animal>);
 			Animal* getAnimal(std::string);
