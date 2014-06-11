@@ -35,7 +35,7 @@ namespace the_lion_king_saga {
     }
 
     void Environment::removeNeighbor(Direction d) {
-        _neighbours.erase(d);
+        _neighbors.erase(d);
     }
 
     void Environment::printDescription() const{
