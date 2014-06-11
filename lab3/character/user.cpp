@@ -2,7 +2,7 @@
 
 namespace the_lion_king_saga {
 
-    User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Talking when nobody listens, may be inefective. Try talking to somebody."),
+    User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Simba:\tMjau\nThere is nobody listening, try talking to someone."),
     _currentPosition(startPosition) {
 #if DEBUG
         std::unique_ptr<Item> i(new Breakable("Coffeecup","HOT",1));
@@ -95,7 +95,13 @@ namespace the_lion_king_saga {
 
     }
     void User::talk_to(std::string s) {
-        std::cout << "Not implemented" << std::endl;
+        std::unique_ptr<Animal> character(_currentPosition->getAnimal(s));
+        if(character== 0)
+            std::cout << "There is no one with the name \"" <<
+                s << "\" here" << std::endl;
+        else {
+            std::cout << character->getSpeach() << std::endl;
+        }
     }
 
     void  User::attack(Animal* a) {
