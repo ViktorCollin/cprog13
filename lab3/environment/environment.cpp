@@ -33,6 +33,10 @@ namespace the_lion_king_saga {
     void Environment::addNeighbor(Environment* e, Direction d) {
         _neighbors[d] = e;
     }
+    void Environment::removeNeighbor(Direction d) {
+        std::cout << "Not yet implemented" << std::endl;
+    }
+    
     void Environment::printDescription() const{
         std::cout << _description << std::endl;
         for(auto& imap: _neighbors) {

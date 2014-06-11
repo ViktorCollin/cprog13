@@ -132,11 +132,67 @@ void updateProgress(std::string input){
             break;
         case 3:
             if(input == "Talk" && user->currentPosition()->name() == "The elephant graveyard"){
-                _map[2]->addNeighbor(_map[3].get(), North);
+                std::cout << "Mufasa:\tRAARW!\nThe hyenas flee the seen\nMufasa:\tSimba, I'm very disappointed in you.\nSimba:\tI know.\nMufasa:\tYou could have been killed! You deliberately disobeyed me! And what's worse, you put Nala in danger!\nSimba:\tI was just trying to be brave like you.\nMufasa:\tSimba, I'm only brave when I have to be. Being brave doesn't mean you go looking for trouble.\nSimba:\tBut you're not scared of anything.\nMufasa:\tI was today.\nSimba:\tYou were?\nMufasa:\tYes. I thought I might lose you.\nSimba:\tWhoah. I guess even kings get scared, huh?\nMufasa:\tMmm-hmm.\nSimba:\tBut you know what?\nMufasa:\tWhat?\nSimba:\tI bet those hyenas were even scareder.\nMufasa:\tThat's 'cause nobody messes with your dad! Come here, you!" << std::endl;
+                _map[3]->addNeighbor(_map[0].get(), South);
+                _map[1]->getAnimal("Scar")->setSpeach("Scar:\tYou are a disgrace for our famely, leave the pride lands and never come back!");
+                _map[0]->removeNeighbor(North);
+                ++level;
+            }
+            break;
+        case 4:
+            if(input == "Talk Scar"){
+                _map[0]->addNeighbor(_map[4].get(), South);
+                ++level;
+            }
+            break;
+        case 5:
+        case 7:
+            if(input == "Take Bugs"){
+                ++level;
+            }
+            break;
+        case 6:
+            if(input == "Eat Bugs"){
+                ++level;
+            }else if(input == "Drop Bugs"){
+                --level;
+            }
+            break;
+        case 8:
+            if(input == "Eat Bugs"){
+                std::cout << "You have now grown into a magnificant lion" << std::endl;
+                user->setSpeach("Simba:\tRAAAWR!");
+                _map[4]->addNeighbor(_map[5].get(), East);
+                ++level;
+            }else if(input == "Drop Bugs"){
+                --level;
+            }
+            break;
+        case 9:
+            if(input == "Talk Rafiki"){
+                std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100,
+                    "Mufasa's ghost:\t[apears among the stars] Simba, you have forgotten me.\nSimba:\tNo. How could I?\nMufasa's ghost:\tYou have forgotten who you are and so have forgotten me.\n\tLook inside yourself, Simba.\n\tYou are more than what you have become.\n\tYou must take your place in the Circle of Life."
+                );
+                _map[5]->addAnimal(std::move(mufasa));
+                ++level;
+            }
+            break;
+        case 10:
+            if(input == "Talk Mufasa"){
+                _map[5]->getAnimal("Rafiki")->setSpeach("Simba:\tI know what I have to do. But going back means I'll have to face my past.\n\tI've been running from it for so long.\n[Rafiki hits Simba on the head with his stick]\nSimba:\tOw! Jeez, what was that for?\nRafiki:\tIt doesn't matter. It's in the past.\nSimba:\tYeah, but it still hurts.\nRafiki:\tOh yes, the past can hurt. But from the way I see it,\n\tyou can either run from it, or... learn from it.\n[swings his stick again at Simba, who ducks out of the way]\nRafiki:\tHa. You see? So what are you going to do?\nSimba:\tFirst, I'm gonna take your stick.\n[Simba snatches Rafiki's stick and throws it and Rafiki runs to grab it]\nRafiki:\tNo, no, no, no, not the stick! Hey, where you going?\nSimba:\tI'm going back!\nRafiki:\tGood! Go on! Get out of here!");
+                ++level;
+            }
+            break;
+        case 11:
+            if(input == "Talk Rafiki"){
+                _map[5]->addNeighbor(_map[6].get(), South);
                 ++level;
             }
             break;
     }
+#ifdef DEBUG
+    std::cout << "level: " << level << std::endl;
+#endif
     
 }
 
@@ -165,7 +221,6 @@ Environment* loadMap(){
     scarsPlace->addNeighbor(prideLands.get(), East);
     prideLands->addNeighbor(waterHole.get(), North);
     waterHole->addNeighbor(prideLands.get(), South);
-    //waterHole->addNeighbor(elephantGraveyard.get(), North);
     
     djungle->addNeighbor(djungle.get(), North);
     djungle->addNeighbor(djungle.get(), South);
@@ -177,11 +232,18 @@ Environment* loadMap(){
     std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
     "Scar:\tI do not have time for you right now."));
     
+    
+    std::unique_ptr<Animal> rafiki(new Friend("Rafiki", 100, 
+        "Rafiki\tAsante sana Squash banana, Wiwi nugu Mi mi apana.\nSimba\tCome on, will you cut it out?\nRafiki\tCan't cut it out. It will grow right back. Hehehe.\nSimba\tCreepy little monkey. Would you stop following me! Who are you?\nRafiki\tThe question is, who... are you?\nSimba\t[sighs] I thought I knew, but now I'm not so sure.\nRafiki\tWell, I know who you are! Shh. Come here, it's a secret.\n[Whispers, then grows louder]\nRafiki\tAsante sana Squash banana, Wiwi nugu Mi mi apana!\nSimba\tEnough already! What's that supposed to mean, anyway?\nRafiki\tIt means you're a baboon... and I'm not.\nSimba\tI think you're a little confused.\nRafiki\tWrong! I'm not the one who's confused. You don't even know who you are!\nSimba\tOh, and I suppose you know?\nRafiki\tSure do. You're Mufasa's boy!\n[Simba turns around to look at him, shocked]\nRafiki\tBye!"));
     //std::unique_ptr<Item> i(new Breakable("cc", "cc", 1));
     //prideLands->addItem(std::move(i));
 
     prideLands->addAnimal(std::move(mufasa));
     scarsPlace->addAnimal(std::move(scar));
+    
+    
+    
+    djungle2->addAnimal(std::move(rafiki));
     Environment* start = prideLands.get();
 
     _map.push_back(std::move(prideLands));
