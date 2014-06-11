@@ -2,7 +2,7 @@
 
 namespace the_lion_king_saga {
 
-    User::User(Environment* startPosition): Animal::Animal("Simba", 100),
+    User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Talking when nobody listens, may be inefective. Try talking to somebody."),
     _currentPosition(startPosition) {
 #if DEBUG
         std::unique_ptr<Item> i(new Breakable("Coffeecup","HOT",1));
