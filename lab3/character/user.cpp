@@ -1,5 +1,7 @@
 #include "user.h"
 
+#define MAXWEIGHT 1
+
 namespace the_lion_king_saga {
 
     User::User(Environment* startPosition): Animal::Animal("Simba", 100, "Simba:\tMjau\nThere is nobody listening, try talking to someone."),
@@ -42,7 +44,7 @@ namespace the_lion_king_saga {
     }
     void User::fight(std::string s) {
         Animal* a = _currentPosition->getAnimal(s);
-        if(a == 0)
+        if(a == NULL)
             std::cout << "No animal named " << s << " could be found" << std::endl;
         else
             User::attack(a);
@@ -71,6 +73,14 @@ namespace the_lion_king_saga {
             std::cout << "No item with the name \"" <<
                 s << "\" exists" << std::endl;
         else {
+            int w = 0;
+            for(auto& item : _inventory) {
+                w += item.second->weight();
+            }
+            if(w >= MAXWEIGHT) {
+                std::cout << "Your cheeks are full" << std::endl;
+                return; 
+            }
             _inventory[s] = std::move(item);
             std::cout << "Picked up \"" << s << "\"" << std::endl;
         }
@@ -105,7 +115,14 @@ namespace the_lion_king_saga {
     }
 
     void  User::attack(Animal* a) {
-        int damage = 60;
+        srand (time(NULL));
+        int damage = rand() % 90 + 10;
+        Enemy* e = dynamic_cast<Enemy*> (a);
+        if(e == NULL) 
+        {
+            std::cout << "Why would you attack someone who is not evil" << std::endl;
+            return;
+        }
         std::cout << "Attacking " << a->name() << std::endl;
         if(a->isDead()) damage = 0;
         std::cout << "Did " << damage << " damage and " << a->name() << "'s health is now " << a->health(damage) << std::endl;

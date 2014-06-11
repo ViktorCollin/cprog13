@@ -8,6 +8,7 @@
 
 #include "character/user.h"
 #include "character/friend.h"
+#include "character/enemy.h"
 #include "environment/day.h"
 #include "environment/night.h"
 #include "environment/djungle.h"
@@ -61,6 +62,9 @@ Environment* loadMap(){
     std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
     "Scar:\tI do not have time for you right now."));
     
+    //std::unique_ptr<Item> i(new Breakable("cc", "cc", 1));
+    //prideLands->addItem(std::move(i));
+
     prideLands->addAnimal(std::move(mufasa));
     scarsPlace->addAnimal(std::move(scar));
     Environment* start = prideLands.get();
