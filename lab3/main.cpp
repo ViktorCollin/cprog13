@@ -178,7 +178,7 @@ void updateProgress(std::string input){
             if(input == "Talk Rafiki"){
                 std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100,
                     "Mufasa's ghost:\t[apears among the stars] Simba, you have forgotten me.\nSimba:\tNo. How could I?\nMufasa's ghost:\tYou have forgotten who you are and so have forgotten me.\n\tLook inside yourself, Simba.\n\tYou are more than what you have become.\n\tYou must take your place in the Circle of Life."
-                );
+                    ));
                 _map[5]->addAnimal(std::move(mufasa));
                 ++level;
             }
