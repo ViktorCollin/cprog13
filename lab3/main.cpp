@@ -29,12 +29,17 @@ void needMoreParams(){
 }
 
 void run(){
+    std::cout << "This game is based on the classic Disney movie \"The Lionking\".\n" <<
+                 "You are the litle lion cub Simba, I will probable help if you have seen the movie\n" <<
+                 "The controlls for this game is very simple just typ one or two words inte the command line and hit Return\n" <<
+                 "All words start with a uppercase character e.g. \"Look\" or \"Go West\"\n" << 
+                 "For a compleate list of commands just type \"Help\"\n" << 
+                 "To quit the game just type \"Exit\"" << std::endl;
     char c_input[256];
     std::string s_input;
     int running = 1;
     while(running){
-        if(user->isDead()) {
-            std::cout << "You died, better luck next time" << std::endl;
+        if(user->isDead() || level >= 13) {
             running = 0;
             break;
         }
@@ -104,6 +109,11 @@ void run(){
         }
         updateProgress(s_input);
     }
+    if(user->isDead()){
+         std::cout << "You died, better luck next time, restart the game and try agien" << std::endl;
+    }else{
+        std::cout << "Welcome back and play agien" << std::endl;
+    }
 }
 
 int main(){
@@ -123,6 +133,10 @@ int main(){
 }
 
 void updateProgress(std::string input){
+    if(input == "CHEAT"){
+        ++level;
+        return;
+    }
     switch(level){
         case 1:
             if(input == "Talk Mufasa"){
@@ -195,6 +209,13 @@ void updateProgress(std::string input){
                 ++level;
             }
             break;
+        case 12:
+            if(input == "Fight Scar" && _map[6]->getAnimal("Scar")->isDead()){
+                std::cout << "Congratulation! You defeated Scar and won the game!" << std::endl;
+                ++level;
+            }
+            break; 
+            
     }
 #ifdef DEBUG
     std::cout << "level: " << level << std::endl;
