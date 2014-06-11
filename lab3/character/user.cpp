@@ -132,4 +132,7 @@ namespace the_lion_king_saga {
             a->attack(this);
         }
     }
+    Environment* User::currentPosition(){
+        return _currentPosition;
+    }
 }

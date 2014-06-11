@@ -20,69 +20,8 @@ User* user;
 std::vector<std::unique_ptr<Environment>> _map;
 int level;
 //Metod declarations (no header file) 
-static void init();
 void updateProgress(std::string);
-
-
-
-Environment* loadMap(){
-#ifdef FILE
-    std::string line;
-    std::ifstream mapFile("map.txt");
-    if (mapFile.is_open()){
-        while(getline(mapFile, line)){
-            std::cout << line << std::endl;
-        }
-        mapFile.close();
-    } else {
-        return NULL;
-    }
-#else
-    std::unique_ptr<Environment> prideLands(new Day("Pride lands", "Home sweet home", "lies the kingdom of the pride lands"));
-    std::unique_ptr<Environment> scarsPlace(new Night("Scars place", "You find your self in the shadows of the lion cliff, it is a spoky place to stay", "is a shadowy place where uncle scar lives"));
-    std::unique_ptr<Environment> waterHole(new Day("The water hole", "You are on the your way to the water hole, but the plan is to reach the elephant graveyard. If you just could get rid of that stupid bird Zazu.", "lies the water hole"));
-    std::unique_ptr<Environment> elephantGraveyard(new Night("The elephant graveyard", "you have arived at the scariest place in the world, the elephat graveyard. Ther is a lot of elephant skulls with large dark holes where the eyes used to be.", "lies the big dark elephant graveyard"));
-    std::unique_ptr<Environment> djungle(new Djungle("Djungle", "The big lush djungle", "lies the djungle"));
-    std::unique_ptr<Environment> djungle2(new Night("Djungle", "The night has fallen over the djungle", "lies the djungle"));
-    std::unique_ptr<Environment> prideLands2(new Night("Pride lands", "This is what use to be your home", "lies the kingdom of the pride lands"));
-    
-    prideLands->addNeighbor(scarsPlace.get(), West);
-    scarsPlace->addNeighbor(prideLands.get(), East);
-    prideLands->addNeighbor(waterHole.get(), North);
-    waterHole->addNeighbor(prideLands.get(), South);
-    //waterHole->addNeighbor(elephantGraveyard.get(), North);
-    
-    djungle->addNeighbor(djungle.get(), North);
-    djungle->addNeighbor(djungle.get(), South);
-    djungle->addNeighbor(djungle.get(), East);
-    djungle->addNeighbor(djungle.get(), West);
-
-    std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
-    "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life.\n\tYou are NOT allowed to go to the areas the sun dont reach."));
-    std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
-    "Scar:\tI do not have time for you right now."));
-    
-    //std::unique_ptr<Item> i(new Breakable("cc", "cc", 1));
-    //prideLands->addItem(std::move(i));
-
-    prideLands->addAnimal(std::move(mufasa));
-    scarsPlace->addAnimal(std::move(scar));
-    Environment* start = prideLands.get();
-
-    _map.push_back(std::move(prideLands));
-    _map.push_back(std::move(scarsPlace));
-    _map.push_back(std::move(waterHole));
-    _map.push_back(std::move(elephantGraveyard));
-    _map.push_back(std::move(djungle));
-    _map.push_back(std::move(djungle2));
-    _map.push_back(std::move(prideLands2));
-
-    return start;
-#endif
-}
-
-void storeMap(){
-}
+Environment* loadMap();
 
 void needMoreParams(){
     std::cout << "Need another parameter" << std::endl;
@@ -166,7 +105,7 @@ int main(){
     std::cout << "In debug mode" << std::endl;
 #endif
     init();
-    level = 0;
+    level = 1;
     Environment* startposition = loadMap();
     if(startposition == NULL) {
         std::cout << "Unable to open map, Exiting the game!" << std::endl; 
@@ -174,7 +113,6 @@ int main(){
     }
     user = new User(startposition);
     run();
-    storeMap();
     delete user;
     return 0;
 }
@@ -183,7 +121,19 @@ void updateProgress(std::string input){
     switch(level){
         case 1:
             if(input == "Talk Mufasa"){
-                _map[1]->getAnimal("Scar")->setSpeach("Simba:\tHey, Uncle Scar, guess what?\nScar:\tI despise guessing games.\nSimba:\tI'm gonna be King of Pride Rock.\nScar:\tOh, goody.\nSimba:\tMy dad just showed me the whole kingdom. And I'm gonna rule it all. Heheh.\nScar:\tYes. Well, forgive me for not leaping for joy. Bad back, you know.\nSimba:\tHey Uncle Scar, when I'm King, what'll that make you?\nScar:\tA monkey's uncle.\nSimba:\tYou're so weird.\nScar:\tYou have no idea.");
+                _map[1]->getAnimal("Scar")->setSpeach("Simba:\tHey, Uncle Scar, guess what?\nScar:\tI despise guessing games.\nSimba:\tI'm gonna be King of Pride Rock.\nScar:\tOh, goody.\nSimba:\tMy dad just showed me the whole kingdom. And I'm gonna rule it all. Heheh.\nScar:\tYes. Well, forgive me for not leaping for joy. Bad back, you know.\nSimba:\tHey Uncle Scar, when I'm King, what'll that make you?\nScar:\tA monkey's uncle.\nSimba:\tYou're so weird.\nScar:\tYou have no idea. Did he tell you about the area where the sun don't reach?\nSimba:\tNo! He just said I was not allowed to go there\nScar:\tHe is absolutly right an Elephant graveyard is no place for a litele lion cub.");
+                ++level;
+            }
+            break;
+        case 2:
+            if(input == "Talk Scar"){
+                _map[2]->addNeighbor(_map[3].get(), North);
+                ++level;
+            }
+            break;
+        case 2:
+            if(input == "Talk" && user->getCurrentPosition()->name() == "The elephant graveyard"){
+                _map[2]->addNeighbor(_map[3].get(), North);
                 ++level;
             }
             break;
@@ -191,6 +141,58 @@ void updateProgress(std::string input){
     
 }
 
-void init() {
+Environment* loadMap(){
+#ifdef FILE
+    std::string line;
+    std::ifstream mapFile("map.txt");
+    if (mapFile.is_open()){
+        while(getline(mapFile, line)){
+            std::cout << line << std::endl;
+        }
+        mapFile.close();
+    } else {
+        return NULL;
+    }
+#else
+    std::unique_ptr<Environment> prideLands(new Day("Pride lands", "Home sweet home", "lies the kingdom of the pride lands"));
+    std::unique_ptr<Environment> scarsPlace(new Night("Scars place", "You find your self in the shadows of the lion cliff, it is a spoky place to stay", "is a shadowy place where uncle scar lives"));
+    std::unique_ptr<Environment> waterHole(new Day("The trail to the water hole", "You are on the your way to the water hole, but the plan is to reach the elephant graveyard. If you just could get rid of that stupid bird Zazu.", "lies the water hole"));
+    std::unique_ptr<Environment> elephantGraveyard(new Night("The elephant graveyard", "you have arived at the scariest place in the world, the elephat graveyard. Ther is a lot of elephant skulls with large dark holes where the eyes used to be.", "lies the big dark elephant graveyard"));
+    std::unique_ptr<Environment> djungle(new Djungle("Djungle", "The big lush djungle", "lies the djungle"));
+    std::unique_ptr<Environment> djungle2(new Night("Djungle", "The night has fallen over the djungle", "lies the djungle"));
+    std::unique_ptr<Environment> prideLands2(new Night("Pride lands", "This is what use to be your home", "lies the kingdom of the pride lands"));
+    
+    prideLands->addNeighbor(scarsPlace.get(), West);
+    scarsPlace->addNeighbor(prideLands.get(), East);
+    prideLands->addNeighbor(waterHole.get(), North);
+    waterHole->addNeighbor(prideLands.get(), South);
+    //waterHole->addNeighbor(elephantGraveyard.get(), North);
+    
+    djungle->addNeighbor(djungle.get(), North);
+    djungle->addNeighbor(djungle.get(), South);
+    djungle->addNeighbor(djungle.get(), East);
+    djungle->addNeighbor(djungle.get(), West);
 
+    std::unique_ptr<Animal> mufasa(new Friend("Mufasa", 100, 
+    "Mufasa:\tEverything you see exists together in a delicate balance.\n\tAs king, you need to understand that balance and respect all the creatures,\n\tfrom the crawling ant to the leaping antelope.\nSimba:\tBut, Dad, don't we eat the antelope?\nMufasa:\tYes, Simba, but let me explain.\n\tWhen we die, our bodies become the grass, and the antelope eat the grass.\n\tAnd so we are all connnected in the great Circle of Life.\n\tYou are NOT allowed to go to the areas the sun dont reach."));
+    std::unique_ptr<Animal> scar(new Friend("Scar", 100, 
+    "Scar:\tI do not have time for you right now."));
+    
+    //std::unique_ptr<Item> i(new Breakable("cc", "cc", 1));
+    //prideLands->addItem(std::move(i));
+
+    prideLands->addAnimal(std::move(mufasa));
+    scarsPlace->addAnimal(std::move(scar));
+    Environment* start = prideLands.get();
+
+    _map.push_back(std::move(prideLands));
+    _map.push_back(std::move(scarsPlace));
+    _map.push_back(std::move(waterHole));
+    _map.push_back(std::move(elephantGraveyard));
+    _map.push_back(std::move(djungle));
+    _map.push_back(std::move(djungle2));
+    _map.push_back(std::move(prideLands2));
+
+    return start;
+#endif
 }
