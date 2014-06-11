@@ -104,7 +104,6 @@ int main(){
 #if DEBUG
     std::cout << "In debug mode" << std::endl;
 #endif
-    init();
     level = 1;
     Environment* startposition = loadMap();
     if(startposition == NULL) {
@@ -131,7 +130,7 @@ void updateProgress(std::string input){
                 ++level;
             }
             break;
-        case 2:
+        case 3:
             if(input == "Talk" && user->getCurrentPosition()->name() == "The elephant graveyard"){
                 _map[2]->addNeighbor(_map[3].get(), North);
                 ++level;
