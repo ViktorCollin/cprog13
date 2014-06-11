@@ -15,12 +15,12 @@ namespace the_lion_king_saga {
 
 		public:
 			Animal(std::string, int, std::string);
-			std::string name();
-            void printSpeach();
+			std::string name() const;
+            void printSpeach() const;
             void setSpeach(std::string);
 			int health( int = 0);
 			virtual void attack(Animal*) = 0;
-			bool isDead();
+			bool isDead() const;
 	};
 }
 

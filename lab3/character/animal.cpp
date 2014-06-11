@@ -8,13 +8,13 @@ namespace the_lion_king_saga {
 		_speach(speach),
 	    _dead(false){ }
 
-	std::string Animal::name() {
+	std::string Animal::name() const{
 		if(isDead()) 
 			return "The body of " + _name;
 		return _name;
 	}
 	
-	void Animal::printSpeach() {
+	void Animal::printSpeach() const{
 		if(isDead()) 
 			std::cout << "Dead animals can't talk" << std::endl;
         else
@@ -34,7 +34,7 @@ namespace the_lion_king_saga {
 		return _health;
 	}
 
-	bool Animal::isDead() {
+	bool Animal::isDead() const{
 		return _dead;
 	}
 }

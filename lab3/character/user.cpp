@@ -8,7 +8,7 @@ namespace the_lion_king_saga {
     _currentPosition(startPosition) {
     }
 
-    void User::look(std::string direction_s /* = "" */) {
+    void User::look(std::string direction_s) const{
         if(direction_s=="") {
             _currentPosition->printDescription();
         } else {
@@ -45,7 +45,7 @@ namespace the_lion_king_saga {
         else
             User::attack(a);
     }
-    void User::showInventory() {
+    void User::showInventory()  const{
         std::cout << "Currently in your cheeks:" << std::endl;
         for(auto& imap: _inventory) {
             std::cout << imap.first << " " << imap.second->status() << std::endl;
@@ -100,7 +100,7 @@ namespace the_lion_king_saga {
 #endif
 
     }
-    void User::talk_to(std::string s) {
+    void User::talk_to(std::string s) const{
         Animal* character(_currentPosition->getAnimal(s));
         if(character== NULL)
             std::cout << "There is no one with the name \"" <<
@@ -128,7 +128,7 @@ namespace the_lion_king_saga {
             a->attack(this);
         }
     }
-    Environment* User::currentPosition(){
+    Environment* User::currentPosition() const{
         return _currentPosition;
     }
 
